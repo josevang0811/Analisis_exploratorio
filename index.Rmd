@@ -1,6 +1,6 @@
 --- 
 title: "Análisis exploratorio"
-author: "Jose Fernando Van Strhlen"
+author: "Jose Fernando Van Strahlen y Jairo Hernandez"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
