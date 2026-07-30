@@ -1,6 +1,6 @@
 fig:nice-fig
 tab:nice-tab
-prerequisites
+prueba-de-modificacion
 intro
 literature
 methods
@@ -9,4 +9,3 @@ applications
 example-one
 example-two
 final-words
-prueba-de-modificacion
