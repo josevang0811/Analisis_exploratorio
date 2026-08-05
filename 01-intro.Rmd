@@ -3,6 +3,7 @@
 ```{r libreria,message=FALSE}
 library(tidyverse)
 library(Amelia)
+library(moments)
 ```
 
 ```{r data}
@@ -53,3 +54,41 @@ df$ocean_proximity<-factor(df$ocean_proximity)
 
 ```
 
+
+## Analisis exploratorio de 'meian_house_value'
+(Target)
+
+Realicemos el resumen estadistico de la variable
+
+```{r median_house}
+
+df %>%  summarise(n=length(median_house_value),
+                  media=mean(median_house_value),
+                  sd=sd(median_house_value),
+                  mediana=median(median_house_value),
+                  RIC=IQR(median_house_value),
+                  Q1=quantile(median_house_value,0.25),
+                  Q3=quantile(median_house_value,0.75),
+                  minimo=min(median_house_value),
+                  maximo=max(median_house_value),
+                  asimetria=skewness(median_house_value),
+                  curtosis=kurtosis(median_house_value)
+                  )
+```
+
+Centro de la distribución
+
+La media es 206.855 y la mediana es 179.700. El dato clave aquí es que la media es bastante mayor que la mediana. Cuando eso pasa, significa que hay casas muy caras, mientras que la mitad de las casas valen 179.700 o menos.
+
+Dispersión (qué tan regados están los datos)
+
+La desviación estándar es 115.395, muy grande respecto a la media, los precios están muy dispersos, no concentrados. El RIC (rango intercuartílico, Q3−Q1) es 145.125. El 50% central de las casas cae entre Q1 = 119.600 y Q3 = 264.725.
+
+Extremos
+
+Mínimo 14.999 y máximo 500.001
+
+Forma de la distribución
+
+Asimetría = 0.98. Es positiva (sesgo a la derecha). Un valor cercano a 1 indica un sesgo moderado-alto. Esto es coherente con lo que veías en media > mediana.
+Curtosis = 3.33. Como el valor de referencia de una distribución normal es 3, la distribución está apenas por encima. Es ligeramente leptocúrtica
