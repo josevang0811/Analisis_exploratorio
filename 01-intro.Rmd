@@ -4,6 +4,7 @@
 library(tidyverse)
 library(Amelia)
 library(moments)
+library(patchwork)
 ```
 
 ```{r data}
@@ -92,3 +93,96 @@ Forma de la distribución
 
 Asimetría = 0.98. Es positiva (sesgo a la derecha). Un valor cercano a 1 indica un sesgo moderado-alto. Esto es coherente con lo que veías en media > mediana.
 Curtosis = 3.33. Como el valor de referencia de una distribución normal es 3, la distribución está apenas por encima. Es ligeramente leptocúrtica
+
+
+##
+
+```{r histhousevalue}
+df %>% 
+  ggplot(aes(x=median_house_value))+
+  geom_histogram(aes(y=after_stat(density)),
+                 binwidth = 25000,
+                 fill="#47078c",
+                 color="white",
+                 alpha=0.6)+
+geom_density(color="darkblue",linewidth=1.2)+
+  labs(title="distribucion de valor medio de las viviendas",
+       x="Valor medio de la casa (USD)",
+       Y="Densidad")+
+  theme_bw()
+
+```
+
+La distribución presenta un sesgo positivo (a la derecha): la mayor concentración de viviendas se ubica en valores bajos-medios, con una cola que se extiende hacia precios altos. Se observa además una acumulación anómala en el extremo derecho, atribuible al truncamiento de los datos en 500.000.
+
+Los mercados inmobiliarios casi siempre son sesgados a la derecha: la mayoría de viviendas se concentra en un rango asequible-medio y una minoría de propiedades de lujo forma la cola. Que tu distribución empírica coincida con lo que la teoría económica predice es un buen cierre: los datos son consistentes con la realidad del fenómeno.
+
+```{r}
+df %>% 
+  ggplot(aes(x="",y=median_house_value))+
+  geom_boxplot(fill="#47078c",color="black",
+               outlier.color = "darkred")+
+stat_summary(fun = mean,geom = "point",shape=20,
+             size=3,color="#b02ca5")+
+  theme_bw()
+               
+```
+
+## analisis de las variables indepentientes (Caracteristicas)
+
+```{r}
+df %>% 
+  select(where(is.numeric), -median_house_value) %>% 
+  pivot_longer(
+    cols = everything(),
+    names_to = "variable",      # <- minúscula
+    values_to = "valor"         # <- minúscula
+  ) %>% 
+  group_by(variable) %>% 
+  summarise(n = length(valor),
+            media = mean(valor),
+            sd = sd(valor),
+            mediana = median(valor),
+            RIC = IQR(valor),
+            Q1 = quantile(valor, 0.25),
+            Q3 = quantile(valor, 0.75),
+            minimo = min(valor),
+            maximo = max(valor),
+            asimetria = skewness(valor),
+            curtosis = kurtosis(valor))
+```
+FALTA INTERPRETACION
+Analisando los datos podemos ver que de las 20640 casas 
+
+```{r}
+df %>% 
+  ggplot(aes(x="",y=median_house_value))+
+  geom_boxplot(fill="#47078c",color="black",
+               outlier.color = "darkred")+
+stat_summary(fun = mean,geom = "point",shape=20,
+             size=3,color="#b02ca5")+
+  theme_bw()->p1
+df %>% 
+  ggplot(aes(x="",y=total_rooms))+
+  geom_boxplot(fill="#47078c",color="black",
+               outlier.color = "darkred")+
+stat_summary(fun = mean,geom = "point",shape=20,
+             size=3,color="#b02ca5")+
+  theme_bw()->p2
+df %>% 
+  ggplot(aes(x="",y=total_bedrooms))+
+  geom_boxplot(fill="#47078c",color="black",
+               outlier.color = "darkred")+
+stat_summary(fun = mean,geom = "point",shape=20,
+             size=3,color="#b02ca5")+
+  theme_bw()->p3
+
+p1+p2+p3
+
+```
+
+```{r}
+df %>% 
+  count(ocean_proximity,name="frecuencia")
+%>% 
+  mutate(Porcentaje=((n/sum(n))*100,2))
