@@ -183,6 +183,11 @@ p1+p2+p3
 
 ```{r}
 df %>% 
-  count(ocean_proximity,name="frecuencia")
-%>% 
-  mutate(Porcentaje=((n/sum(n))*100,2))
+  count(ocean_proximity, name = "n") %>% 
+  mutate(Porcentaje = round((n / sum(n)) * 100, 2),
+         Variable   = "Ocean_proximity",
+         Categoria  = as.character(ocean_proximity)) %>% 
+  select(Variable, Categoria, n, Porcentaje) -> tabla_ocean
+
+tabla_ocean
+```
