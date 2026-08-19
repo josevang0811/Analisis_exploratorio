@@ -12,3 +12,25 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+/* Recuadro para los enunciados de los ejercicios */
+div.ejercicio {
+  background-color: #f4eefb;
+  border-left: 6px solid #47078c;
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 1.2em 0;
+}
+div.ejercicio p {
+  margin-bottom: 0.4em;
+}
+div.ejercicio p:last-child {
+  margin-bottom: 0;
+}
+div.ejercicio .fuente {
+  font-size: 0.9em;
+  color: #5c5c5c;
+}
+h3 .etiqueta-ej {
+  color: #47078c;
+}

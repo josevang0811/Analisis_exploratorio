@@ -1,0 +1,454 @@
+---
+title: "Parcial 1 de métodos estadísticos, resuelto"
+subtitle: "Práctica sobre el parcial del 2025-08-27"
+author: "Jose Fernando Van Strahlen"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Este documento resuelve el parcial del semestre pasado con la estructura que el profesor
+pide: código en R, salida obtenida e interpretación estadística de cada punto.
+
+# Contexto de los datos
+
+El conjunto de datos de edentulismo proviene de un estudio socio-demográfico y psicosocial
+en adultos, con información sobre edad, género, nivel educativo, estrato socioeconómico,
+condición de edentulismo (con o sin pérdida dental) y nivel de autoestima (alta o baja).
+
+```{r librerias}
+library(tidyverse)
+library(readxl)
+library(nortest)
+library(car)
+library(effsize)
+library(rstatix)
+```
+
+```{r datos}
+if (!file.exists("Datos/datos_edentulismo.xlsx")) {
+  dir.create("Datos", showWarnings = FALSE)
+  download.file(
+    "https://raw.githubusercontent.com/cdeoroaguado/Datos/main/datadescrip/datos_edentulismo.xlsx",
+    "Datos/datos_edentulismo.xlsx", mode = "wb")
+}
+
+d <- read_excel("Datos/datos_edentulismo.xlsx")
+
+d <- d %>%
+  mutate(across(c(Genero, Educación, EDENTULISMO, Autoestima), as.factor),
+         Estrato = factor(Estrato))
+
+str(d)
+```
+
+Son 366 registros y seis variables, sin datos faltantes. `Edad` es la única cuantitativa;
+`Estrato` viene como número pero es una categoría ordinal, así que se convierte a factor
+para que las pruebas la traten como grupo y no como variable continua.
+
+# Punto 1
+
+*Realice una tabla adecuada de la caracterización de la edad según el autoestima de los
+adultos. Interprete el resultado. Use `tidyverse` para la solución de este punto.*
+
+```{r p1}
+d %>%
+  group_by(Autoestima) %>%
+  summarise(n = length(Edad),
+            media = mean(Edad),
+            sd = sd(Edad),
+            mediana = median(Edad),
+            RIC = IQR(Edad),
+            Q1 = quantile(Edad, 0.25),
+            Q3 = quantile(Edad, 0.75),
+            minimo = min(Edad),
+            maximo = max(Edad))
+```
+
+Interpretación. De los 366 adultos, 164 reportan autoestima alta y 202 autoestima baja. La
+edad promedio es prácticamente la misma en los dos grupos, 35,35 años contra 34,73, o sea
+0,61 años de diferencia, que al lado de una desviación estándar de casi 13 años no es
+nada. Las medianas también coinciden (33 y 32 años) y los rangos intercuartílicos son
+similares, 21 y 20 años. En los dos grupos la media queda por encima de la mediana, lo que
+indica un ligero sesgo a la derecha: la muestra tiene más adultos jóvenes y una cola hacia
+los mayores. La caracterización sugiere que la edad no distingue entre niveles de
+autoestima, lo cual se contrastará formalmente en el punto 4.
+
+# Punto 2
+
+*Realice un gráfico adecuado que muestre la caracterización de la edad según el
+edentulismo de los adultos. Interprete el resultado. Use `tidyverse` para la solución de
+este punto.*
+
+El gráfico adecuado para una variable cuantitativa según una categórica de dos niveles es
+el diagrama de caja y bigotes, porque muestra a la vez el centro, la dispersión, la
+simetría y los valores atípicos de cada grupo.
+
+```{r p2, fig.height=4}
+d %>%
+  ggplot(aes(x = EDENTULISMO, y = Edad)) +
+  geom_boxplot(fill = "#47078c", color = "black",
+               outlier.color = "darkred", alpha = 0.8) +
+  stat_summary(fun = mean, geom = "point", shape = 20,
+               size = 3, color = "#b02ca5") +
+  labs(title = "Edad según la condición de edentulismo",
+       x = "Condición de edentulismo", y = "Edad (años)") +
+  theme_bw()
+```
+
+```{r p2b, fig.height=3.5}
+d %>%
+  ggplot(aes(x = Edad, fill = EDENTULISMO)) +
+  geom_density(alpha = 0.5, color = "black") +
+  scale_fill_manual(values = c("#47078c", "#008B8B")) +
+  labs(title = "Distribución de la edad según la condición de edentulismo",
+       x = "Edad (años)", y = "Densidad", fill = "") +
+  theme_bw()
+```
+
+Interpretación. Las dos cajas están claramente desplazadas una respecto de la otra. El
+grupo con pérdida dental se ubica en edades mayores, con mediana de 42 años y rango
+intercuartílico de 31 a 50, mientras que el grupo sin pérdida se concentra en edades
+jóvenes, con mediana de 25 años y rango de 20 a 29. El traslape entre cajas es pequeño, lo
+que anticipa una diferencia significativa.
+
+Además, la caja del grupo con pérdida es mucho más alta (desviación estándar de 12,2 años
+contra 7,3), o sea que ese grupo es bastante más heterogéneo en edad, mientras que el grupo
+sin pérdida está más concentrado y se ve sesgado a la derecha. Esa diferencia de dispersión
+va a ser importante en el punto siguiente. El gráfico de densidad muestra lo mismo desde otro ángulo: la curva de "sin
+pérdida" tiene un pico marcado en los veintitantos y la de "con pérdida" es más ancha y
+desplazada a la derecha. Todo esto es coherente con lo que se espera clínicamente, ya que
+la pérdida dental es acumulativa con la edad.
+
+# Punto 3
+
+*Se desea evaluar si la edad promedio difiere entre los grupos definidos por la condición
+de EDENTULISMO. Realice un cálculo manual paso a paso del estadístico t, verifique con
+`t.test()` y compare.*
+
+El enunciado indica que ya se verificó normalidad aproximada e igualdad de varianzas, de
+modo que aplica el t de Student para muestras independientes con varianzas iguales. Aun
+así conviene dejar la comprobación:
+
+```{r p3supuestos}
+d %>%
+  group_by(EDENTULISMO) %>%
+  summarise(n = length(Edad),
+            varianza = var(Edad),
+            est_sw = shapiro.test(Edad)$statistic,
+            p_sw = shapiro.test(Edad)$p.value,
+            est_l = lillie.test(Edad)$statistic,
+            p_l = lillie.test(Edad)$p.value)
+
+var.test(Edad ~ EDENTULISMO, data = d)
+
+leveneTest(Edad ~ EDENTULISMO, data = d, center = median)
+```
+
+Aquí aparece algo que vale la pena anotar. El enunciado da por sentada la igualdad de
+varianzas, pero los datos no la respaldan: la varianza del grupo con pérdida es 148,24 y la
+del grupo sin pérdida 52,76, la razón es 2,81 con intervalo [2,078 ; 3,766] que no contiene
+el 1, y Levene da p = 9,93e-12. La normalidad tampoco se sostiene, aunque con n = 219 y
+n = 147 eso lo resuelve el teorema del límite central.
+
+Como el punto pide expresamente el t con varianzas iguales, el desarrollo se hace como lo
+indica el enunciado y al final se agrega la corrección de Welch para mostrar que la
+conclusión no cambia. En el parcial conviene resolver lo que se pide y dejar la observación
+anotada, no cambiar la prueba por cuenta propia.
+
+## Paso 1. Medias, varianzas y tamaños
+
+```{r p3paso1}
+cp <- d %>% filter(EDENTULISMO == "Con perdida") %>% pull(Edad)
+sp <- d %>% filter(EDENTULISMO == "Sin perdida") %>% pull(Edad)
+
+n1 <- length(cp); n2 <- length(sp)
+m1 <- mean(cp);   m2 <- mean(sp)
+s1_2 <- var(cp);  s2_2 <- var(sp)
+
+tibble(grupo = c("Con perdida", "Sin perdida"),
+       n = c(n1, n2),
+       media = c(m1, m2),
+       varianza = c(s1_2, s2_2),
+       desviacion = c(sd(cp), sd(sp)))
+```
+
+## Paso 2. Varianza combinada
+
+$$S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1+n_2-2}$$
+
+```{r p3paso2}
+Sp_2 <- ((n1 - 1) * s1_2 + (n2 - 1) * s2_2) / (n1 + n2 - 2)
+Sp   <- sqrt(Sp_2)
+
+tibble(Sp_2, Sp)
+```
+
+## Paso 3. Estadístico t, grados de libertad y decisión
+
+$$t = \frac{\bar{X}_1-\bar{X}_2}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+\qquad gl = n_1+n_2-2$$
+
+```{r p3paso3}
+ee <- Sp * sqrt(1/n1 + 1/n2)
+t_calc <- (m1 - m2) / ee
+gl <- n1 + n2 - 2
+t_crit <- qt(0.975, gl)
+p_calc <- 2 * pt(abs(t_calc), gl, lower.tail = FALSE)
+
+tibble(diferencia = m1 - m2, error_estandar = ee,
+       t_calc, gl, t_crit, p_calc,
+       decision = ifelse(abs(t_calc) > t_crit,
+                         "Rechazar H0", "No rechazar H0"))
+```
+
+## Paso 4. Verificación con `t.test`
+
+```{r p3paso4}
+t.test(cp, sp, var.equal = TRUE, paired = FALSE)
+
+cohen.d(cp, sp, paired = FALSE)
+```
+
+Y la corrección de Welch, que es la que correspondería si se atiende al resultado de la
+prueba de varianzas:
+
+```{r p3welch}
+t.test(cp, sp, var.equal = FALSE, paired = FALSE)
+```
+
+## Paso 5. Comparación e interpretación
+
+| | Cálculo manual | `t.test` clásico | Welch |
+|---|---|---|---|
+| Estadístico t | 13,3235 | 13,324 | 14,636 |
+| Grados de libertad | 364 | 364 | 359,54 |
+| p-valor | 2,91e-33 | < 2,2e-16 | < 2,2e-16 |
+| IC de la diferencia | — | [12,70 ; 17,09] | [12,89 ; 16,90] |
+
+El cálculo manual y `t.test` coinciden hasta el último decimal, que es lo que pedía el
+punto. Welch da un estadístico algo mayor y un intervalo ligeramente más estrecho, pero la
+decisión es la misma, así que la desigualdad de varianzas no cambia la conclusión en este
+caso. Eso pasa porque los dos grupos tienen tamaños parecidos; cuando además son
+desbalanceados es cuando ignorar Welch sí puede llevar a error.
+
+Interpretación. Como $|13,3235| > 1,9665$ y el p-valor es prácticamente cero, se rechaza
+H0 al 5%. La edad promedio de los adultos con pérdida dental es 40,99 años y la de los que
+no tienen pérdida es 26,10, con una diferencia de 14,90 años e intervalo de confianza al
+95% de [12,70 ; 17,09]. El intervalo no contiene el cero. La d de Cohen es 1,42, muy por
+encima del corte de 0,8, así que el efecto es grande. Existe diferencia significativa en la
+edad promedio entre los dos grupos, y los adultos con pérdida dental son en promedio casi
+quince años mayores.
+
+# Punto 4
+
+*¿Existe diferencia significativa en la edad promedio entre los individuos con autoestima
+alta y aquellos con autoestima baja? Compruebe los supuestos y aplique las funciones
+adecuadas.*
+
+## Hipótesis
+
+$$H_0: \mu_{alta} = \mu_{baja} \qquad \text{vs} \qquad H_1: \mu_{alta} \neq \mu_{baja}$$
+
+## Supuesto de normalidad
+
+```{r p4norm}
+d %>%
+  group_by(Autoestima) %>%
+  summarise(n = length(Edad),
+            est_sw = shapiro.test(Edad)$statistic,
+            p_sw = shapiro.test(Edad)$p.value,
+            est_l = lillie.test(Edad)$statistic,
+            p_l = lillie.test(Edad)$p.value)
+```
+
+Shapiro-Wilk y Lilliefors rechazan la normalidad en los dos grupos, con p-valores del
+orden de 1e-06 o menores. La edad está sesgada a la derecha en ambos casos. Con n = 164 y
+n = 202 el teorema del límite central permite seguir por la vía paramétrica, pero se
+confirmará después con la prueba no paramétrica.
+
+## Supuesto de homogeneidad de varianzas
+
+```{r p4var}
+var.test(Edad ~ Autoestima, data = d)
+
+leveneTest(Edad ~ Autoestima, data = d, center = median)
+```
+
+La razón de varianzas es 0,98 con intervalo [0,733 ; 1,317], que contiene el 1, y Levene
+da p = 0,7732. Las varianzas son homogéneas, así que aplica el t-test con
+`var.equal = TRUE`.
+
+## Prueba
+
+```{r p4prueba}
+t.test(Edad ~ Autoestima, data = d, var.equal = TRUE)
+
+cohen.d(Edad ~ Autoestima, data = d)
+```
+
+## Confirmación no paramétrica
+
+```{r p4wilcox}
+wilcox.test(Edad ~ Autoestima, data = d)
+
+d %>% wilcox_effsize(Edad ~ Autoestima)
+```
+
+## Interpretación
+
+El t-test da t = 0,4576 con 364 grados de libertad y p = 0,6475, muy por encima de 0,05,
+de modo que no se rechaza H0. El intervalo de confianza de la diferencia es
+[−2,03 ; 3,26] y contiene el cero. La d de Cohen es 0,048, clasificada como despreciable.
+
+La prueba de Mann-Whitney confirma el resultado con p = 0,6231 y un tamaño de efecto
+r = 0,026, también despreciable. Que las dos pruebas coincidan indica que el
+incumplimiento de la normalidad no estaba afectando la conclusión.
+
+No existe diferencia significativa en la edad promedio entre los adultos con autoestima
+alta y los de autoestima baja. Conviene señalar que "no rechazar" no equivale a demostrar
+que las poblaciones son idénticas: lo que dice el intervalo de confianza es que cualquier
+diferencia real está entre −2,03 y 3,26 años, un rango demasiado estrecho para tener
+relevancia práctica.
+
+# Punto 5
+
+*Se desea evaluar si la edad promedio difiere entre los grupos definidos por el estrato
+socioeconómico. Calcule tamaños y promedios, las sumas de cuadrados, los cuadrados medios
+y el estadístico F, compare con el valor crítico, verifique con `aov` e interprete.*
+
+## Paso 1. Tamaños y promedios
+
+```{r p5paso1}
+resumen <- d %>%
+  group_by(Estrato) %>%
+  summarise(ni = length(Edad),
+            mi = mean(Edad),
+            si = sd(Edad),
+            vari = var(Edad))
+
+resumen
+
+media_global <- mean(d$Edad)
+k <- nlevels(d$Estrato)
+n <- nrow(d)
+
+tibble(media_global, k, n)
+```
+
+## Supuestos
+
+```{r p5supuestos}
+d %>%
+  group_by(Estrato) %>%
+  summarise(n = length(Edad),
+            p_sw = shapiro.test(Edad)$p.value,
+            p_l = lillie.test(Edad)$p.value)
+
+bartlett.test(Edad ~ Estrato, data = d)
+
+leveneTest(Edad ~ Estrato, data = d, center = median)
+```
+
+Bartlett da p = 0,478 y Levene p = 0,1486, así que la homocedasticidad se cumple. La
+normalidad dentro de cada estrato se rechaza, pero con tamaños de 230, 84 y 52 el ANOVA
+tolera esa desviación.
+
+## Paso 2. Sumas de cuadrados, cuadrados medios y F
+
+$$SST = \sum_i\sum_j (X_{ij}-\bar{X})^2 \qquad
+SSA = \sum_i n_i(\bar{X}_i-\bar{X})^2 \qquad
+SSE = SST - SSA$$
+
+```{r p5paso2}
+SST <- sum((d$Edad - media_global)^2)
+SSA <- sum(resumen$ni * (resumen$mi - media_global)^2)
+SSE <- SST - SSA
+
+MSA <- SSA / (k - 1)
+MSE <- SSE / (n - k)
+F_calc <- MSA / MSE
+
+tibble(SST, SSA, SSE, MSA, MSE, F_calc,
+       gl_entre = k - 1, gl_dentro = n - k)
+```
+
+## Paso 3. Comparación con el valor crítico
+
+```{r p5paso3}
+F_crit <- qf(0.95, k - 1, n - k)
+p_calc <- pf(F_calc, k - 1, n - k, lower.tail = FALSE)
+
+tibble(F_calc, F_crit, p_calc,
+       decision = ifelse(F_calc > F_crit, "Rechazar H0", "No rechazar H0"))
+```
+
+## Paso 4. Verificación con `aov`
+
+```{r p5paso4}
+modelo <- aov(Edad ~ Estrato, data = d)
+summary(modelo)
+```
+
+## Paso 5. Comparaciones múltiples
+
+```{r p5tukey}
+TukeyHSD(modelo)
+```
+
+```{r p5tukeyplot, fig.height=3.5}
+plot(TukeyHSD(modelo))
+```
+
+## Confirmación no paramétrica
+
+```{r p5kw}
+kruskal.test(Edad ~ Estrato, data = d)
+
+d %>% kruskal_effsize(Edad ~ Estrato)
+
+d %>% dunn_test(Edad ~ Estrato, p.adjust.method = "bonferroni")
+```
+
+## Interpretación
+
+| | Cálculo manual | `aov` |
+|---|---|---|
+| SSA | 1.926,27 | 1.926 |
+| SSE | 57.608,71 | 57.609 |
+| MSA | 963,13 | 963,1 |
+| MSE | 158,70 | 158,7 |
+| F | 6,0688 | 6,069 |
+| p | 0,00256 | 0,00256 |
+
+Los dos caminos coinciden. Como $F = 6,0688 > F_{0,05;\,2;\,363} = 3,0206$ y el p-valor es
+0,00256, se rechaza H0 al 5%: al menos un estrato difiere de los demás en edad promedio.
+
+Tukey muestra que el único par significativo es estrato 3 contra estrato 1, con una
+diferencia de 6,32 años, intervalo ajustado [1,77 ; 10,87] y p = 0,0034. Los pares 2-1 y
+3-2 no alcanzan significancia y sus intervalos contienen el cero. Kruskal-Wallis confirma
+el resultado global (H = 11,162, p = 0,0038) y Dunn confirma que el único par significativo
+es 1 contra 3, con p ajustado 0,0055.
+
+Hay un matiz que vale la pena reportar. La suma de cuadrados entre grupos es apenas el 3,2%
+de la total, y el eta cuadrado de Kruskal-Wallis es 0,025. Es decir, el estrato explica
+alrededor del 3% de la variabilidad de la edad. La diferencia es estadísticamente
+significativa, pero pequeña en magnitud, algo esperable con n = 366. En un informe habría
+que reportar las dos cosas: que la diferencia existe y que es modesta.
+
+# Resumen de los puntos
+
+| Punto | Pregunta | Prueba | Resultado |
+|---|---|---|---|
+| 3 | Edad según edentulismo | t de Student, varianzas iguales | t = 13,324, p < 2,2e-16, rechaza H0, d = 1,42 |
+| 4 | Edad según autoestima | t de Student, varianzas iguales | t = 0,458, p = 0,6475, no rechaza H0, d = 0,05 |
+| 5 | Edad según estrato | ANOVA de un factor | F = 6,069, p = 0,00256, rechaza H0, solo difiere 1 vs 3 |

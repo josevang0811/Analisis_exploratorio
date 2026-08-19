@@ -1,0 +1,228 @@
+# Guía para el parcial
+
+Este capítulo no agrega análisis nuevos. Reúne el criterio para escoger la prueba y la
+forma de leer cada salida de R, que es lo que el parcial pide justificar.
+
+## Cómo se decide qué prueba usar
+
+La decisión sale de responder cuatro preguntas en orden. Cambiar el orden es la fuente más
+común de errores.
+
+**Primera: ¿cuántos grupos se comparan?** Dos, o más de dos. Con más de dos nunca se hacen
+t-test por parejas, porque el error tipo I se acumula: con tres grupos son tres pruebas y
+la probabilidad de equivocarse en alguna sube de 5% a casi 14%.
+
+**Segunda: ¿los grupos son independientes o pareados?** Son pareados cuando las dos
+mediciones vienen del mismo sujeto (antes y después, dos tratamientos aplicados a la misma
+persona, gemelos). Son independientes cuando cada observación pertenece a un solo grupo.
+Si hay duda, sirve preguntarse si los dos grupos tienen forzosamente el mismo tamaño: si
+sí, probablemente sean pareados.
+
+**Tercera: ¿se cumple normalidad?** Se verifica con Shapiro-Wilk, Lilliefors o
+Kolmogorov-Smirnov dentro de cada grupo, y se apoya con la asimetría, la curtosis y el
+histograma. En el caso pareado lo que debe ser normal son las diferencias, no cada
+medición.
+
+**Cuarta: ¿se cumple homogeneidad de varianzas?** Con `var.test` si son dos grupos, o con
+Bartlett, Levene y Fligner-Killeen. La respuesta no decide entre paramétrica y no
+paramétrica, solo decide qué versión de la prueba paramétrica se usa.
+
+Con esas cuatro respuestas la prueba queda determinada:
+
+| Grupos | Diseño | Normalidad | Varianzas | Prueba | Tamaño de efecto |
+|---|---|---|---|---|---|
+| 2 | Independientes | Sí | Iguales | `t.test(var.equal = TRUE)` | `cohen.d` |
+| 2 | Independientes | Sí | Distintas | `t.test(var.equal = FALSE)` (Welch) | `cohen.d` |
+| 2 | Independientes | No | — | `wilcox_test` (Mann-Whitney) | `wilcox_effsize` |
+| 2 | Pareados | Sí (diferencias) | — | `t.test(paired = TRUE)` | `cohen.d(paired = TRUE)` |
+| 2 | Pareados | No | — | `wilcox_test(paired = TRUE)` | `wilcox_effsize(paired = TRUE)` |
+| >2 | Independientes | Sí | Iguales | `aov` | `TukeyHSD` |
+| >2 | Independientes | No | — | `kruskal.test` | `dunn_test` |
+
+Sobre la tercera pregunta hay un matiz que suele decidir puntos en el parcial. Que
+Shapiro-Wilk rechace no obliga automáticamente a irse a la no paramétrica. Lo que el
+t-test necesita es que la distribución de la media muestral sea normal, no que lo sean los
+datos, y por el teorema del límite central eso se cumple cuando la muestra es grande. La
+regla práctica es n ≥ 30 por grupo, siempre que la asimetría sea moderada y no haya
+valores extremos dominando. Con muestras pequeñas no hay margen y el supuesto sí es
+obligatorio.
+
+## Cómo se lee cada salida
+
+### Pruebas de normalidad
+
+En las tres, H0 dice que los datos vienen de una normal. Un p-valor grande es lo que se
+busca, y eso invierte la lógica habitual: aquí "no rechazar" es la buena noticia.
+
+`shapiro.test(x)` es la más potente y la recomendada para n < 50, aunque funciona hasta
+n = 5000. Con muestras grandes rechaza por desviaciones sin importancia práctica.
+
+`lillie.test(x)` es la corrección de Kolmogorov-Smirnov para cuando la media y la
+desviación se estiman de la misma muestra, que es siempre el caso en la práctica.
+
+`ks.test(scale(x), "pnorm")` es la versión que aparece en las notas de clase. Tiene dos
+problemas que conviene tener presentes: al estimar los parámetros de los mismos datos, el
+p-valor sale más grande de lo que debería, o sea que la prueba se vuelve conservadora y
+rechaza menos de lo que debería; y si hay valores repetidos R tira el aviso de empates,
+porque la prueba supone una variable continua. Cuando KS y Lilliefors dan estadísticos
+idénticos pero p-valores distintos, es exactamente esta corrección la que está actuando.
+
+Si las tres pruebas se contradicen, se decide mirando el tamaño de muestra, la asimetría,
+la curtosis y el histograma, no solo el p-valor.
+
+### `var.test`
+
+Contrasta $H_0: \sigma_1^2 = \sigma_2^2$ con el cociente de varianzas muestrales, que bajo
+H0 sigue una F con $n_1-1$ y $n_2-1$ grados de libertad. De la salida se leen tres cosas:
+el valor de F, el p-valor, y el intervalo de confianza de la razón. El atajo más rápido es
+el intervalo: si contiene el 1, las varianzas son compatibles.
+
+Bartlett es el más potente si hay normalidad pero se rompe con colas pesadas. Levene con
+`center = median` es robusto porque trabaja con distancias a la mediana. Fligner-Killeen
+es el más robusto de todos porque trabaja con rangos de esas distancias. Si se
+contradicen, se le hace caso a Levene o a Fligner.
+
+### `t.test`
+
+De la salida importan cinco elementos. El estadístico `t`, que es la diferencia dividida
+por su error estándar. Los grados de libertad `df`, que valen $n_1+n_2-2$ en el caso
+clásico, $n-1$ en el pareado, y un número con decimales cuando es Welch (esa es la señal
+inmediata de que se corrió Welch). El `p-value`. El intervalo de confianza de la
+diferencia, que es lo más informativo de toda la salida: si contiene el cero, no hay
+diferencia significativa, y su ancho dice con qué precisión se estimó. Y las medias de
+cada grupo al final.
+
+Una advertencia sobre el orden de los argumentos: `t.test(x, y)` calcula
+$\bar{x} - \bar{y}$, así que el signo del estadístico y del intervalo depende de cuál
+grupo se ponga primero. El signo no cambia la conclusión pero sí cambia la redacción.
+
+### `cohen.d` y `wilcox_effsize`
+
+El p-valor dice si la diferencia existe; el tamaño del efecto dice qué tan grande es. Son
+preguntas distintas y el parcial pide las dos. Con muestras grandes cualquier diferencia
+diminuta alcanza significancia, y ahí el tamaño del efecto es lo único que evita concluir
+de más.
+
+Los cortes convencionales para la d de Cohen son 0,2 pequeño, 0,5 mediano y 0,8 grande.
+Para la r de `wilcox_effsize` son 0,1 pequeño, 0,3 mediano y 0,5 grande. El propio R
+imprime la clasificación al lado del número.
+
+### `aov` y `TukeyHSD`
+
+La tabla de `summary(aov(...))` trae la descomposición: la fila del factor lleva $k-1$
+grados de libertad, SSA y MSA; la fila de residuales lleva $n-k$, SSE y MSE. El F es
+MSA/MSE.
+
+Dos cosas se suelen pasar por alto. La primera es que un F significativo solo dice que al
+menos un par de medias difiere, nunca cuál, y por eso siempre hay que seguir con Tukey. La
+segunda es que conviene calcular SSA/SST: es la proporción de variabilidad que explica el
+factor, y puede ser mínima aunque el p-valor sea muy pequeño.
+
+En `TukeyHSD` cada fila es una pareja, con la diferencia, los límites del intervalo
+ajustado y el `p adj`. Un par es significativo cuando su intervalo no contiene el cero.
+
+### `kruskal.test` y `dunn_test`
+
+El estadístico se llama `Kruskal-Wallis chi-squared`, con $k-1$ grados de libertad. El
+tamaño del efecto se saca con `kruskal_effsize` y es un eta cuadrado basado en H, que se
+lee como la proporción de variabilidad de los rangos que explica el factor.
+
+En `dunn_test` la columna que se reporta es `p.adj`, nunca la `p` sin ajustar.
+`p.adjust.method = "bonferroni"` es el ajuste más conservador; `"holm"` es igual de válido
+y algo menos estricto.
+
+## Cómo se redacta la conclusión
+
+Una conclusión completa tiene cinco partes, y el parcial pide explícitamente
+"justificación, código, salida e interpretación":
+
+1. Qué supuestos se verificaron y con qué resultado.
+2. Qué prueba se escogió y por qué esos supuestos la justifican.
+3. El estadístico, los grados de libertad y el p-valor.
+4. La decisión sobre H0 al nivel de significancia escogido.
+5. Qué significa eso en el contexto del problema, con el tamaño del efecto y el intervalo
+   de confianza.
+
+Un ejemplo de redacción, sobre el caso de la presión arterial:
+
+> Los tres contrastes de normalidad no rechazan en la presión sistólica, y en la
+> diastólica solo Shapiro-Wilk rechaza levemente (p = 0,0369), lo que con n = 100 por grupo
+> no compromete el análisis. La prueba F de razón de varianzas da p = 0,7102 con intervalo
+> [0,624 ; 1,379], que contiene el 1, de modo que se asume homogeneidad. Se aplica entonces
+> el t-test para muestras independientes con varianzas iguales, que arroja t = 31,888 con
+> 198 grados de libertad y p < 2,2e-16. Como el p-valor es menor que 0,05 se rechaza H0. La
+> presión sistólica promedio supera a la diastólica en 41,96 mmHg, con intervalo de
+> confianza al 95% de [39,36 ; 44,55], y la d de Cohen de 4,51 indica un efecto grande.
+
+## Errores que cuestan puntos
+
+Concluir que "se acepta H0". No se acepta, no se rechaza. La diferencia importa porque no
+rechazar puede deberse a falta de potencia y no a ausencia de efecto.
+
+Verificar la normalidad sobre la variable completa en vez de dentro de cada grupo. Una
+mezcla de dos normales con medias distintas no es normal, así que ese contraste rechaza por
+la razón equivocada.
+
+En el caso pareado, verificar la normalidad de cada medición en vez de la de las
+diferencias.
+
+Usar `var.equal = TRUE` por defecto. R trae `FALSE` como valor por defecto, así que si no
+se escribe nada se corre Welch. Hay que escribirlo explícitamente y justificarlo con el
+resultado de la prueba de varianzas.
+
+Reportar el p-valor sin el tamaño del efecto ni el intervalo de confianza.
+
+Quedarse en el ANOVA significativo sin hacer las comparaciones múltiples.
+
+Olvidar convertir a factor las variables de agrupación antes de las pruebas.
+
+## Fórmulas para tener a mano
+
+Dos grupos independientes, varianzas iguales:
+
+$$t = \frac{\bar{X}_1 - \bar{X}_2}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+\qquad
+S_p = \sqrt{\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}}
+\qquad
+gl = n_1+n_2-2$$
+
+Dos grupos independientes, varianzas distintas (Welch):
+
+$$t = \frac{\bar{X}_1-\bar{X}_2}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}
+\qquad
+gl = \frac{\left(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}\right)^2}
+{\frac{(S_1^2/n_1)^2}{n_1-1}+\frac{(S_2^2/n_2)^2}{n_2-1}}$$
+
+Dos grupos pareados:
+
+$$t = \frac{\bar{d}}{S_d/\sqrt{n}} \qquad gl = n-1 \qquad d_i = X_{2i}-X_{1i}$$
+
+Razón de varianzas:
+
+$$F = \frac{S_1^2}{S_2^2} \sim F_{n_1-1,\,n_2-1}$$
+
+ANOVA de un factor:
+
+$$SST = SSA + SSE \qquad MSA = \frac{SSA}{k-1} \qquad MSE = \frac{SSE}{n-k}
+\qquad F = \frac{MSA}{MSE}$$
+
+Tamaño del efecto:
+
+$$d = \frac{\bar{X}_1-\bar{X}_2}{S_p} \qquad r = \frac{|Z|}{\sqrt{N}}$$
+
+## Comandos de rescate en R
+
+Cuando en el parcial no se recuerda un valor crítico o la forma exacta de una función:
+
+```{r rescate, eval=FALSE}
+qt(0.975, gl)               # valor critico t de dos colas al 5%
+qf(0.95, gl1, gl2)          # valor critico F de una cola al 5%
+qchisq(0.95, gl)            # valor critico ji-cuadrado
+qnorm(0.975)                # valor critico z de dos colas al 5%
+
+pt(abs(t), gl, lower.tail = FALSE) * 2      # p-valor de un t
+pf(F, gl1, gl2, lower.tail = FALSE)         # p-valor de un F
+
+?t.test                     # ayuda de cualquier funcion
+args(wilcox.test)           # solo los argumentos
+```

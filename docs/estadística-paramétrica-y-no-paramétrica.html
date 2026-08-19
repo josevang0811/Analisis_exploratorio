@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Estadística paramétrica y no paramétrica | Notas de Métodos Estadísticos</title>
+  <meta name="description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Estadística paramétrica y no paramétrica | Notas de Métodos Estadísticos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  <meta name="github-repo" content="josevang0811/Analisis_exploratorio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Estadística paramétrica y no paramétrica | Notas de Métodos Estadísticos" />
+  
+  <meta name="twitter:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  
+
+<meta name="author" content="Jose Fernando Van Strahlen y Jairo Hernandez" />
+
+
+<meta name="date" content="2026-08-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="guía-para-el-parcial.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notas de Métodos Estadísticos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#datos-y-paquetes"><i class="fa fa-check"></i>Datos y paquetes</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Análisis exploratorio de datos</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#analisis-exploratorio-de-median_house_value"><i class="fa fa-check"></i><b>1.1</b> Analisis exploratorio de median_house_value</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#analisis-de-las-variables-independientes-caracteristicas"><i class="fa fa-check"></i><b>1.2</b> Analisis de las variables independientes (Caracteristicas)</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#ejercicio-1.-gr%C3%A1ficas-e-interpretaci%C3%B3n-de-las-variables-caracter%C3%ADsticas"><i class="fa fa-check"></i><b>1.2.1</b> Ejercicio 1. Gráficas e interpretación de las variables características</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#analisis-exploratorio-bivariado"><i class="fa fa-check"></i><b>1.3</b> Analisis exploratorio bivariado</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#ejercicio-2.-diagramas-de-dispersi%C3%B3n-con-las-dem%C3%A1s-variables"><i class="fa fa-check"></i><b>1.3.1</b> Ejercicio 2. Diagramas de dispersión con las demás variables</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ejercicio-3.-errores-del-gr%C3%A1fico-de-ggpairs"><i class="fa fa-check"></i><b>1.3.2</b> Ejercicio 3. Errores del gráfico de <code>ggpairs</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html"><i class="fa fa-check"></i><b>2</b> Estadística paramétrica y no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#presi%C3%B3n-sist%C3%B3lica-contra-diast%C3%B3lica-independientes-param%C3%A9trica"><i class="fa fa-check"></i><b>2.1</b> Presión sistólica contra diastólica (independientes, paramétrica)</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-4.-an%C3%A1lisis-exploratorio-de-los-datos-de-presi%C3%B3n"><i class="fa fa-check"></i><b>2.1.1</b> Ejercicio 4. Análisis exploratorio de los datos de presión</a></li>
+<li class="chapter" data-level="2.1.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad"><i class="fa fa-check"></i><b>2.1.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-5.-verificaci%C3%B3n-de-var.test-con-el-teorema-de-raz%C3%B3n-de-varianzas"><i class="fa fa-check"></i><b>2.1.3</b> Ejercicio 5. Verificación de <code>var.test</code> con el teorema de razón de varianzas</a></li>
+<li class="chapter" data-level="2.1.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-6.-teorema-de-la-diferencia-de-medias"><i class="fa fa-check"></i><b>2.1.4</b> Ejercicio 6. Teorema de la diferencia de medias</a></li>
+<li class="chapter" data-level="2.1.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#tama%C3%B1o-del-efecto"><i class="fa fa-check"></i><b>2.1.5</b> Tamaño del efecto</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#precios-por-tipo-de-cuenta-con-varianzas-distintas"><i class="fa fa-check"></i><b>2.2</b> Precios por tipo de cuenta, con varianzas distintas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-7.-an%C3%A1lisis-exploratorio-de-los-precios"><i class="fa fa-check"></i><b>2.2.1</b> Ejercicio 7. Análisis exploratorio de los precios</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-1"><i class="fa fa-check"></i><b>2.2.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.2.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-8.-bartlett-levene-y-fligner-killeen"><i class="fa fa-check"></i><b>2.2.3</b> Ejercicio 8. Bartlett, Levene y Fligner-Killeen</a></li>
+<li class="chapter" data-level="2.2.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-t-con-la-correcci%C3%B3n-de-welch"><i class="fa fa-check"></i><b>2.2.4</b> Prueba t con la corrección de Welch</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-param%C3%A9trica"><i class="fa fa-check"></i><b>2.3</b> Dos grupos pareados, paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-9.-an%C3%A1lisis-exploratorio-de-los-tiempos"><i class="fa fa-check"></i><b>2.3.1</b> Ejercicio 9. Análisis exploratorio de los tiempos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-2"><i class="fa fa-check"></i><b>2.3.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.3.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-10.-teorema-de-la-diferencia-de-medias-para-datos-pareados"><i class="fa fa-check"></i><b>2.3.3</b> Ejercicio 10. Teorema de la diferencia de medias para datos pareados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-independientes-no-param%C3%A9trica"><i class="fa fa-check"></i><b>2.4</b> Dos grupos independientes, no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-11.-an%C3%A1lisis-exploratorio-del-peso-al-nacer"><i class="fa fa-check"></i><b>2.4.1</b> Ejercicio 11. Análisis exploratorio del peso al nacer</a></li>
+<li class="chapter" data-level="2.4.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-3"><i class="fa fa-check"></i><b>2.4.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.4.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#homogeneidad-de-varianzas"><i class="fa fa-check"></i><b>2.4.3</b> Homogeneidad de varianzas</a></li>
+<li class="chapter" data-level="2.4.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-mann-whitney"><i class="fa fa-check"></i><b>2.4.4</b> Prueba de Mann-Whitney</a></li>
+<li class="chapter" data-level="2.4.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-12.-se-puede-usar-una-prueba-param%C3%A9trica"><i class="fa fa-check"></i><b>2.4.5</b> Ejercicio 12. ¿Se puede usar una prueba paramétrica?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-no-param%C3%A9trica"><i class="fa fa-check"></i><b>2.5</b> Dos grupos pareados, no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-13.-an%C3%A1lisis-exploratorio-del-cuestionario"><i class="fa fa-check"></i><b>2.5.1</b> Ejercicio 13. Análisis exploratorio del cuestionario</a></li>
+<li class="chapter" data-level="2.5.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-4"><i class="fa fa-check"></i><b>2.5.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.5.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-rangos-con-signo-de-wilcoxon"><i class="fa fa-check"></i><b>2.5.3</b> Prueba de rangos con signo de Wilcoxon</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova"><i class="fa fa-check"></i><b>2.6</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#c%C3%A1lculo-manual"><i class="fa fa-check"></i><b>2.6.2</b> Cálculo manual</a></li>
+<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#verificaci%C3%B3n-con-aov"><i class="fa fa-check"></i><b>2.6.3</b> Verificación con <code>aov</code></a></li>
+<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-m%C3%BAltiples"><i class="fa fa-check"></i><b>2.6.4</b> Comparaciones múltiples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#kruskal-wallis"><i class="fa fa-check"></i><b>2.7</b> Kruskal-Wallis</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-post-hoc"><i class="fa fa-check"></i><b>2.7.1</b> Comparaciones post-hoc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html"><i class="fa fa-check"></i><b>3</b> Guía para el parcial</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-decide-qu%C3%A9-prueba-usar"><i class="fa fa-check"></i><b>3.1</b> Cómo se decide qué prueba usar</a></li>
+<li class="chapter" data-level="3.2" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-lee-cada-salida"><i class="fa fa-check"></i><b>3.2</b> Cómo se lee cada salida</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#pruebas-de-normalidad"><i class="fa fa-check"></i><b>3.2.1</b> Pruebas de normalidad</a></li>
+<li class="chapter" data-level="3.2.2" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#var.test"><i class="fa fa-check"></i><b>3.2.2</b> <code>var.test</code></a></li>
+<li class="chapter" data-level="3.2.3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#t.test"><i class="fa fa-check"></i><b>3.2.3</b> <code>t.test</code></a></li>
+<li class="chapter" data-level="3.2.4" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#cohen.d-y-wilcox_effsize"><i class="fa fa-check"></i><b>3.2.4</b> <code>cohen.d</code> y <code>wilcox_effsize</code></a></li>
+<li class="chapter" data-level="3.2.5" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#aov-y-tukeyhsd"><i class="fa fa-check"></i><b>3.2.5</b> <code>aov</code> y <code>TukeyHSD</code></a></li>
+<li class="chapter" data-level="3.2.6" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#kruskal.test-y-dunn_test"><i class="fa fa-check"></i><b>3.2.6</b> <code>kruskal.test</code> y <code>dunn_test</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-redacta-la-conclusi%C3%B3n"><i class="fa fa-check"></i><b>3.3</b> Cómo se redacta la conclusión</a></li>
+<li class="chapter" data-level="3.4" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#errores-que-cuestan-puntos"><i class="fa fa-check"></i><b>3.4</b> Errores que cuestan puntos</a></li>
+<li class="chapter" data-level="3.5" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#f%C3%B3rmulas-para-tener-a-mano"><i class="fa fa-check"></i><b>3.5</b> Fórmulas para tener a mano</a></li>
+<li class="chapter" data-level="3.6" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#comandos-de-rescate-en-r"><i class="fa fa-check"></i><b>3.6</b> Comandos de rescate en R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas de Métodos Estadísticos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="estadística-paramétrica-y-no-paramétrica" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Estadística paramétrica y no paramétrica<a href="estadística-paramétrica-y-no-paramétrica.html#estad%C3%ADstica-param%C3%A9trica-y-no-param%C3%A9trica" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Corresponde a la sección 4 del libro del profesor. La pregunta de fondo siempre es la
+misma: dos o más grupos, una variable numérica, y queremos saber si la diferencia que
+vemos entre ellos es real o es del azar del muestreo. Lo que cambia de una sección a otra
+son tres cosas: si los grupos son independientes o pareados, si se cumple normalidad, y si
+se cumple homogeneidad de varianzas.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb38-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb38-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-3" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb38-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-4" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
+<span id="cb38-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-5" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb38-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-6" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb38-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-7" tabindex="-1"></a><span class="fu">library</span>(openintro)</span>
+<span id="cb38-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb38-8" tabindex="-1"></a><span class="fu">library</span>(moments)</span></code></pre></div>
+<div id="presión-sistólica-contra-diastólica-independientes-paramétrica" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Presión sistólica contra diastólica (independientes, paramétrica)<a href="estadística-paramétrica-y-no-paramétrica.html#presi%C3%B3n-sist%C3%B3lica-contra-diast%C3%B3lica-independientes-param%C3%A9trica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb39-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Datos/datos_medicos.xlsx&quot;</span>)</span>
+<span id="cb39-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb39-2" tabindex="-1"></a>df<span class="sc">$</span>Presion <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Presion)</span></code></pre></div>
+<p>Los datos vienen en formato largo: una columna dice de qué presión se trata y la otra trae
+el valor. Para las pruebas que reciben dos vectores hay que separarlos.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-1" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-2" tabindex="-1"></a>  <span class="fu">filter</span>(Presion <span class="sc">==</span> <span class="st">&quot;PresionSistolica&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-3" tabindex="-1"></a>  <span class="fu">pull</span>(Valores)</span>
+<span id="cb40-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-4" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-5" tabindex="-1"></a>dfd <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb40-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-6" tabindex="-1"></a>  <span class="fu">filter</span>(Presion <span class="sc">==</span> <span class="st">&quot;PresionDiastolica&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb40-7" tabindex="-1"></a>  <span class="fu">pull</span>(Valores)</span></code></pre></div>
+<div id="ejercicio-4.-análisis-exploratorio-de-los-datos-de-presión" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Ejercicio 4. Análisis exploratorio de los datos de presión<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-4.-an%C3%A1lisis-exploratorio-de-los-datos-de-presi%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Presion) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Valores),</span>
+<span id="cb41-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Valores),</span>
+<span id="cb41-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Valores),</span>
+<span id="cb41-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-6" tabindex="-1"></a>            <span class="at">varianza =</span> <span class="fu">var</span>(Valores),</span>
+<span id="cb41-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-7" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Valores),</span>
+<span id="cb41-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-8" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Valores),</span>
+<span id="cb41-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-9" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Valores),</span>
+<span id="cb41-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-10" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Valores),</span>
+<span id="cb41-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-11" tabindex="-1"></a>            <span class="at">asimetria =</span> <span class="fu">skewness</span>(Valores),</span>
+<span id="cb41-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb41-12" tabindex="-1"></a>            <span class="at">curtosis =</span> <span class="fu">kurtosis</span>(Valores))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 11
+##   Presion             n  prom    ds varianza mediana   RIC   min   max asimetria
+##   &lt;fct&gt;           &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+## 1 PresionDiastol…   100  78.9  9.48     89.8    77.8  12.4  59.9  112.    0.639 
+## 2 PresionSistoli…   100 121.   9.13     83.3   121.   11.9  96.9  142.    0.0605
+## # ℹ 1 more variable: curtosis &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb43-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb43-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Valores, <span class="at">fill =</span> Presion)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb43-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb43-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb43-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Presión (mmHg)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb43-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edamedplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb44-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb44-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Presion, <span class="at">y =</span> Valores)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb44-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb44-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb44-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Presión (mmHg)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb44-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edamedplot-2.png" width="672" /></p>
+<p>Son dos grupos de 100 mediciones cada uno. La sistólica promedia 120,90 mmHg y la
+diastólica 78,95, o sea unos 42 mmHg de diferencia, que es un valor grandísimo comparado
+con la dispersión de cada grupo (9,13 y 9,48). En los dos grupos la media y la mediana
+casi coinciden, la asimetría está cerca de cero y la curtosis cerca de 3, que es lo que se
+espera de datos normales. Las cajas quedan completamente separadas, sin ningún traslape,
+así que la prueba formal casi seguro va a confirmar lo que ya se ve.</p>
+</div>
+<div id="supuesto-de-normalidad" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Supuesto de normalidad<a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb45-1" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">scale</span>(dfs), <span class="st">&quot;pnorm&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Asymptotic one-sample Kolmogorov-Smirnov test
+## 
+## data:  scale(dfs)
+## D = 0.058097, p-value = 0.8884
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb47-1" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">scale</span>(dfd), <span class="st">&quot;pnorm&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Asymptotic one-sample Kolmogorov-Smirnov test
+## 
+## data:  scale(dfd)
+## D = 0.057927, p-value = 0.8905
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb49-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dfs)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dfs
+## W = 0.99388, p-value = 0.9349</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb51-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dfd)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dfd
+## W = 0.97289, p-value = 0.03691</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb53-1" tabindex="-1"></a><span class="fu">lillie.test</span>(dfs)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  dfs
+## D = 0.058097, p-value = 0.5575</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb55-1" tabindex="-1"></a><span class="fu">lillie.test</span>(dfd)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  dfd
+## D = 0.057927, p-value = 0.5622</code></pre>
+<p>Los tres contrastan lo mismo: H0 dice que los datos vienen de una normal, así que un
+p-valor grande es lo que queremos. En la sistólica los tres coinciden en no rechazar. En
+la diastólica, Kolmogorov-Smirnov da p = 0,8905 y Lilliefors p = 0,5622, pero
+Shapiro-Wilk da p = 0,0369, que a un 5% sí rechaza.</p>
+<p>Cuando los tests se contradicen hay que mirar por qué. Shapiro-Wilk es el más potente de
+los tres, o sea que con n = 100 detecta desviaciones pequeñas que a los otros se les
+pasan. Pero potencia alta también significa que con muestras grandes rechaza por
+desviaciones que no tienen importancia práctica. Aquí la asimetría y la curtosis están
+dentro de lo esperado y el histograma se ve simétrico, así que la desviación es leve y el
+t-test, que es bastante robusto con n = 100 por grupo, se puede aplicar sin problema.</p>
+</div>
+<div id="ejercicio-5.-verificación-de-var.test-con-el-teorema-de-razón-de-varianzas" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Ejercicio 5. Verificación de <code>var.test</code> con el teorema de razón de varianzas<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-5.-verificaci%C3%B3n-de-var.test-con-el-teorema-de-raz%C3%B3n-de-varianzas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Usando el teorema de razón de varianzas verifica la salida de la función <code>var.test</code>.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong> Primero se obtiene la salida de R, que es la que hay que reproducir a mano:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb57-1" tabindex="-1"></a><span class="fu">var.test</span>(dfs, dfd)</span></code></pre></div>
+<pre><code>## 
+##  F test to compare two variances
+## 
+## data:  dfs and dfd
+## F = 0.92784, num df = 99, denom df = 99, p-value = 0.7102
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.6242897 1.3789878
+## sample estimates:
+## ratio of variances 
+##          0.9278405</code></pre>
+<p>El teorema dice que si dos muestras independientes vienen de poblaciones normales, el
+cociente de las varianzas muestrales sigue una distribución F:</p>
+<p><span class="math display">\[F = \frac{S_1^2}{S_2^2} \sim F_{n_1-1,\; n_2-1}\]</span></p>
+<p>con hipótesis</p>
+<p><span class="math display">\[H_0: \sigma_1^2 = \sigma_2^2 \qquad \text{vs} \qquad H_1: \sigma_1^2 \neq \sigma_2^2\]</span></p>
+<p>Como la prueba es de dos colas, se rechaza si <span class="math inline">\(F &lt; F_{\alpha/2}\)</span> o si
+<span class="math inline">\(F &gt; F_{1-\alpha/2}\)</span>.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-1" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(dfs); n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(dfd)</span>
+<span id="cb59-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-2" tabindex="-1"></a>s1_2 <span class="ot">&lt;-</span> <span class="fu">var</span>(dfs);  s2_2 <span class="ot">&lt;-</span> <span class="fu">var</span>(dfd)</span>
+<span id="cb59-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-3" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-4" tabindex="-1"></a>F_calc <span class="ot">&lt;-</span> s1_2 <span class="sc">/</span> s2_2</span>
+<span id="cb59-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-5" tabindex="-1"></a>gl1 <span class="ot">&lt;-</span> n1 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb59-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-6" tabindex="-1"></a>gl2 <span class="ot">&lt;-</span> n2 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb59-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-7" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-8" tabindex="-1"></a>F_inf <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="fl">0.025</span>, gl1, gl2)</span>
+<span id="cb59-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-9" tabindex="-1"></a>F_sup <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="fl">0.975</span>, gl1, gl2)</span>
+<span id="cb59-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-10" tabindex="-1"></a>p_val <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">min</span>(<span class="fu">pf</span>(F_calc, gl1, gl2), <span class="fu">pf</span>(F_calc, gl1, gl2, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb59-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-11" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb59-12" tabindex="-1"></a><span class="fu">tibble</span>(s1_2, s2_2, F_calc, gl1, gl2, F_inf, F_sup, p_val)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##    s1_2  s2_2 F_calc   gl1   gl2 F_inf F_sup p_val
+##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  83.3  89.8  0.928    99    99 0.673  1.49 0.710</code></pre>
+<p>El F calculado a mano da 0,92784, con 99 y 99 grados de libertad, y el p-valor 0,7102.
+Son exactamente los mismos números que reporta <code>var.test</code>. Como F cae entre 0,6728 y
+1,4862, que son los valores críticos al 5%, no se rechaza H0. Además el intervalo de
+confianza de la razón, [0,6243 ; 1,3790], contiene el 1, que es otra forma de leer lo
+mismo: no hay evidencia de que las varianzas sean distintas.</p>
+</div>
+<div id="ejercicio-6.-teorema-de-la-diferencia-de-medias" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Ejercicio 6. Teorema de la diferencia de medias<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-6.-teorema-de-la-diferencia-de-medias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Aplica el teorema de diferencia de medias con la distribución normal.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong> Con normalidad e igualdad de varianzas se puede aplicar el t-test clásico, que es la salida a reproducir:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb61-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> dfs, <span class="at">y =</span> dfd, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  dfs and dfd
+## t = 31.888, df = 198, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  39.36328 44.55275
+## sample estimates:
+## mean of x mean of y 
+## 120.90406  78.94604</code></pre>
+<p>El teorema del t de Student con varianzas iguales usa la varianza combinada:</p>
+<p><span class="math display">\[t = \frac{\bar{X}_1 - \bar{X}_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+\qquad
+S_p = \sqrt{\frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1 + n_2 - 2}}
+\qquad
+gl = n_1 + n_2 - 2\]</span></p>
+<p>Cuando las muestras son grandes, la t se aproxima a la normal estándar y el estadístico se
+puede escribir directamente como</p>
+<p><span class="math display">\[Z = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}\]</span></p>
+<p>Se hacen los dos y se comparan.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-1" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dfs); m2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dfd)</span>
+<span id="cb63-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-2" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-3" tabindex="-1"></a>Sp_2 <span class="ot">&lt;-</span> ((n1 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s1_2 <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2_2) <span class="sc">/</span> (n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb63-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-4" tabindex="-1"></a>Sp   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(Sp_2)</span>
+<span id="cb63-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-5" tabindex="-1"></a>ee_t <span class="ot">&lt;-</span> Sp <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2)</span>
+<span id="cb63-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-6" tabindex="-1"></a>t_calc <span class="ot">&lt;-</span> (m1 <span class="sc">-</span> m2) <span class="sc">/</span> ee_t</span>
+<span id="cb63-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-7" tabindex="-1"></a>gl <span class="ot">&lt;-</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb63-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-8" tabindex="-1"></a></span>
+<span id="cb63-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-9" tabindex="-1"></a>ee_z <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(s1_2<span class="sc">/</span>n1 <span class="sc">+</span> s2_2<span class="sc">/</span>n2)</span>
+<span id="cb63-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-10" tabindex="-1"></a>z_calc <span class="ot">&lt;-</span> (m1 <span class="sc">-</span> m2) <span class="sc">/</span> ee_z</span>
+<span id="cb63-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-11" tabindex="-1"></a></span>
+<span id="cb63-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-12" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">dif =</span> m1 <span class="sc">-</span> m2,</span>
+<span id="cb63-13"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-13" tabindex="-1"></a>       Sp_2, Sp, ee_t, t_calc, gl,</span>
+<span id="cb63-14"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-14" tabindex="-1"></a>       <span class="at">t_critico =</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, gl),</span>
+<span id="cb63-15"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-15" tabindex="-1"></a>       <span class="at">p_t =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_calc), gl, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb63-16"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-16" tabindex="-1"></a>       ee_z, z_calc,</span>
+<span id="cb63-17"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-17" tabindex="-1"></a>       <span class="at">z_critico =</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>),</span>
+<span id="cb63-18"><a href="estadística-paramétrica-y-no-paramétrica.html#cb63-18" tabindex="-1"></a>       <span class="at">p_z =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z_calc), <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 12
+##     dif  Sp_2    Sp  ee_t t_calc    gl t_critico      p_t  ee_z z_calc z_critico
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1  42.0  86.6  9.30  1.32   31.9   198      1.97 6.20e-80  1.32   31.9      1.96
+## # ℹ 1 more variable: p_z &lt;dbl&gt;</code></pre>
+<p>La varianza combinada da 86,563 y el error estándar de la diferencia 1,3158, con lo que el
+t manual queda en 31,888 con 198 grados de libertad, idéntico a la salida de <code>t.test</code>. El
+valor crítico al 5% es 1,972, y como <span class="math inline">\(|31,888| &gt; 1,972\)</span> se rechaza H0.</p>
+<p>Por la vía normal el estadístico da 31,890, prácticamente el mismo número. Esto pasa
+porque las dos varianzas son casi iguales y porque con 198 grados de libertad la t ya es
+indistinguible de la normal: el crítico de la t es 1,9720 y el de la normal 1,9600. La
+diferencia entre los dos caminos solo se nota cuando la muestra es pequeña.</p>
+<p>La conclusión sustantiva: la presión sistólica promedio es 41,96 mmHg mayor que la
+diastólica, con intervalo de confianza al 95% de [39,36 ; 44,55]. El intervalo no contiene
+el cero, así que la diferencia es significativa.</p>
+</div>
+<div id="tamaño-del-efecto" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Tamaño del efecto<a href="estadística-paramétrica-y-no-paramétrica.html#tama%C3%B1o-del-efecto" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb65-1" tabindex="-1"></a><span class="fu">cohen.d</span>(dfs, dfd, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 4.509702 (large)
+## 95 percent confidence interval:
+##    lower    upper 
+## 3.984821 5.034583</code></pre>
+<p>La d de Cohen da 4,51, que se clasifica como grande (el corte convencional para “grande”
+es 0,8). Es importante separar las dos cosas: el p-valor dice que la diferencia existe, la
+d dice qué tan grande es. Aquí la diferencia entre los grupos es de más de cuatro
+desviaciones estándar, lo que confirma que no es un hallazgo apenas detectable sino una
+separación enorme. Esto tiene sentido fisiológico: la sistólica y la diastólica miden
+momentos distintos del ciclo cardíaco.</p>
+</div>
+</div>
+<div id="precios-por-tipo-de-cuenta-con-varianzas-distintas" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Precios por tipo de cuenta, con varianzas distintas<a href="estadística-paramétrica-y-no-paramétrica.html#precios-por-tipo-de-cuenta-con-varianzas-distintas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Datos/datos_economia.xlsx&quot;</span>)</span>
+<span id="cb67-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-2" tabindex="-1"></a>df<span class="sc">$</span><span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>)</span>
+<span id="cb67-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-3" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-4" tabindex="-1"></a>dfi <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb67-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;Inversion&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-6" tabindex="-1"></a>  <span class="fu">pull</span>(Precio)</span>
+<span id="cb67-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-7" tabindex="-1"></a></span>
+<span id="cb67-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-8" tabindex="-1"></a>dfg <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb67-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-9" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;Ganancia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb67-10" tabindex="-1"></a>  <span class="fu">pull</span>(Precio)</span></code></pre></div>
+<div id="ejercicio-7.-análisis-exploratorio-de-los-precios" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Ejercicio 7. Análisis exploratorio de los precios<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-7.-an%C3%A1lisis-exploratorio-de-los-precios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-2" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Precio),</span>
+<span id="cb68-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Precio),</span>
+<span id="cb68-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Precio),</span>
+<span id="cb68-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-6" tabindex="-1"></a>            <span class="at">varianza =</span> <span class="fu">var</span>(Precio),</span>
+<span id="cb68-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-7" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Precio),</span>
+<span id="cb68-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-8" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Precio),</span>
+<span id="cb68-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-9" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Precio),</span>
+<span id="cb68-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-10" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Precio),</span>
+<span id="cb68-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb68-11" tabindex="-1"></a>            <span class="at">CV =</span> <span class="fu">sd</span>(Precio) <span class="sc">/</span> <span class="fu">mean</span>(Precio))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 10
+##   `Tipo de cuenta`     n     prom      ds  varianza mediana    RIC    min    max
+##   &lt;fct&gt;            &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Ganancia           100  778491. 193397.   3.74e10  7.55e5 2.54e5 3.89e5 1.45e6
+## 2 Inversion          100 5090406. 912816.   8.33e11  5.06e6 1.19e6 2.69e6 7.19e6
+## # ℹ 1 more variable: CV &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb70-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">y =</span> Precio)) <span class="sc">+</span></span>
+<span id="cb70-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb70-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edaeconplot-1.png" width="672" /></p>
+<p>Aquí la historia es distinta a la de la presión. Las cuentas de inversión promedian
+5.090.406 y las de ganancia 778.491, o sea una relación de casi 6,5 a 1 en el promedio.
+Pero lo que salta a la vista es la dispersión: la desviación estándar de inversión es
+912.816 y la de ganancia 193.397, casi cinco veces menor. El coeficiente de variación, en
+cambio, es casi el mismo en los dos grupos (alrededor de 0,18 y 0,25), lo que sugiere que
+la dispersión crece proporcional a la magnitud, que es lo típico de variables de dinero.
+Con varianzas tan distintas, el t-test clásico no aplica.</p>
+</div>
+<div id="supuesto-de-normalidad-1" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Supuesto de normalidad<a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb71-1" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">scale</span>(dfi), <span class="st">&quot;pnorm&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Asymptotic one-sample Kolmogorov-Smirnov test
+## 
+## data:  scale(dfi)
+## D = 0.058097, p-value = 0.8884
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb73-1" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">scale</span>(dfg), <span class="st">&quot;pnorm&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Asymptotic one-sample Kolmogorov-Smirnov test
+## 
+## data:  scale(dfg)
+## D = 0.057927, p-value = 0.8905
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb75-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dfi)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dfi
+## W = 0.99388, p-value = 0.9349</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb77-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dfg)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dfg
+## W = 0.97289, p-value = 0.03691</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb79-1" tabindex="-1"></a><span class="fu">lillie.test</span>(dfi)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  dfi
+## D = 0.058097, p-value = 0.5575</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb81-1" tabindex="-1"></a><span class="fu">lillie.test</span>(dfg)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  dfg
+## D = 0.057927, p-value = 0.5622</code></pre>
+<p>Mismo panorama que antes: KS y Lilliefors no rechazan en ninguno de los dos grupos, y
+Shapiro-Wilk rechaza levemente en el grupo de ganancia (p = 0,0369). Con n = 100 por grupo
+se puede seguir por la vía paramétrica.</p>
+</div>
+<div id="ejercicio-8.-bartlett-levene-y-fligner-killeen" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Ejercicio 8. Bartlett, Levene y Fligner-Killeen<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-8.-bartlett-levene-y-fligner-killeen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Aplica las pruebas de Bartlett, Levene y Fligner-Killeen, explica detalladamente.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong> Las tres prueban lo mismo, <span class="math inline">\(H_0: \sigma_1^2 = \sigma_2^2\)</span>, pero por caminos distintos.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb83-1" tabindex="-1"></a><span class="fu">bartlett.test</span>(Precio <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">data =</span> df)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  Precio by Tipo de cuenta
+## Bartlett&#39;s K-squared = 177.81, df = 1, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb85-1" tabindex="-1"></a><span class="fu">leveneTest</span>(Precio <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">data =</span> df, <span class="at">center =</span> median)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##        Df F value    Pr(&gt;F)    
+## group   1   107.2 &lt; 2.2e-16 ***
+##       198                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb87-1" tabindex="-1"></a><span class="fu">fligner.test</span>(Precio <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">data =</span> df)</span></code></pre></div>
+<pre><code>## 
+##  Fligner-Killeen test of homogeneity of variances
+## 
+## data:  Precio by Tipo de cuenta
+## Fligner-Killeen:med chi-squared = 82.798, df = 1, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb89-1" tabindex="-1"></a><span class="fu">var.test</span>(dfi, dfg)</span></code></pre></div>
+<pre><code>## 
+##  F test to compare two variances
+## 
+## data:  dfi and dfg
+## F = 22.277, num df = 99, denom df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  14.9892 33.1095
+## sample estimates:
+## ratio of variances 
+##           22.27745</code></pre>
+<p>Bartlett compara las varianzas mediante un estadístico basado en el logaritmo de las
+varianzas de cada grupo, que bajo H0 se distribuye ji-cuadrado. Es el más potente de los
+tres cuando los datos sí son normales, pero también el más frágil: si hay colas pesadas o
+asimetría, rechaza aunque las varianzas sean iguales. Aquí da K² = 177,81 con p &lt; 2,2e-16.</p>
+<p>Levene no trabaja con las varianzas sino con las distancias de cada dato al centro de su
+grupo. Convierte cada observación en <span class="math inline">\(|x_{ij} - \tilde{x}_i|\)</span> y le corre un ANOVA a esas
+distancias: si un grupo está más disperso, sus distancias promedio serán mayores. Usar la
+mediana como centro (<code>center = median</code>) en vez de la media es lo que lo vuelve robusto a
+los valores extremos. Aquí da F = 107,2 con p &lt; 2,2e-16.</p>
+<p>Fligner-Killeen va un paso más allá y trabaja con los rangos de esas distancias en lugar
+de con las distancias mismas. Al pasar a rangos deja de importar la forma de la
+distribución, así que es el más robusto de los tres y el recomendado cuando hay dudas
+serias sobre la normalidad. Aquí da ji-cuadrado = 82,798 con p &lt; 2,2e-16.</p>
+<p>Las tres coinciden en rechazar H0, y <code>var.test</code> lo confirma: la razón de varianzas es
+22,28 con intervalo [14,99 ; 33,11], que ni de cerca contiene el 1. Que los tres métodos
+coincidan es la situación cómoda; cuando se contradicen, la regla práctica es hacerle caso
+a Levene o a Fligner, porque Bartlett suele estar rechazando por falta de normalidad y no
+por diferencia real de varianzas.</p>
+</div>
+<div id="prueba-t-con-la-corrección-de-welch" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Prueba t con la corrección de Welch<a href="estadística-paramétrica-y-no-paramétrica.html#prueba-t-con-la-correcci%C3%B3n-de-welch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Como las varianzas son distintas, hay que usar la corrección de Welch.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb91-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> dfi, <span class="at">y =</span> dfg, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dfi and dfg
+## t = 46.212, df = 107.87, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  4126960 4496870
+## sample estimates:
+## mean of x mean of y 
+## 5090405.9  778490.6</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb93-1" tabindex="-1"></a><span class="fu">cohen.d</span>(dfi, dfg, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 6.535323 (large)
+## 95 percent confidence interval:
+##    lower    upper 
+## 5.833174 7.237472</code></pre>
+<p>Welch no usa varianza combinada; calcula el error estándar como
+<span class="math inline">\(\sqrt{S_1^2/n_1 + S_2^2/n_2}\)</span> y ajusta los grados de libertad con la fórmula de
+Welch-Satterthwaite. Por eso los grados de libertad salen 107,87 y no 198: cuando las
+varianzas son muy distintas, la prueba “castiga” y deja menos grados de libertad de los
+que habría con muestras equilibradas.</p>
+<p>El resultado es t = 46,212 con p &lt; 2,2e-16 y una diferencia de 4.311.915 con intervalo
+[4.126.960 ; 4.496.870]. La d de Cohen da 6,54, grande. Las cuentas de inversión tienen un
+precio promedio significativamente mayor que las de ganancia.</p>
+</div>
+</div>
+<div id="dos-grupos-pareados-paramétrica" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Dos grupos pareados, paramétrica<a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-param%C3%A9trica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando las dos mediciones vienen del mismo sujeto ya no son independientes, y la prueba
+cambia: en vez de comparar dos grupos, se trabaja con la diferencia dentro de cada sujeto
+y se contrasta si su media es cero.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb95-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb95-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb95-2" tabindex="-1"></a>  <span class="at">estudiante =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>),</span>
+<span id="cb95-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb95-3" tabindex="-1"></a>  <span class="at">antes =</span> <span class="fu">c</span>(<span class="fl">12.9</span>, <span class="fl">13.5</span>, <span class="fl">12.8</span>, <span class="fl">15.6</span>, <span class="fl">17.2</span>, <span class="fl">19.2</span>, <span class="fl">12.6</span>, <span class="fl">15.3</span>, <span class="fl">14.4</span>, <span class="fl">11.3</span>),</span>
+<span id="cb95-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb95-4" tabindex="-1"></a>  <span class="at">despues =</span> <span class="fu">c</span>(<span class="fl">12.7</span>, <span class="fl">13.6</span>, <span class="fl">12.0</span>, <span class="fl">15.2</span>, <span class="fl">16.8</span>, <span class="fl">20.0</span>, <span class="fl">12.0</span>, <span class="fl">15.9</span>, <span class="fl">16.0</span>, <span class="fl">11.1</span>)</span>
+<span id="cb95-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb95-5" tabindex="-1"></a>)</span></code></pre></div>
+<div id="ejercicio-9.-análisis-exploratorio-de-los-tiempos" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Ejercicio 9. Análisis exploratorio de los tiempos<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-9.-an%C3%A1lisis-exploratorio-de-los-tiempos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.2 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb96-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb96-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diferencia =</span> despues <span class="sc">-</span> antes)</span>
+<span id="cb96-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb96-3" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb96-4" tabindex="-1"></a>datos</span></code></pre></div>
+<pre><code>##    estudiante antes despues diferencia
+## 1           1  12.9    12.7       -0.2
+## 2           2  13.5    13.6        0.1
+## 3           3  12.8    12.0       -0.8
+## 4           4  15.6    15.2       -0.4
+## 5           5  17.2    16.8       -0.4
+## 6           6  19.2    20.0        0.8
+## 7           7  12.6    12.0       -0.6
+## 8           8  15.3    15.9        0.6
+## 9           9  14.4    16.0        1.6
+## 10         10  11.3    11.1       -0.2</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(antes, despues, diferencia),</span>
+<span id="cb98-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;momento&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;tiempo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb98-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-4" tabindex="-1"></a>  <span class="fu">group_by</span>(momento) <span class="sc">%&gt;%</span></span>
+<span id="cb98-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(tiempo),</span>
+<span id="cb98-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-6" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(tiempo),</span>
+<span id="cb98-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-7" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(tiempo),</span>
+<span id="cb98-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-8" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(tiempo),</span>
+<span id="cb98-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-9" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(tiempo),</span>
+<span id="cb98-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-10" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(tiempo),</span>
+<span id="cb98-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb98-11" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(tiempo))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 8
+##   momento        n    prom    ds mediana   RIC    min   max
+##   &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 antes         10 14.5    2.39   14.0   2.70  11.3    19.2
+## 2 despues       10 14.5    2.76   14.4   3.8   11.1    20  
+## 3 diferencia    10  0.0500 0.741  -0.200 0.875 -0.800   1.6</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(antes, despues),</span>
+<span id="cb100-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;momento&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;tiempo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb100-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">momento =</span> <span class="fu">fct_relevel</span>(momento, <span class="st">&quot;antes&quot;</span>, <span class="st">&quot;despues&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb100-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> momento, <span class="at">y =</span> tiempo, <span class="at">group =</span> estudiante)) <span class="sc">+</span></span>
+<span id="cb100-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;grey60&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> momento), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb100-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-8" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb100-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tiempo&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb100-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edaparplot-1.png" width="672" /></p>
+<p>El promedio pasa de 14,48 a 14,53, o sea 0,05 de diferencia, que al lado de una desviación
+estándar de 2,39 no es nada. El gráfico de líneas muestra por qué el análisis pareado es
+el correcto aquí: las líneas se cruzan poco, cada estudiante conserva su nivel, y lo que
+cambia es poco y en direcciones opuestas. Seis estudiantes bajaron su tiempo y cuatro lo
+subieron. La diferencia individual va de −0,8 a 1,6 con media 0,05 y desviación 0,74.</p>
+</div>
+<div id="supuesto-de-normalidad-2" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Supuesto de normalidad<a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb101-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(datos<span class="sc">$</span>antes)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  datos$antes
+## W = 0.94444, p-value = 0.6033</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb103-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(datos<span class="sc">$</span>despues)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  datos$despues
+## W = 0.93638, p-value = 0.5135</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb105-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(datos<span class="sc">$</span>diferencia)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  datos$diferencia
+## W = 0.90307, p-value = 0.2367</code></pre>
+<p>Los tres no rechazan. El que de verdad importa es el tercero: el t pareado supone
+normalidad de las diferencias, no de cada medición por separado. Con n = 10 no hay margen
+para descuidar ese supuesto porque el teorema del límite central no ayuda con muestras tan
+pequeñas.</p>
+</div>
+<div id="ejercicio-10.-teorema-de-la-diferencia-de-medias-para-datos-pareados" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Ejercicio 10. Teorema de la diferencia de medias para datos pareados<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-10.-teorema-de-la-diferencia-de-medias-para-datos-pareados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Usando el teorema de la diferencia de medias para datos pareados verifica la salida.</p>
+<p><span class="fuente">Sección 4.2 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong> La salida a reproducir es esta:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb107-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> datos<span class="sc">$</span>despues, <span class="at">y =</span> datos<span class="sc">$</span>antes, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  datos$despues and datos$antes
+## t = 0.21331, df = 9, p-value = 0.8358
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -0.4802549  0.5802549
+## sample estimates:
+## mean difference 
+##            0.05</code></pre>
+<p>El teorema reduce el problema a una sola muestra, la de las diferencias
+<span class="math inline">\(d_i = X_{2i} - X_{1i}\)</span>:</p>
+<p><span class="math display">\[t = \frac{\bar{d}}{S_d / \sqrt{n}} \qquad gl = n - 1\]</span></p>
+<p>con <span class="math inline">\(H_0: \mu_d = 0\)</span>.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-1" tabindex="-1"></a>d  <span class="ot">&lt;-</span> datos<span class="sc">$</span>diferencia</span>
+<span id="cb109-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-2" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">length</span>(d)</span>
+<span id="cb109-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-3" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-4" tabindex="-1"></a>d_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(d)</span>
+<span id="cb109-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-5" tabindex="-1"></a>S_d   <span class="ot">&lt;-</span> <span class="fu">sd</span>(d)</span>
+<span id="cb109-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-6" tabindex="-1"></a>ee_d  <span class="ot">&lt;-</span> S_d <span class="sc">/</span> <span class="fu">sqrt</span>(nd)</span>
+<span id="cb109-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-7" tabindex="-1"></a>t_par <span class="ot">&lt;-</span> d_bar <span class="sc">/</span> ee_d</span>
+<span id="cb109-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-8" tabindex="-1"></a>gl_par <span class="ot">&lt;-</span> nd <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb109-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-9" tabindex="-1"></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, gl_par)</span>
+<span id="cb109-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-10" tabindex="-1"></a></span>
+<span id="cb109-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-11" tabindex="-1"></a><span class="fu">tibble</span>(d_bar, S_d, ee_d, t_par, gl_par, t_crit,</span>
+<span id="cb109-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-12" tabindex="-1"></a>       <span class="at">p =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_par), gl_par, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb109-13"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-13" tabindex="-1"></a>       <span class="at">IC_inf =</span> d_bar <span class="sc">-</span> t_crit <span class="sc">*</span> ee_d,</span>
+<span id="cb109-14"><a href="estadística-paramétrica-y-no-paramétrica.html#cb109-14" tabindex="-1"></a>       <span class="at">IC_sup =</span> d_bar <span class="sc">+</span> t_crit <span class="sc">*</span> ee_d)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##    d_bar   S_d  ee_d t_par gl_par t_crit     p IC_inf IC_sup
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.0500 0.741 0.234 0.213      9   2.26 0.836 -0.480  0.580</code></pre>
+<p>El t manual da 0,21331 con 9 grados de libertad, el mismo que reporta <code>t.test</code>, y el
+intervalo de confianza [−0,4803 ; 0,5803] también coincide. Como <span class="math inline">\(|0,213| &lt; 2,262\)</span> no se
+rechaza H0.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb111-1" tabindex="-1"></a><span class="fu">cohen.d</span>(datos<span class="sc">$</span>despues, datos<span class="sc">$</span>antes, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 0.0169815 (negligible)
+## 95 percent confidence interval:
+##      lower      upper 
+## -0.1502851  0.1842481</code></pre>
+<p>La d de Cohen da 0,017, clasificada como despreciable. No hay evidencia de que la
+intervención educativa haya cambiado los tiempos. Y aquí conviene señalar una cosa: con
+n = 10 la prueba tiene muy poca potencia, así que “no se rechaza” no es lo mismo que “se
+demostró que no hay efecto”. Lo único que se puede afirmar es que con esta muestra no se
+detecta ninguno, y el intervalo de confianza es lo que dice cuánto efecto seguiría siendo
+compatible con los datos: cualquier cambio entre −0,48 y 0,58.</p>
+</div>
+</div>
+<div id="dos-grupos-independientes-no-paramétrica" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Dos grupos independientes, no paramétrica<a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-independientes-no-param%C3%A9trica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando el supuesto de normalidad se cae de verdad, se cambia de familia de pruebas. La
+Mann-Whitney (o suma de rangos de Wilcoxon) no compara medias sino que ordena todas las
+observaciones de menor a mayor, las reemplaza por su posición en el orden y compara las
+sumas de rangos de cada grupo. Al trabajar con posiciones y no con valores, deja de
+importar la forma de la distribución y los valores extremos pierden peso.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb113-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;births&quot;</span>)</span>
+<span id="cb113-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb113-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> births</span></code></pre></div>
+<p>Vamos a caracterizar el peso del bebé según si la madre fuma o no.</p>
+<div id="ejercicio-11.-análisis-exploratorio-del-peso-al-nacer" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Ejercicio 11. Análisis exploratorio del peso al nacer<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-11.-an%C3%A1lisis-exploratorio-del-peso-al-nacer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.3 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong></p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb114-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-2" tabindex="-1"></a>  <span class="fu">group_by</span>(smoke) <span class="sc">%&gt;%</span></span>
+<span id="cb114-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(weight),</span>
+<span id="cb114-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb114-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(weight),</span>
+<span id="cb114-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-6" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(weight),</span>
+<span id="cb114-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-7" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(weight),</span>
+<span id="cb114-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-8" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(weight),</span>
+<span id="cb114-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-9" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(weight),</span>
+<span id="cb114-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-10" tabindex="-1"></a>            <span class="at">asimetria =</span> <span class="fu">skewness</span>(weight),</span>
+<span id="cb114-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb114-11" tabindex="-1"></a>            <span class="at">curtosis =</span> <span class="fu">kurtosis</span>(weight))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 10
+##   smoke         n  prom    ds mediana   RIC   min   max asimetria curtosis
+##   &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 nonsmoker   100  7.18  1.43    7.44  1.36  1.63 10.1      -1.20     5.38
+## 2 smoker       50  6.78  1.60    6.97  1.59  1.69  9.13     -1.33     5.06</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb116-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb116-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb116-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> smoke)) <span class="sc">+</span></span>
+<span id="cb116-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb116-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb116-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb116-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb116-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Peso del bebé (libras)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb116-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edabirthsplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb117-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb117-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb117-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> smoke, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb117-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb117-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb117-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb117-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Peso del bebé (libras)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb117-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edabirthsplot-2.png" width="672" /></p>
+<p>Son 100 no fumadoras y 50 fumadoras. El peso promedio es 7,18 libras contra 6,78, o sea
+0,40 libras de diferencia, con desviaciones de 1,43 y 1,60. Las cajas se traslapan
+bastante, así que a ojo la diferencia no se ve concluyente.</p>
+<p>Lo importante para decidir la prueba es la forma: la asimetría es −1,20 y −1,33 en cada
+grupo y la curtosis 5,38 y 5,06. Las dos distribuciones están sesgadas a la izquierda y
+tienen colas más pesadas que la normal, que es lo esperable en peso al nacer porque los
+prematuros forman una cola larga hacia abajo mientras que por arriba el peso tiene un
+límite biológico.</p>
+</div>
+<div id="supuesto-de-normalidad-3" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Supuesto de normalidad<a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb118-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-2" tabindex="-1"></a>  <span class="fu">group_by</span>(smoke) <span class="sc">%&gt;%</span></span>
+<span id="cb118-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb118-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-4" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">length</span>(weight),</span>
+<span id="cb118-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-5" tabindex="-1"></a>    <span class="at">est_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(weight), <span class="st">&quot;pnorm&quot;</span>)<span class="sc">$</span>statistic,</span>
+<span id="cb118-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-6" tabindex="-1"></a>    <span class="at">p_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(weight), <span class="st">&quot;pnorm&quot;</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb118-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-7" tabindex="-1"></a>    <span class="at">est_sw =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>statistic,</span>
+<span id="cb118-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-8" tabindex="-1"></a>    <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p.value,</span>
+<span id="cb118-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-9" tabindex="-1"></a>    <span class="at">est_l =</span> <span class="fu">lillie.test</span>(weight)<span class="sc">$</span>statistic,</span>
+<span id="cb118-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb118-10" tabindex="-1"></a>    <span class="at">p_l =</span> <span class="fu">lillie.test</span>(weight)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 8
+##   smoke         n est_ks   p_ks est_sw      p_sw est_l      p_l
+##   &lt;fct&gt;     &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 nonsmoker   100  0.132 0.0604  0.924 0.0000223 0.132 0.000184
+## 2 smoker       50  0.125 0.413   0.895 0.000328  0.125 0.0484</code></pre>
+<p>Shapiro-Wilk rechaza con fuerza en los dos grupos (p = 2,2e-05 y p = 3,3e-04) y Lilliefors
+también (p = 0,00018 y p = 0,048). Kolmogorov-Smirnov es el único que se queda corto en el
+grupo de no fumadoras (p = 0,060), y además tira un aviso de empates: como el peso está
+redondeado a dos decimales hay valores repetidos, y KS supone distribución continua sin
+empates. Ese aviso ya es razón suficiente para no confiar en ese p-valor.</p>
+<p>Con dos de tres pruebas rechazando, más la asimetría y la curtosis que ya habíamos visto,
+la normalidad no se sostiene y toca ir por la vía no paramétrica.</p>
+</div>
+<div id="homogeneidad-de-varianzas" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Homogeneidad de varianzas<a href="estadística-paramétrica-y-no-paramétrica.html#homogeneidad-de-varianzas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb120-1" tabindex="-1"></a><span class="fu">leveneTest</span>(weight <span class="sc">~</span> smoke, <span class="at">data =</span> df, <span class="at">center =</span> median)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(&gt;F)
+## group   1  0.4442 0.5062
+##       148</code></pre>
+<p>Levene da p = 0,5062, así que las dispersiones sí son comparables. Esto importa porque la
+Mann-Whitney, para poder interpretarse como comparación de medianas, necesita que las dos
+distribuciones tengan forma parecida; si no, solo permite decir que una tiende a dar
+valores mayores que la otra.</p>
+</div>
+<div id="prueba-de-mann-whitney" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Prueba de Mann-Whitney<a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-mann-whitney" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb122-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb122-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb122-2" tabindex="-1"></a>  <span class="fu">wilcox_test</span>(weight <span class="sc">~</span> smoke)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##   .y.    group1    group2    n1    n2 statistic     p
+## * &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 weight nonsmoker smoker   100    50      2879 0.131</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb124-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb124-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb124-2" tabindex="-1"></a>  <span class="fu">wilcox_effsize</span>(weight <span class="sc">~</span> smoke)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##   .y.    group1    group2 effsize    n1    n2 magnitude
+## * &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+## 1 weight nonsmoker smoker   0.123   100    50 small</code></pre>
+<p>El estadístico da W = 2879 con p = 0,131, por encima de 0,05, así que no se rechaza H0. El
+tamaño del efecto r = 0,123 es pequeño. No hay evidencia de que el peso del bebé difiera
+según si la madre fuma, al menos con esta muestra.</p>
+</div>
+<div id="ejercicio-12.-se-puede-usar-una-prueba-paramétrica" class="section level3 hasAnchor" number="2.4.5">
+<h3><span class="header-section-number">2.4.5</span> Ejercicio 12. ¿Se puede usar una prueba paramétrica?<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-12.-se-puede-usar-una-prueba-param%C3%A9trica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> ¿Puedes usar una prueba paramétrica? En caso afirmativo, ejecútela.</p>
+<p><span class="fuente">Sección 4.3 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong> Sí se puede, y la razón no es que los datos sean normales, porque ya vimos que no lo son.
+La razón es el teorema del límite central: lo que el t-test necesita no es que los datos
+sean normales sino que lo sea la distribución de la media muestral, y con n = 100 y n = 50
+esa distribución ya es aproximadamente normal aunque la variable original esté sesgada. La
+regla práctica de n ≥ 30 por grupo se cumple con holgura, la asimetría es moderada (por
+debajo de 2 en valor absoluto) y Levene confirmó que las varianzas son homogéneas.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb126-1" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> smoke, <span class="at">data =</span> df, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  weight by smoke
+## t = 1.5517, df = 148, p-value = 0.1229
+## alternative hypothesis: true difference in means between group nonsmoker and group smoker is not equal to 0
+## 95 percent confidence interval:
+##  -0.1095531  0.9105531
+## sample estimates:
+## mean in group nonsmoker    mean in group smoker 
+##                  7.1795                  6.7790</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb128-1" tabindex="-1"></a><span class="fu">cohen.d</span>(weight <span class="sc">~</span> smoke, <span class="at">data =</span> df)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 0.2687581 (small)
+## 95 percent confidence interval:
+##       lower       upper 
+## -0.07488708  0.61240332</code></pre>
+<p>El t-test da t = 1,5517 con 148 grados de libertad y p = 0,1229, con intervalo
+[−0,1096 ; 0,9106] y d de Cohen 0,269, pequeña. La conclusión es la misma que dio
+Mann-Whitney: los p-valores quedan casi pegados, 0,1229 por la vía paramétrica y 0,1310
+por la no paramétrica, y ninguno alcanza el 5%.</p>
+<p>Que las dos pruebas coincidan es una buena señal: significa que la desviación de la
+normalidad no estaba distorsionando el resultado. Cuando coinciden se puede reportar la
+paramétrica, que da un intervalo de confianza sobre la diferencia de medias, más fácil de
+interpretar. Cuando no coinciden, hay que quedarse con la no paramétrica y explicar por
+qué.</p>
+</div>
+</div>
+<div id="dos-grupos-pareados-no-paramétrica" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Dos grupos pareados, no paramétrica<a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-no-param%C3%A9trica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es el equivalente de la sección anterior pero para datos dependientes. La prueba de rangos
+con signo de Wilcoxon calcula la diferencia dentro de cada sujeto, descarta las que dan
+cero, ordena el resto por su magnitud absoluta sin mirar el signo, y después le devuelve el
+signo a cada rango. Al final compara la suma de los rangos positivos contra la de los
+negativos. Si el tratamiento no hubiera hecho nada, unos y otros deberían pesar más o menos
+lo mismo.</p>
+<p>Se recomienda cuando las diferencias no son normales, cuando la muestra es pequeña, o
+cuando la variable es ordinal, que es el caso típico de las escalas tipo Likert de un
+cuestionario. Esa última razón es la que manda aquí: una respuesta de 1 a 5 no es una
+magnitud continua, así que promediarla ya es una licencia y suponerla normal es imposible.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb130-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;Datos/dataQ.tsv&quot;</span>, <span class="at">delim =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb130-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb130-2" tabindex="-1"></a>                    <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb130-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb130-3" tabindex="-1"></a></span>
+<span id="cb130-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb130-4" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb130-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb130-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Experimento, Genero, <span class="st">`</span><span class="at">Nivel educativo</span><span class="st">`</span>), as.factor),</span>
+<span id="cb130-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb130-6" tabindex="-1"></a>         <span class="at">Experimento =</span> <span class="fu">fct_relevel</span>(Experimento, <span class="st">&quot;Pretest&quot;</span>, <span class="st">&quot;Post-test&quot;</span>))</span></code></pre></div>
+<p>Son 49 participantes medidos dos veces, antes y después de una intervención formativa. El
+cuestionario tiene cuatro preguntas (<code>Q1</code> a <code>Q4</code>) y aquí se trabaja con <code>Q1</code>, siguiendo al
+profesor.</p>
+<div id="ejercicio-13.-análisis-exploratorio-del-cuestionario" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Ejercicio 13. Análisis exploratorio del cuestionario<a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-13.-an%C3%A1lisis-exploratorio-del-cuestionario" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.4 del libro del profesor</span></p>
+</div>
+<p><strong>Solución.</strong> Primero quiénes son los participantes:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb131-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-2" tabindex="-1"></a>  <span class="fu">filter</span>(Experimento <span class="sc">==</span> <span class="st">&quot;Pretest&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb131-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Edad),</span>
+<span id="cb131-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-4" tabindex="-1"></a>            <span class="at">edad_media =</span> <span class="fu">mean</span>(Edad),</span>
+<span id="cb131-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-5" tabindex="-1"></a>            <span class="at">edad_ds =</span> <span class="fu">sd</span>(Edad),</span>
+<span id="cb131-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-6" tabindex="-1"></a>            <span class="at">edad_min =</span> <span class="fu">min</span>(Edad),</span>
+<span id="cb131-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-7" tabindex="-1"></a>            <span class="at">edad_max =</span> <span class="fu">max</span>(Edad),</span>
+<span id="cb131-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb131-8" tabindex="-1"></a>            <span class="at">labor_mediana =</span> <span class="fu">median</span>(<span class="st">`</span><span class="at">Tiempo de labor</span><span class="st">`</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 6
+##       n edad_media edad_ds edad_min edad_max labor_mediana
+##   &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+## 1    49         46    10.6       24       67             7</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb133-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb133-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb133-2" tabindex="-1"></a>  <span class="fu">filter</span>(Experimento <span class="sc">==</span> <span class="st">&quot;Pretest&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb133-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb133-3" tabindex="-1"></a>  <span class="fu">count</span>(Genero, <span class="st">`</span><span class="at">Nivel educativo</span><span class="st">`</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   Genero `Nivel educativo`     n
+##   &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt;
+## 1 F      PO                   16
+## 2 F      PR                   14
+## 3 M      PO                   10
+## 4 M      PR                    9</code></pre>
+<p>Y ahora la variable de interés, <code>Q1</code>, en cada momento:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb135-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Experimento) <span class="sc">%&gt;%</span></span>
+<span id="cb135-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Q1),</span>
+<span id="cb135-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Q1),</span>
+<span id="cb135-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Q1),</span>
+<span id="cb135-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-6" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Q1),</span>
+<span id="cb135-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-7" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Q1),</span>
+<span id="cb135-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-8" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Q1),</span>
+<span id="cb135-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb135-9" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Q1))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 8
+##   Experimento     n  prom    ds mediana   RIC   min   max
+##   &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Pretest        49  2.57 0.764       2     1     1     4
+## 2 Post-test      49  4.63 0.528       5     1     3     5</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb137-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb137-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb137-2" tabindex="-1"></a>  <span class="fu">count</span>(Experimento, Q1) <span class="sc">%&gt;%</span></span>
+<span id="cb137-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb137-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Experimento, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb137-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb137-4" tabindex="-1"></a>  <span class="fu">arrange</span>(Q1)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##      Q1 Pretest `Post-test`
+##   &lt;dbl&gt;   &lt;int&gt;       &lt;int&gt;
+## 1     1       1           0
+## 2     2      26           0
+## 3     3      15           1
+## 4     4       7          16
+## 5     5       0          32</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb139-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb139-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb139-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Q1), <span class="at">fill =</span> Experimento)) <span class="sc">+</span></span>
+<span id="cb139-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb139-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb139-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb139-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb139-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb139-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Respuesta Q1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb139-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb139-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edaqplot-1.png" width="672" /></p>
+<p>Los 49 participantes tienen en promedio 46 años, entre 24 y 67, con una mediana de 7 años
+de labor. Son 30 mujeres y 19 hombres, repartidos casi por mitades entre los dos niveles
+educativos, así que el grupo es razonablemente homogéneo y no hay un subgrupo diminuto que
+distorsione.</p>
+<p>En <code>Q1</code> el cambio es grande y evidente. El promedio pasa de 2,57 a 4,63 y la mediana de 2 a
+5. La tabla de frecuencias lo muestra mejor que cualquier promedio: en el pre-test 27 de
+los 49 respondieron 1 o 2 y nadie llegó a 5; en el post-test 48 de 49 respondieron 4 o 5 y
+nadie bajó de 3. Es un desplazamiento de toda la distribución, no un corrimiento del
+promedio jalado por unos pocos.</p>
+<p>Como los datos son pareados, lo que de verdad hay que mirar es la diferencia dentro de cada
+persona:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-1" tabindex="-1"></a>diferencias <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb140-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-2" tabindex="-1"></a>  <span class="fu">select</span>(Participantes, Experimento, Q1) <span class="sc">%&gt;%</span></span>
+<span id="cb140-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Experimento, <span class="at">values_from =</span> Q1) <span class="sc">%&gt;%</span></span>
+<span id="cb140-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">d =</span> <span class="st">`</span><span class="at">Post-test</span><span class="st">`</span> <span class="sc">-</span> Pretest)</span>
+<span id="cb140-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-5" tabindex="-1"></a></span>
+<span id="cb140-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-6" tabindex="-1"></a>diferencias <span class="sc">%&gt;%</span></span>
+<span id="cb140-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(d),</span>
+<span id="cb140-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-8" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(d),</span>
+<span id="cb140-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-9" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(d),</span>
+<span id="cb140-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-10" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(d),</span>
+<span id="cb140-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-11" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(d),</span>
+<span id="cb140-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-12" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(d),</span>
+<span id="cb140-13"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-13" tabindex="-1"></a>            <span class="at">suben =</span> <span class="fu">sum</span>(d <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb140-14"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-14" tabindex="-1"></a>            <span class="at">bajan =</span> <span class="fu">sum</span>(d <span class="sc">&lt;</span> <span class="dv">0</span>),</span>
+<span id="cb140-15"><a href="estadística-paramétrica-y-no-paramétrica.html#cb140-15" tabindex="-1"></a>            <span class="at">empatan =</span> <span class="fu">sum</span>(d <span class="sc">==</span> <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   min   max suben bajan empatan
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+## 1    49  2.06 0.899       2     0     4    47     0       2</code></pre>
+<p>Este es el dato que define el resultado: de 49 participantes, <strong>47 subieron, 2 se quedaron
+igual y ninguno bajó</strong>. La diferencia promedio es de 2,06 puntos con desviación 0,90. Que
+no haya ni un solo caso en contra es poco común y anticipa un p-valor diminuto.</p>
+</div>
+<div id="supuesto-de-normalidad-4" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Supuesto de normalidad<a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb142-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Experimento) <span class="sc">%&gt;%</span></span>
+<span id="cb142-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Q1),</span>
+<span id="cb142-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-4" tabindex="-1"></a>            <span class="at">estsw =</span> <span class="fu">shapiro.test</span>(Q1)<span class="sc">$</span>statistic,</span>
+<span id="cb142-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-5" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(Q1)<span class="sc">$</span>p.value,</span>
+<span id="cb142-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-6" tabindex="-1"></a>            <span class="at">est_lt =</span> <span class="fu">lillie.test</span>(Q1)<span class="sc">$</span>statistic,</span>
+<span id="cb142-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb142-7" tabindex="-1"></a>            <span class="at">p_lt =</span> <span class="fu">lillie.test</span>(Q1)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 6
+##   Experimento     n estsw          p_sw est_lt     p_lt
+##   &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Pretest        49 0.791 0.000000652    0.324 3.28e-14
+## 2 Post-test      49 0.645 0.00000000123  0.410 2.43e-23</code></pre>
+<p>Shapiro-Wilk y Lilliefors rechazan la normalidad en los dos momentos, con p-valores del
+orden de 1e-07 o menores. No es sorpresa: una variable que solo toma cinco valores enteros
+no puede ser normal, porque la normal es continua. Aquí la prueba de normalidad es casi un
+trámite, la decisión ya estaba tomada desde que supimos que <code>Q1</code> es ordinal.</p>
+<p>De todos modos, lo que el t pareado exigiría es la normalidad de las diferencias, no la de
+cada momento, así que conviene revisarla también:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(diferencias<span class="sc">$</span>d)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  diferencias$d
+## W = 0.88275, p-value = 0.0001573</code></pre>
+<p>También se rechaza (p = 0,00016), lo que cierra la puerta a la vía paramétrica y confirma
+que hay que usar Wilcoxon.</p>
+</div>
+<div id="prueba-de-rangos-con-signo-de-wilcoxon" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Prueba de rangos con signo de Wilcoxon<a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-rangos-con-signo-de-wilcoxon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb146-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb146-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb146-2" tabindex="-1"></a>  <span class="fu">wilcox_test</span>(Q1 <span class="sc">~</span> Experimento, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##   .y.   group1  group2       n1    n2 statistic             p
+## * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Q1    Pretest Post-test    49    49         0 0.00000000145</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb148-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-2" tabindex="-1"></a>  <span class="fu">wilcox_effsize</span>(Q1 <span class="sc">~</span> Experimento, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##   .y.   group1  group2    effsize    n1    n2 magnitude
+## * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+## 1 Q1    Pretest Post-test   0.879    49    49 large</code></pre>
+<p>El estadístico da 0 y el p-valor 1,45e-09. Vale la pena entender por qué el estadístico
+salió exactamente cero: es la suma de los rangos que van en contra, y como ningún
+participante bajó, esa suma no tiene nada que sumar. Cero es el valor más extremo que puede
+tomar el estadístico, o sea la evidencia más fuerte posible contra H0 con esta muestra.</p>
+<p>El tamaño del efecto es r = 0,879, muy por encima de 0,5, así que se clasifica como grande.
+Hay evidencia de que la intervención cambió las respuestas, y el cambio es sustancial.</p>
+<p>Un detalle de la salida que conviene saber leer: si se corre la versión base
+<code>wilcox.test(paired = TRUE)</code>, R avisa que no puede calcular el p-valor exacto por los
+empates y por los ceros. Eso no es un error, solo significa que usa la aproximación normal
+en vez de la distribución exacta. Con n = 49 la aproximación es perfectamente válida.</p>
+</div>
+</div>
+<div id="anova" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> ANOVA<a href="estadística-paramétrica-y-no-paramétrica.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando hay más de dos grupos ya no sirve hacer varios t-test por parejas, porque cada
+prueba tiene su propia probabilidad de error tipo I y al acumularlas la probabilidad de
+equivocarse en alguna se dispara. Con tres grupos serían tres pruebas y el riesgo real
+subiría de 5% a casi 14%. El ANOVA resuelve esto con un solo contraste global.</p>
+<p>La idea es descomponer la variabilidad total en dos partes: la que hay entre los grupos y
+la que hay dentro de ellos.</p>
+<p><span class="math display">\[SST = SSA + SSE\]</span></p>
+<p><span class="math display">\[SST = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(X_{ij} - \bar{X})^2 \qquad
+SSA = \sum_{i=1}^{k} n_i(\bar{X}_i - \bar{X})^2 \qquad
+SSE = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(X_{ij} - \bar{X}_i)^2\]</span></p>
+<p><span class="math display">\[MSA = \frac{SSA}{k-1} \qquad MSE = \frac{SSE}{n-k} \qquad F = \frac{MSA}{MSE}\]</span></p>
+<p>con hipótesis</p>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2 = \cdots = \mu_k \qquad \text{vs} \qquad
+H_1: \text{al menos una media difiere}\]</span></p>
+<p>Si todas las medias fueran iguales, la variabilidad entre grupos sería solo ruido y F
+estaría alrededor de 1. Un F grande significa que los grupos están más separados entre sí
+de lo que explica la variabilidad interna.</p>
+<p>Como el profesor no deja datos en esta sección, se usa el conjunto de edentulismo, que es
+el mismo del parcial del semestre pasado, comparando la edad promedio según el estrato
+socioeconómico.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Datos/datos_edentulismo.xlsx&quot;</span>)</span>
+<span id="cb150-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-2" tabindex="-1"></a></span>
+<span id="cb150-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-3" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb150-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Genero, Educación, EDENTULISMO, Autoestima), as.factor),</span>
+<span id="cb150-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-5" tabindex="-1"></a>         <span class="at">Estrato =</span> <span class="fu">factor</span>(Estrato))</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb151-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Estrato) <span class="sc">%&gt;%</span></span>
+<span id="cb151-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Edad),</span>
+<span id="cb151-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Edad),</span>
+<span id="cb151-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Edad),</span>
+<span id="cb151-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-6" tabindex="-1"></a>            <span class="at">varianza =</span> <span class="fu">var</span>(Edad),</span>
+<span id="cb151-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-7" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Edad),</span>
+<span id="cb151-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-8" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Edad),</span>
+<span id="cb151-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-9" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Edad),</span>
+<span id="cb151-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-10" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Edad))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 9
+##   Estrato     n  prom    ds varianza mediana   RIC   min   max
+##   &lt;fct&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1         230  33.4  12.2     148.    30.5  19      18    64
+## 2 2          84  36.5  13.2     174.    34    22.5    19    64
+## 3 3          52  39.7  13.5     183.    40.5  24.2    19    64</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb153-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb153-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb153-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Estrato, <span class="at">y =</span> Edad)) <span class="sc">+</span></span>
+<span id="cb153-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb153-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb153-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb153-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb153-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb153-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Estrato socioeconómico&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Edad (años)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb153-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb153-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/edaedentplot-1.png" width="672" /></p>
+<div id="supuestos" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Supuestos<a href="estadística-paramétrica-y-no-paramétrica.html#supuestos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb154-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Estrato) <span class="sc">%&gt;%</span></span>
+<span id="cb154-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Edad),</span>
+<span id="cb154-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-4" tabindex="-1"></a>            <span class="at">est_sw =</span> <span class="fu">shapiro.test</span>(Edad)<span class="sc">$</span>statistic,</span>
+<span id="cb154-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-5" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(Edad)<span class="sc">$</span>p.value,</span>
+<span id="cb154-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-6" tabindex="-1"></a>            <span class="at">est_l =</span> <span class="fu">lillie.test</span>(Edad)<span class="sc">$</span>statistic,</span>
+<span id="cb154-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-7" tabindex="-1"></a>            <span class="at">p_l =</span> <span class="fu">lillie.test</span>(Edad)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 6
+##   Estrato     n est_sw          p_sw est_l          p_l
+##   &lt;fct&gt;   &lt;int&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
+## 1 1         230  0.932 0.00000000772 0.116 0.0000000695
+## 2 2          84  0.924 0.000105      0.156 0.0000270   
+## 3 3          52  0.944 0.0166        0.113 0.0955</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb156-1" tabindex="-1"></a><span class="fu">bartlett.test</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  Edad by Estrato
+## Bartlett&#39;s K-squared = 1.4761, df = 2, p-value = 0.478</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb158-1" tabindex="-1"></a><span class="fu">leveneTest</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d, <span class="at">center =</span> median)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(&gt;F)
+## group   2  1.9169 0.1486
+##       363</code></pre>
+<p>La homogeneidad se cumple sin discusión: Bartlett da p = 0,478 y Levene p = 0,1486. La
+normalidad dentro de cada estrato se rechaza, porque la edad está sesgada a la derecha (hay
+muchos adultos jóvenes y una cola hacia los mayores). Con n = 230, 84 y 52 el ANOVA aguanta
+esa desviación por el teorema del límite central, pero conviene dejarlo anotado y confirmar
+después con Kruskal-Wallis.</p>
+</div>
+<div id="cálculo-manual" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Cálculo manual<a href="estadística-paramétrica-y-no-paramétrica.html#c%C3%A1lculo-manual" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-1" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">mean</span>(d<span class="sc">$</span>Edad)</span>
+<span id="cb160-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-2" tabindex="-1"></a>k  <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(d<span class="sc">$</span>Estrato)</span>
+<span id="cb160-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-3" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(d)</span>
+<span id="cb160-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-4" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-5" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb160-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-6" tabindex="-1"></a>  <span class="fu">group_by</span>(Estrato) <span class="sc">%&gt;%</span></span>
+<span id="cb160-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ni =</span> <span class="fu">length</span>(Edad), <span class="at">mi =</span> <span class="fu">mean</span>(Edad))</span>
+<span id="cb160-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-8" tabindex="-1"></a></span>
+<span id="cb160-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-9" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>(resumen<span class="sc">$</span>ni <span class="sc">*</span> (resumen<span class="sc">$</span>mi <span class="sc">-</span> gm)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb160-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-10" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fu">sum</span>((d<span class="sc">$</span>Edad <span class="sc">-</span> gm)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb160-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-11" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> SST <span class="sc">-</span> SSA</span>
+<span id="cb160-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-12" tabindex="-1"></a></span>
+<span id="cb160-13"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-13" tabindex="-1"></a>MSA <span class="ot">&lt;-</span> SSA <span class="sc">/</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb160-14"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-14" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE <span class="sc">/</span> (n <span class="sc">-</span> k)</span>
+<span id="cb160-15"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-15" tabindex="-1"></a>F_calc <span class="ot">&lt;-</span> MSA <span class="sc">/</span> MSE</span>
+<span id="cb160-16"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-16" tabindex="-1"></a></span>
+<span id="cb160-17"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-17" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">media_global =</span> gm, k, n, SST, SSA, SSE, MSA, MSE, F_calc,</span>
+<span id="cb160-18"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-18" tabindex="-1"></a>       <span class="at">gl1 =</span> k <span class="sc">-</span> <span class="dv">1</span>, <span class="at">gl2 =</span> n <span class="sc">-</span> k,</span>
+<span id="cb160-19"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-19" tabindex="-1"></a>       <span class="at">F_critico =</span> <span class="fu">qf</span>(<span class="fl">0.95</span>, k <span class="sc">-</span> <span class="dv">1</span>, n <span class="sc">-</span> k),</span>
+<span id="cb160-20"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-20" tabindex="-1"></a>       <span class="at">p =</span> <span class="fu">pf</span>(F_calc, k <span class="sc">-</span> <span class="dv">1</span>, n <span class="sc">-</span> k, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 13
+##   media_global     k     n    SST   SSA    SSE   MSA   MSE F_calc   gl1   gl2
+##          &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1         35.0     3   366 59535. 1926. 57609.  963.  159.   6.07     2   363
+## # ℹ 2 more variables: F_critico &lt;dbl&gt;, p &lt;dbl&gt;</code></pre>
+</div>
+<div id="verificación-con-aov" class="section level3 hasAnchor" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> Verificación con <code>aov</code><a href="estadística-paramétrica-y-no-paramétrica.html#verificaci%C3%B3n-con-aov" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb162-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">aov</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d)</span>
+<span id="cb162-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb162-2" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## Estrato       2   1926   963.1   6.069 0.00256 **
+## Residuals   363  57609   158.7                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Los números coinciden: SSA = 1.926,27 con 2 grados de libertad y SSE = 57.608,71 con 363,
+lo que da MSA = 963,13, MSE = 158,70 y F = 6,0688. El valor crítico al 5% es 3,0206 y como
+<span class="math inline">\(6,0688 &gt; 3,0206\)</span> se rechaza H0, con p = 0,00256.</p>
+<p>Vale la pena mirar la proporción: SSA es apenas el 3,2% de SST. O sea que el estrato
+explica muy poco de la variabilidad de la edad. La diferencia es estadísticamente
+significativa pero pequeña en términos prácticos, y eso pasa porque con n = 366 hasta las
+diferencias chiquitas alcanzan significancia. Es la razón por la que nunca basta con el
+p-valor.</p>
+</div>
+<div id="comparaciones-múltiples" class="section level3 hasAnchor" number="2.6.4">
+<h3><span class="header-section-number">2.6.4</span> Comparaciones múltiples<a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-m%C3%BAltiples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb164-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(modelo)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Edad ~ Estrato, data = d)
+## 
+## $Estrato
+##         diff        lwr       upr     p adj
+## 2-1 3.055590 -0.7239745  6.835155 0.1393892
+## 3-1 6.322074  1.7696835 10.874464 0.0033906
+## 3-2 3.266484 -1.9648047  8.497772 0.3068550</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb166-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(modelo))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/tukeyplot-1.png" width="672" /></p>
+<p>El ANOVA dice que al menos un par difiere, pero no cuál. Tukey compara todas las parejas
+ajustando el nivel de significancia para que el error global se mantenga en 5%. El único
+par que resulta significativo es estrato 3 contra estrato 1, con una diferencia de 6,32
+años, intervalo [1,77 ; 10,87] y p ajustado 0,0034. Los pares 2-1 y 3-2 no alcanzan
+significancia y sus intervalos contienen el cero.</p>
+</div>
+</div>
+<div id="kruskal-wallis" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Kruskal-Wallis<a href="estadística-paramétrica-y-no-paramétrica.html#kruskal-wallis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es la versión no paramétrica del ANOVA de un factor. En vez de descomponer sumas de
+cuadrados, ordena todas las observaciones de la muestra completa, las reemplaza por su
+rango y compara el rango promedio de cada grupo:</p>
+<p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)\]</span></p>
+<p>que bajo H0 se distribuye aproximadamente ji-cuadrado con <span class="math inline">\(k-1\)</span> grados de libertad.</p>
+<p>Las hipótesis son</p>
+<p><span class="math display">\[H_0: \text{las } k \text{ poblaciones tienen la misma distribución} \qquad \text{vs}
+\qquad H_1: \text{al menos una tiende a dar valores mayores}\]</span></p>
+<p>Se usa cuando no se cumple la normalidad, cuando los grupos son pequeños, cuando la
+variable es ordinal o cuando hay valores extremos que distorsionarían las medias. No exige
+normalidad, pero sí que las observaciones sean independientes y que las distribuciones
+tengan forma parecida si se quiere leer el resultado como comparación de medianas.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb167-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  Edad by Estrato
+## Kruskal-Wallis chi-squared = 11.162, df = 2, p-value = 0.003769</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb169-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb169-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb169-2" tabindex="-1"></a>  <span class="fu">kruskal_effsize</span>(Edad <span class="sc">~</span> Estrato)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   .y.       n effsize method  magnitude
+## * &lt;chr&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;ord&gt;    
+## 1 Edad    366  0.0252 eta2[H] small</code></pre>
+<p>Da H = 11,162 con 2 grados de libertad y p = 0,00377, o sea la misma conclusión del ANOVA.
+El eta cuadrado basado en H es 0,0252, o sea que el estrato explica el 2,5% de la
+variabilidad de los rangos, un efecto pequeño. Que las dos pruebas coincidan confirma que
+la falta de normalidad dentro de los estratos no estaba afectando el resultado.</p>
+<div id="comparaciones-post-hoc" class="section level3 hasAnchor" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span> Comparaciones post-hoc<a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-post-hoc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb171-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb171-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb171-2" tabindex="-1"></a>  <span class="fu">dunn_test</span>(Edad <span class="sc">~</span> Estrato, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 9
+##   .y.   group1 group2    n1    n2 statistic       p   p.adj p.adj.signif
+## * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
+## 1 Edad  1      2        230    84      1.86 0.0625  0.188   ns          
+## 2 Edad  1      3        230    52      3.12 0.00182 0.00546 **          
+## 3 Edad  2      3         84    52      1.37 0.171   0.514   ns</code></pre>
+<p>La prueba de Dunn es el equivalente de Tukey para Kruskal-Wallis: compara los rangos
+promedio de cada pareja y ajusta los p-valores por el número de comparaciones. Bonferroni
+es el ajuste más conservador, simplemente multiplica cada p-valor por el número de pruebas.</p>
+<p>El resultado repite el de Tukey: el único par significativo es estrato 1 contra estrato 3,
+con p ajustado 0,0055. Los otros dos pares quedan sin significancia.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="guía-para-el-parcial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/josevang0811/Analisis_exploratorio/edit/main/02-estparynopar.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

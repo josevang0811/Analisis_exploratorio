@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Notas de Métodos Estadísticos</title>
+  <title>Capítulo 3 Guía para el parcial | Notas de Métodos Estadísticos</title>
   <meta name="description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Notas de Métodos Estadísticos" />
+  <meta property="og:title" content="Capítulo 3 Guía para el parcial | Notas de Métodos Estadísticos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
   <meta name="github-repo" content="josevang0811/Analisis_exploratorio" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Notas de Métodos Estadísticos" />
+  <meta name="twitter:title" content="Capítulo 3 Guía para el parcial | Notas de Métodos Estadísticos" />
   
   <meta name="twitter:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="estadística-paramétrica-y-no-paramétrica.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -245,39 +245,267 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Notas de Métodos Estadísticos</h1>
-<p class="author"><em>Jose Fernando Van Strahlen y Jairo Hernandez</em></p>
-<p class="date"><em>2026-08-19</em></p>
+<div id="guía-para-el-parcial" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Guía para el parcial<a href="guía-para-el-parcial.html#gu%C3%ADa-para-el-parcial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Este capítulo no agrega análisis nuevos. Reúne el criterio para escoger la prueba y la
+forma de leer cada salida de R, que es lo que el parcial pide justificar.</p>
+<div id="cómo-se-decide-qué-prueba-usar" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Cómo se decide qué prueba usar<a href="guía-para-el-parcial.html#c%C3%B3mo-se-decide-qu%C3%A9-prueba-usar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La decisión sale de responder cuatro preguntas en orden. Cambiar el orden es la fuente más
+común de errores.</p>
+<p><strong>Primera: ¿cuántos grupos se comparan?</strong> Dos, o más de dos. Con más de dos nunca se hacen
+t-test por parejas, porque el error tipo I se acumula: con tres grupos son tres pruebas y
+la probabilidad de equivocarse en alguna sube de 5% a casi 14%.</p>
+<p><strong>Segunda: ¿los grupos son independientes o pareados?</strong> Son pareados cuando las dos
+mediciones vienen del mismo sujeto (antes y después, dos tratamientos aplicados a la misma
+persona, gemelos). Son independientes cuando cada observación pertenece a un solo grupo.
+Si hay duda, sirve preguntarse si los dos grupos tienen forzosamente el mismo tamaño: si
+sí, probablemente sean pareados.</p>
+<p><strong>Tercera: ¿se cumple normalidad?</strong> Se verifica con Shapiro-Wilk, Lilliefors o
+Kolmogorov-Smirnov dentro de cada grupo, y se apoya con la asimetría, la curtosis y el
+histograma. En el caso pareado lo que debe ser normal son las diferencias, no cada
+medición.</p>
+<p><strong>Cuarta: ¿se cumple homogeneidad de varianzas?</strong> Con <code>var.test</code> si son dos grupos, o con
+Bartlett, Levene y Fligner-Killeen. La respuesta no decide entre paramétrica y no
+paramétrica, solo decide qué versión de la prueba paramétrica se usa.</p>
+<p>Con esas cuatro respuestas la prueba queda determinada:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grupos</th>
+<th>Diseño</th>
+<th>Normalidad</th>
+<th>Varianzas</th>
+<th>Prueba</th>
+<th>Tamaño de efecto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>Independientes</td>
+<td>Sí</td>
+<td>Iguales</td>
+<td><code>t.test(var.equal = TRUE)</code></td>
+<td><code>cohen.d</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Independientes</td>
+<td>Sí</td>
+<td>Distintas</td>
+<td><code>t.test(var.equal = FALSE)</code> (Welch)</td>
+<td><code>cohen.d</code></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Independientes</td>
+<td>No</td>
+<td>—</td>
+<td><code>wilcox_test</code> (Mann-Whitney)</td>
+<td><code>wilcox_effsize</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Pareados</td>
+<td>Sí (diferencias)</td>
+<td>—</td>
+<td><code>t.test(paired = TRUE)</code></td>
+<td><code>cohen.d(paired = TRUE)</code></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Pareados</td>
+<td>No</td>
+<td>—</td>
+<td><code>wilcox_test(paired = TRUE)</code></td>
+<td><code>wilcox_effsize(paired = TRUE)</code></td>
+</tr>
+<tr class="even">
+<td>&gt;2</td>
+<td>Independientes</td>
+<td>Sí</td>
+<td>Iguales</td>
+<td><code>aov</code></td>
+<td><code>TukeyHSD</code></td>
+</tr>
+<tr class="odd">
+<td>&gt;2</td>
+<td>Independientes</td>
+<td>No</td>
+<td>—</td>
+<td><code>kruskal.test</code></td>
+<td><code>dunn_test</code></td>
+</tr>
+</tbody>
+</table>
+<p>Sobre la tercera pregunta hay un matiz que suele decidir puntos en el parcial. Que
+Shapiro-Wilk rechace no obliga automáticamente a irse a la no paramétrica. Lo que el
+t-test necesita es que la distribución de la media muestral sea normal, no que lo sean los
+datos, y por el teorema del límite central eso se cumple cuando la muestra es grande. La
+regla práctica es n ≥ 30 por grupo, siempre que la asimetría sea moderada y no haya
+valores extremos dominando. Con muestras pequeñas no hay margen y el supuesto sí es
+obligatorio.</p>
 </div>
-<div id="presentación" class="section level1 unnumbered hasAnchor">
-<h1>Presentación<a href="index.html#presentaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Este libro recoge lo que hemos trabajado en el curso de Métodos Estadísticos, siguiendo
-las notas del profesor Carlos de Oro Aguado
-(<a href="https://cdeoroaguado.github.io/rbook_met_estad/" class="uri">https://cdeoroaguado.github.io/rbook_met_estad/</a>).</p>
-<p>Va organizado en tres partes. La primera es el análisis exploratorio de datos, donde
-trabajamos el conjunto de viviendas de California. La segunda es la comparación de dos o
-más grupos, tanto por la vía paramétrica como por la no paramétrica. La tercera es una
-guía de repaso para el parcial, con el árbol de decisión de qué prueba usar y cómo se lee
-cada salida de R.</p>
-<p>Los ejercicios que el profesor deja asignados en su libro van numerados del 1 al 13 y cada
-uno tiene su propia sección, así que aparecen en el índice de la izquierda y se puede
-saltar directo a cualquiera. El enunciado va en un recuadro morado como este:</p>
-<div class="ejercicio">
-<p><strong>Enunciado.</strong> Enunciado del ejercicio tal como lo deja el profesor.</p>
-<p><span class="fuente">Sección x.y.z del libro del profesor</span></p>
+<div id="cómo-se-lee-cada-salida" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Cómo se lee cada salida<a href="guía-para-el-parcial.html#c%C3%B3mo-se-lee-cada-salida" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="pruebas-de-normalidad" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Pruebas de normalidad<a href="guía-para-el-parcial.html#pruebas-de-normalidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En las tres, H0 dice que los datos vienen de una normal. Un p-valor grande es lo que se
+busca, y eso invierte la lógica habitual: aquí “no rechazar” es la buena noticia.</p>
+<p><code>shapiro.test(x)</code> es la más potente y la recomendada para n &lt; 50, aunque funciona hasta
+n = 5000. Con muestras grandes rechaza por desviaciones sin importancia práctica.</p>
+<p><code>lillie.test(x)</code> es la corrección de Kolmogorov-Smirnov para cuando la media y la
+desviación se estiman de la misma muestra, que es siempre el caso en la práctica.</p>
+<p><code>ks.test(scale(x), "pnorm")</code> es la versión que aparece en las notas de clase. Tiene dos
+problemas que conviene tener presentes: al estimar los parámetros de los mismos datos, el
+p-valor sale más grande de lo que debería, o sea que la prueba se vuelve conservadora y
+rechaza menos de lo que debería; y si hay valores repetidos R tira el aviso de empates,
+porque la prueba supone una variable continua. Cuando KS y Lilliefors dan estadísticos
+idénticos pero p-valores distintos, es exactamente esta corrección la que está actuando.</p>
+<p>Si las tres pruebas se contradicen, se decide mirando el tamaño de muestra, la asimetría,
+la curtosis y el histograma, no solo el p-valor.</p>
 </div>
-<p>Debajo del recuadro empieza la solución, y termina donde arranca la siguiente sección.
-Los ejercicios 1 a 3 están en el capítulo de análisis exploratorio y los ejercicios 4 a 13
-en el de estadística paramétrica y no paramétrica.</p>
-<div id="datos-y-paquetes" class="section level2 unnumbered hasAnchor">
-<h2>Datos y paquetes<a href="index.html#datos-y-paquetes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Los archivos que se usan están en la carpeta <code>Datos</code> del proyecto. Todos los capítulos
-asumen que el libro se compila desde la raíz, así que las rutas van relativas.</p>
-<p>Estos son los paquetes que hay que tener instalados:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;readxl&quot;</span>, <span class="st">&quot;Amelia&quot;</span>, <span class="st">&quot;moments&quot;</span>, <span class="st">&quot;patchwork&quot;</span>,</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a>                   <span class="st">&quot;GGally&quot;</span>, <span class="st">&quot;effsize&quot;</span>, <span class="st">&quot;nortest&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;rstatix&quot;</span>,</span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a>                   <span class="st">&quot;openintro&quot;</span>, <span class="st">&quot;coin&quot;</span>, <span class="st">&quot;bookdown&quot;</span>))</span></code></pre></div>
+<div id="var.test" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> <code>var.test</code><a href="guía-para-el-parcial.html#var.test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Contrasta <span class="math inline">\(H_0: \sigma_1^2 = \sigma_2^2\)</span> con el cociente de varianzas muestrales, que bajo
+H0 sigue una F con <span class="math inline">\(n_1-1\)</span> y <span class="math inline">\(n_2-1\)</span> grados de libertad. De la salida se leen tres cosas:
+el valor de F, el p-valor, y el intervalo de confianza de la razón. El atajo más rápido es
+el intervalo: si contiene el 1, las varianzas son compatibles.</p>
+<p>Bartlett es el más potente si hay normalidad pero se rompe con colas pesadas. Levene con
+<code>center = median</code> es robusto porque trabaja con distancias a la mediana. Fligner-Killeen
+es el más robusto de todos porque trabaja con rangos de esas distancias. Si se
+contradicen, se le hace caso a Levene o a Fligner.</p>
+</div>
+<div id="t.test" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> <code>t.test</code><a href="guía-para-el-parcial.html#t.test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De la salida importan cinco elementos. El estadístico <code>t</code>, que es la diferencia dividida
+por su error estándar. Los grados de libertad <code>df</code>, que valen <span class="math inline">\(n_1+n_2-2\)</span> en el caso
+clásico, <span class="math inline">\(n-1\)</span> en el pareado, y un número con decimales cuando es Welch (esa es la señal
+inmediata de que se corrió Welch). El <code>p-value</code>. El intervalo de confianza de la
+diferencia, que es lo más informativo de toda la salida: si contiene el cero, no hay
+diferencia significativa, y su ancho dice con qué precisión se estimó. Y las medias de
+cada grupo al final.</p>
+<p>Una advertencia sobre el orden de los argumentos: <code>t.test(x, y)</code> calcula
+<span class="math inline">\(\bar{x} - \bar{y}\)</span>, así que el signo del estadístico y del intervalo depende de cuál
+grupo se ponga primero. El signo no cambia la conclusión pero sí cambia la redacción.</p>
+</div>
+<div id="cohen.d-y-wilcox_effsize" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> <code>cohen.d</code> y <code>wilcox_effsize</code><a href="guía-para-el-parcial.html#cohen.d-y-wilcox_effsize" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El p-valor dice si la diferencia existe; el tamaño del efecto dice qué tan grande es. Son
+preguntas distintas y el parcial pide las dos. Con muestras grandes cualquier diferencia
+diminuta alcanza significancia, y ahí el tamaño del efecto es lo único que evita concluir
+de más.</p>
+<p>Los cortes convencionales para la d de Cohen son 0,2 pequeño, 0,5 mediano y 0,8 grande.
+Para la r de <code>wilcox_effsize</code> son 0,1 pequeño, 0,3 mediano y 0,5 grande. El propio R
+imprime la clasificación al lado del número.</p>
+</div>
+<div id="aov-y-tukeyhsd" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> <code>aov</code> y <code>TukeyHSD</code><a href="guía-para-el-parcial.html#aov-y-tukeyhsd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La tabla de <code>summary(aov(...))</code> trae la descomposición: la fila del factor lleva <span class="math inline">\(k-1\)</span>
+grados de libertad, SSA y MSA; la fila de residuales lleva <span class="math inline">\(n-k\)</span>, SSE y MSE. El F es
+MSA/MSE.</p>
+<p>Dos cosas se suelen pasar por alto. La primera es que un F significativo solo dice que al
+menos un par de medias difiere, nunca cuál, y por eso siempre hay que seguir con Tukey. La
+segunda es que conviene calcular SSA/SST: es la proporción de variabilidad que explica el
+factor, y puede ser mínima aunque el p-valor sea muy pequeño.</p>
+<p>En <code>TukeyHSD</code> cada fila es una pareja, con la diferencia, los límites del intervalo
+ajustado y el <code>p adj</code>. Un par es significativo cuando su intervalo no contiene el cero.</p>
+</div>
+<div id="kruskal.test-y-dunn_test" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> <code>kruskal.test</code> y <code>dunn_test</code><a href="guía-para-el-parcial.html#kruskal.test-y-dunn_test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El estadístico se llama <code>Kruskal-Wallis chi-squared</code>, con <span class="math inline">\(k-1\)</span> grados de libertad. El
+tamaño del efecto se saca con <code>kruskal_effsize</code> y es un eta cuadrado basado en H, que se
+lee como la proporción de variabilidad de los rangos que explica el factor.</p>
+<p>En <code>dunn_test</code> la columna que se reporta es <code>p.adj</code>, nunca la <code>p</code> sin ajustar.
+<code>p.adjust.method = "bonferroni"</code> es el ajuste más conservador; <code>"holm"</code> es igual de válido
+y algo menos estricto.</p>
+</div>
+</div>
+<div id="cómo-se-redacta-la-conclusión" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Cómo se redacta la conclusión<a href="guía-para-el-parcial.html#c%C3%B3mo-se-redacta-la-conclusi%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una conclusión completa tiene cinco partes, y el parcial pide explícitamente
+“justificación, código, salida e interpretación”:</p>
+<ol style="list-style-type: decimal">
+<li>Qué supuestos se verificaron y con qué resultado.</li>
+<li>Qué prueba se escogió y por qué esos supuestos la justifican.</li>
+<li>El estadístico, los grados de libertad y el p-valor.</li>
+<li>La decisión sobre H0 al nivel de significancia escogido.</li>
+<li>Qué significa eso en el contexto del problema, con el tamaño del efecto y el intervalo
+de confianza.</li>
+</ol>
+<p>Un ejemplo de redacción, sobre el caso de la presión arterial:</p>
+<blockquote>
+<p>Los tres contrastes de normalidad no rechazan en la presión sistólica, y en la
+diastólica solo Shapiro-Wilk rechaza levemente (p = 0,0369), lo que con n = 100 por grupo
+no compromete el análisis. La prueba F de razón de varianzas da p = 0,7102 con intervalo
+[0,624 ; 1,379], que contiene el 1, de modo que se asume homogeneidad. Se aplica entonces
+el t-test para muestras independientes con varianzas iguales, que arroja t = 31,888 con
+198 grados de libertad y p &lt; 2,2e-16. Como el p-valor es menor que 0,05 se rechaza H0. La
+presión sistólica promedio supera a la diastólica en 41,96 mmHg, con intervalo de
+confianza al 95% de [39,36 ; 44,55], y la d de Cohen de 4,51 indica un efecto grande.</p>
+</blockquote>
+</div>
+<div id="errores-que-cuestan-puntos" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Errores que cuestan puntos<a href="guía-para-el-parcial.html#errores-que-cuestan-puntos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Concluir que “se acepta H0”. No se acepta, no se rechaza. La diferencia importa porque no
+rechazar puede deberse a falta de potencia y no a ausencia de efecto.</p>
+<p>Verificar la normalidad sobre la variable completa en vez de dentro de cada grupo. Una
+mezcla de dos normales con medias distintas no es normal, así que ese contraste rechaza por
+la razón equivocada.</p>
+<p>En el caso pareado, verificar la normalidad de cada medición en vez de la de las
+diferencias.</p>
+<p>Usar <code>var.equal = TRUE</code> por defecto. R trae <code>FALSE</code> como valor por defecto, así que si no
+se escribe nada se corre Welch. Hay que escribirlo explícitamente y justificarlo con el
+resultado de la prueba de varianzas.</p>
+<p>Reportar el p-valor sin el tamaño del efecto ni el intervalo de confianza.</p>
+<p>Quedarse en el ANOVA significativo sin hacer las comparaciones múltiples.</p>
+<p>Olvidar convertir a factor las variables de agrupación antes de las pruebas.</p>
+</div>
+<div id="fórmulas-para-tener-a-mano" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Fórmulas para tener a mano<a href="guía-para-el-parcial.html#f%C3%B3rmulas-para-tener-a-mano" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dos grupos independientes, varianzas iguales:</p>
+<p><span class="math display">\[t = \frac{\bar{X}_1 - \bar{X}_2}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+\qquad
+S_p = \sqrt{\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}}
+\qquad
+gl = n_1+n_2-2\]</span></p>
+<p>Dos grupos independientes, varianzas distintas (Welch):</p>
+<p><span class="math display">\[t = \frac{\bar{X}_1-\bar{X}_2}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}
+\qquad
+gl = \frac{\left(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}\right)^2}
+{\frac{(S_1^2/n_1)^2}{n_1-1}+\frac{(S_2^2/n_2)^2}{n_2-1}}\]</span></p>
+<p>Dos grupos pareados:</p>
+<p><span class="math display">\[t = \frac{\bar{d}}{S_d/\sqrt{n}} \qquad gl = n-1 \qquad d_i = X_{2i}-X_{1i}\]</span></p>
+<p>Razón de varianzas:</p>
+<p><span class="math display">\[F = \frac{S_1^2}{S_2^2} \sim F_{n_1-1,\,n_2-1}\]</span></p>
+<p>ANOVA de un factor:</p>
+<p><span class="math display">\[SST = SSA + SSE \qquad MSA = \frac{SSA}{k-1} \qquad MSE = \frac{SSE}{n-k}
+\qquad F = \frac{MSA}{MSE}\]</span></p>
+<p>Tamaño del efecto:</p>
+<p><span class="math display">\[d = \frac{\bar{X}_1-\bar{X}_2}{S_p} \qquad r = \frac{|Z|}{\sqrt{N}}\]</span></p>
+</div>
+<div id="comandos-de-rescate-en-r" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Comandos de rescate en R<a href="guía-para-el-parcial.html#comandos-de-rescate-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando en el parcial no se recuerda un valor crítico o la forma exacta de una función:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="guía-para-el-parcial.html#cb173-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, gl)               <span class="co"># valor critico t de dos colas al 5%</span></span>
+<span id="cb173-2"><a href="guía-para-el-parcial.html#cb173-2" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, gl1, gl2)          <span class="co"># valor critico F de una cola al 5%</span></span>
+<span id="cb173-3"><a href="guía-para-el-parcial.html#cb173-3" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, gl)            <span class="co"># valor critico ji-cuadrado</span></span>
+<span id="cb173-4"><a href="guía-para-el-parcial.html#cb173-4" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                <span class="co"># valor critico z de dos colas al 5%</span></span>
+<span id="cb173-5"><a href="guía-para-el-parcial.html#cb173-5" tabindex="-1"></a></span>
+<span id="cb173-6"><a href="guía-para-el-parcial.html#cb173-6" tabindex="-1"></a><span class="fu">pt</span>(<span class="fu">abs</span>(t), gl, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span>      <span class="co"># p-valor de un t</span></span>
+<span id="cb173-7"><a href="guía-para-el-parcial.html#cb173-7" tabindex="-1"></a><span class="fu">pf</span>(F, gl1, gl2, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)         <span class="co"># p-valor de un F</span></span>
+<span id="cb173-8"><a href="guía-para-el-parcial.html#cb173-8" tabindex="-1"></a></span>
+<span id="cb173-9"><a href="guía-para-el-parcial.html#cb173-9" tabindex="-1"></a>?t.test                     <span class="co"># ayuda de cualquier funcion</span></span>
+<span id="cb173-10"><a href="guía-para-el-parcial.html#cb173-10" tabindex="-1"></a><span class="fu">args</span>(wilcox.test)           <span class="co"># solo los argumentos</span></span></code></pre></div>
 
 </div>
 </div>
@@ -286,8 +514,8 @@ asumen que el libro se compila desde la raíz, así que las rutas van relativas.
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estadística-paramétrica-y-no-paramétrica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -318,7 +546,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/josevang0811/Analisis_exploratorio/edit/main/index.Rmd",
+    "link": "https://github.com/josevang0811/Analisis_exploratorio/edit/main/03-guia-parcial.Rmd",
     "text": "Edit"
   },
   "history": {

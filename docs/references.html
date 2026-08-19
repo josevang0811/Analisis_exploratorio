@@ -4,33 +4,33 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Análisis exploratorio</title>
-  <meta name="description" content="Primeras modificaciones e integracion con github" />
+  <title>References | Notas de Métodos Estadísticos</title>
+  <meta name="description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Análisis exploratorio" />
+  <meta property="og:title" content="References | Notas de Métodos Estadísticos" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Primeras modificaciones e integracion con github" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  <meta name="github-repo" content="josevang0811/Analisis_exploratorio" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Análisis exploratorio" />
+  <meta name="twitter:title" content="References | Notas de Métodos Estadísticos" />
   
-  <meta name="twitter:description" content="Primeras modificaciones e integracion con github" />
+  <meta name="twitter:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
   
 
 <meta name="author" content="Jose Fernando Van Strahlen y Jairo Hernandez" />
 
 
-<meta name="date" content="2026-07-29" />
+<meta name="date" content="2026-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="final-words.html"/>
+<link rel="prev" href="guía-para-el-parcial.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -124,29 +124,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -161,25 +138,95 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Notas de Métodos Estadísticos</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prueba de modificacion</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
-<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>4.1</b> math example</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#datos-y-paquetes"><i class="fa fa-check"></i>Datos y paquetes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Análisis exploratorio de datos</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#analisis-exploratorio-de-median_house_value"><i class="fa fa-check"></i><b>1.1</b> Analisis exploratorio de median_house_value</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#analisis-de-las-variables-independientes-caracteristicas"><i class="fa fa-check"></i><b>1.2</b> Analisis de las variables independientes (Caracteristicas)</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#ejercicio-1.-gr%C3%A1ficas-e-interpretaci%C3%B3n-de-las-variables-caracter%C3%ADsticas"><i class="fa fa-check"></i><b>1.2.1</b> Ejercicio 1. Gráficas e interpretación de las variables características</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#analisis-exploratorio-bivariado"><i class="fa fa-check"></i><b>1.3</b> Analisis exploratorio bivariado</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#ejercicio-2.-diagramas-de-dispersi%C3%B3n-con-las-dem%C3%A1s-variables"><i class="fa fa-check"></i><b>1.3.1</b> Ejercicio 2. Diagramas de dispersión con las demás variables</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ejercicio-3.-errores-del-gr%C3%A1fico-de-ggpairs"><i class="fa fa-check"></i><b>1.3.2</b> Ejercicio 3. Errores del gráfico de <code>ggpairs</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html"><i class="fa fa-check"></i><b>2</b> Estadística paramétrica y no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#presi%C3%B3n-sist%C3%B3lica-contra-diast%C3%B3lica-independientes-param%C3%A9trica"><i class="fa fa-check"></i><b>2.1</b> Presión sistólica contra diastólica (independientes, paramétrica)</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-4.-an%C3%A1lisis-exploratorio-de-los-datos-de-presi%C3%B3n"><i class="fa fa-check"></i><b>2.1.1</b> Ejercicio 4. Análisis exploratorio de los datos de presión</a></li>
+<li class="chapter" data-level="2.1.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad"><i class="fa fa-check"></i><b>2.1.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-5.-verificaci%C3%B3n-de-var.test-con-el-teorema-de-raz%C3%B3n-de-varianzas"><i class="fa fa-check"></i><b>2.1.3</b> Ejercicio 5. Verificación de <code>var.test</code> con el teorema de razón de varianzas</a></li>
+<li class="chapter" data-level="2.1.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-6.-teorema-de-la-diferencia-de-medias"><i class="fa fa-check"></i><b>2.1.4</b> Ejercicio 6. Teorema de la diferencia de medias</a></li>
+<li class="chapter" data-level="2.1.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#tama%C3%B1o-del-efecto"><i class="fa fa-check"></i><b>2.1.5</b> Tamaño del efecto</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#precios-por-tipo-de-cuenta-con-varianzas-distintas"><i class="fa fa-check"></i><b>2.2</b> Precios por tipo de cuenta, con varianzas distintas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-7.-an%C3%A1lisis-exploratorio-de-los-precios"><i class="fa fa-check"></i><b>2.2.1</b> Ejercicio 7. Análisis exploratorio de los precios</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-1"><i class="fa fa-check"></i><b>2.2.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.2.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-8.-bartlett-levene-y-fligner-killeen"><i class="fa fa-check"></i><b>2.2.3</b> Ejercicio 8. Bartlett, Levene y Fligner-Killeen</a></li>
+<li class="chapter" data-level="2.2.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-t-con-la-correcci%C3%B3n-de-welch"><i class="fa fa-check"></i><b>2.2.4</b> Prueba t con la corrección de Welch</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-param%C3%A9trica"><i class="fa fa-check"></i><b>2.3</b> Dos grupos pareados, paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-9.-an%C3%A1lisis-exploratorio-de-los-tiempos"><i class="fa fa-check"></i><b>2.3.1</b> Ejercicio 9. Análisis exploratorio de los tiempos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-2"><i class="fa fa-check"></i><b>2.3.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.3.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-10.-teorema-de-la-diferencia-de-medias-para-datos-pareados"><i class="fa fa-check"></i><b>2.3.3</b> Ejercicio 10. Teorema de la diferencia de medias para datos pareados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-independientes-no-param%C3%A9trica"><i class="fa fa-check"></i><b>2.4</b> Dos grupos independientes, no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-11.-an%C3%A1lisis-exploratorio-del-peso-al-nacer"><i class="fa fa-check"></i><b>2.4.1</b> Ejercicio 11. Análisis exploratorio del peso al nacer</a></li>
+<li class="chapter" data-level="2.4.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-3"><i class="fa fa-check"></i><b>2.4.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.4.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#homogeneidad-de-varianzas"><i class="fa fa-check"></i><b>2.4.3</b> Homogeneidad de varianzas</a></li>
+<li class="chapter" data-level="2.4.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-mann-whitney"><i class="fa fa-check"></i><b>2.4.4</b> Prueba de Mann-Whitney</a></li>
+<li class="chapter" data-level="2.4.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-12.-se-puede-usar-una-prueba-param%C3%A9trica"><i class="fa fa-check"></i><b>2.4.5</b> Ejercicio 12. ¿Se puede usar una prueba paramétrica?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-no-param%C3%A9trica"><i class="fa fa-check"></i><b>2.5</b> Dos grupos pareados, no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ejercicio-13.-an%C3%A1lisis-exploratorio-del-cuestionario"><i class="fa fa-check"></i><b>2.5.1</b> Ejercicio 13. Análisis exploratorio del cuestionario</a></li>
+<li class="chapter" data-level="2.5.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-4"><i class="fa fa-check"></i><b>2.5.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.5.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-rangos-con-signo-de-wilcoxon"><i class="fa fa-check"></i><b>2.5.3</b> Prueba de rangos con signo de Wilcoxon</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova"><i class="fa fa-check"></i><b>2.6</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#c%C3%A1lculo-manual"><i class="fa fa-check"></i><b>2.6.2</b> Cálculo manual</a></li>
+<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#verificaci%C3%B3n-con-aov"><i class="fa fa-check"></i><b>2.6.3</b> Verificación con <code>aov</code></a></li>
+<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-m%C3%BAltiples"><i class="fa fa-check"></i><b>2.6.4</b> Comparaciones múltiples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#kruskal-wallis"><i class="fa fa-check"></i><b>2.7</b> Kruskal-Wallis</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-post-hoc"><i class="fa fa-check"></i><b>2.7.1</b> Comparaciones post-hoc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html"><i class="fa fa-check"></i><b>3</b> Guía para el parcial</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-decide-qu%C3%A9-prueba-usar"><i class="fa fa-check"></i><b>3.1</b> Cómo se decide qué prueba usar</a></li>
+<li class="chapter" data-level="3.2" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-lee-cada-salida"><i class="fa fa-check"></i><b>3.2</b> Cómo se lee cada salida</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#pruebas-de-normalidad"><i class="fa fa-check"></i><b>3.2.1</b> Pruebas de normalidad</a></li>
+<li class="chapter" data-level="3.2.2" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#var.test"><i class="fa fa-check"></i><b>3.2.2</b> <code>var.test</code></a></li>
+<li class="chapter" data-level="3.2.3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#t.test"><i class="fa fa-check"></i><b>3.2.3</b> <code>t.test</code></a></li>
+<li class="chapter" data-level="3.2.4" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#cohen.d-y-wilcox_effsize"><i class="fa fa-check"></i><b>3.2.4</b> <code>cohen.d</code> y <code>wilcox_effsize</code></a></li>
+<li class="chapter" data-level="3.2.5" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#aov-y-tukeyhsd"><i class="fa fa-check"></i><b>3.2.5</b> <code>aov</code> y <code>TukeyHSD</code></a></li>
+<li class="chapter" data-level="3.2.6" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#kruskal.test-y-dunn_test"><i class="fa fa-check"></i><b>3.2.6</b> <code>kruskal.test</code> y <code>dunn_test</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-redacta-la-conclusi%C3%B3n"><i class="fa fa-check"></i><b>3.3</b> Cómo se redacta la conclusión</a></li>
+<li class="chapter" data-level="3.4" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#errores-que-cuestan-puntos"><i class="fa fa-check"></i><b>3.4</b> Errores que cuestan puntos</a></li>
+<li class="chapter" data-level="3.5" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#f%C3%B3rmulas-para-tener-a-mano"><i class="fa fa-check"></i><b>3.5</b> Fórmulas para tener a mano</a></li>
+<li class="chapter" data-level="3.6" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#comandos-de-rescate-en-r"><i class="fa fa-check"></i><b>3.6</b> Comandos de rescate en R</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 
 </ul>
 
@@ -190,7 +237,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis exploratorio</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas de Métodos Estadísticos</a>
           </h1>
         </div>
 
@@ -201,31 +248,13 @@ div.csl-indent {
 <div id="references" class="section level1 unnumbered hasAnchor">
 <h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
 </div>
-<div class="csl-entry">
-———. 2026. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="final-words.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="guía-para-el-parcial.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -257,7 +286,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/06-references.Rmd",
+    "link": "https://github.com/josevang0811/Analisis_exploratorio/edit/main/06-references.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -268,7 +297,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+  "download": null,
   "search": {
     "engine": "fuse",
     "options": null
