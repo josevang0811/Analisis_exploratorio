@@ -5,9 +5,9 @@ _book
 _bookdown_files
 rsconnect
 
-bookdown-demo_files
+/bookdown-demo_files
 _to_delete
 *.knit.md
 *.utf8.md
-bookdown-demo.tex
-bookdown-demo.log
+/bookdown-demo.tex
+/bookdown-demo.log
