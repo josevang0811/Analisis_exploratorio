@@ -762,18 +762,17 @@ da p = 6,9e-05 en el pre-test y 1,4e-07 en el post-test, Shapiro-Wilk 6,5e-07 y 
 Lilliefors 3,3e-14 y 2,4e-23. Cuando las tres apuntan en la misma dirección con p-valores
 tan pequeños no hay nada que discutir.
 
-No es sorpresa: una variable que solo toma cinco valores enteros no puede ser normal, porque
-la normal es continua. Aquí la prueba de normalidad es casi un trámite, la decisión ya
-estaba tomada desde que supimos que `Q1` es ordinal.
+Es valido aclarar que una variable que solo toma cinco valores enteros no puede ser normal, porque
+la normal es continua. Aquí la prueba de normalidad es una prueba poco influyente, la decisión ya
+estaba tomada desde que vimos que `Q1` es ordinal.
 
-Vale la pena fijarse en dos cosas de esta tabla. La primera es que el estadístico de
+Analisando la tabla podemos ver que 2 cosas, La primera es que el estadístico de
 Kolmogorov-Smirnov y el de Lilliefors son idénticos (0,3238 y 0,4097) pero sus p-valores
 difieren en varios órdenes de magnitud. Es el mismo estadístico calculado igual; lo que
 cambia es la distribución de referencia contra la que se compara, porque Lilliefors corrige
 el hecho de que la media y la desviación se estimaron de los mismos datos. La segunda es
-que R tira un aviso de empates: con 49 respuestas repartidas en cinco valores hay
-muchísimos valores repetidos, y KS supone una variable continua sin empates. Ese aviso por
-sí solo ya es razón para no confiar en su p-valor.
+que R avisa de un empate: con 49 respuestas repartidas en cinco valores hay
+muchísimos valores repetidos, y KS supone una variable continua sin empates. Ese aviso nos perimite confirmar que el p-valor no es adecuado.
 
 De todos modos, lo que el t pareado exigiría es la normalidad de las diferencias, no la de
 cada momento, así que conviene revisarla también:
@@ -795,202 +794,447 @@ datos %>%
   wilcox_effsize(Q1 ~ Experimento, paired = TRUE)
 ```
 
-El estadístico da 0 y el p-valor 1,45e-09. Vale la pena entender por qué el estadístico
-salió exactamente cero: es la suma de los rangos que van en contra, y como ningún
-participante bajó, esa suma no tiene nada que sumar. Cero es el valor más extremo que puede
-tomar el estadístico, o sea la evidencia más fuerte posible contra H0 con esta muestra.
+El estadístico da 0 y el p-valor 1,45e-09.
 
 El tamaño del efecto es r = 0,879, muy por encima de 0,5, así que se clasifica como grande.
 Hay evidencia de que la intervención cambió las respuestas, y el cambio es sustancial.
 
-Un detalle de la salida que conviene saber leer: si se corre la versión base
-`wilcox.test(paired = TRUE)`, R avisa que no puede calcular el p-valor exacto por los
-empates y por los ceros. Eso no es un error, solo significa que usa la aproximación normal
-en vez de la distribución exacta. Con n = 49 la aproximación es perfectamente válida.
+## ANOVA (análisis de varianza para comparar múltiples medias)
 
-## ANOVA
+La técnica de análisis de varianza (ANOVA), también conocida como análisis factorial, fue
+desarrollada por Ronald Fisher en la década de 1930 y constituye una herramienta estadística
+fundamental para evaluar el efecto de uno o más factores (cada uno con dos o más niveles)
+sobre la media de una variable continua.
 
-Cuando hay más de dos grupos ya no sirve hacer varios t-test por parejas, porque cada
-prueba tiene su propia probabilidad de error tipo I y al acumularlas la probabilidad de
-equivocarse en alguna se dispara. Con tres grupos serían tres pruebas y el riesgo real
-subiría de 5% a casi 14%. El ANOVA resuelve esto con un solo contraste global.
+ANOVA se utiliza cuando se desea comparar simultáneamente las medias de dos o más grupos,
+evaluando si las diferencias observadas son estadísticamente significativas. Además, esta
+técnica puede extenderse para analizar no solo los efectos principales de los factores, sino
+también sus posibles interacciones y, en ciertos casos, el efecto de los factores sobre la
+variabilidad de la variable dependiente.
 
-La idea es descomponer la variabilidad total en dos partes: la que hay entre los grupos y
-la que hay dentro de ellos.
+### Supuestos y formulación de las hipótesis
+
+Se consideran $k$ grupos o poblaciones, correspondientes a los $k$ tratamientos o categorías
+de un factor. Se asume que las observaciones de cada grupo están normalmente distribuidas,
+con medias poblacionales $\mu_1, \mu_2, \dots, \mu_k$, y comparten una misma varianza común
+$\sigma^2$. Para representarlas se extraen muestras aleatorias independientes de tamaños
+$n_1, n_2, \dots, n_k$, respectivamente. Es decir,
+
+$$Y_{ij} \sim N(\mu_j, \sigma^2), \qquad i = 1,\dots,n_j, \qquad j = 1,\dots,k$$
+
+A lo largo del análisis se utiliza la notación $y_{ij}$ para denotar la $i$-ésima observación
+dentro del $j$-ésimo grupo o tratamiento.
+
+Los datos pueden organizarse por categorías de la siguiente forma:
+
+| | Tratamiento 1 | Tratamiento 2 | $\cdots$ | Tratamiento $k$ | Total |
+|---|---|---|---|---|---|
+| Observaciones | $y_{11}$ | $y_{12}$ | $\cdots$ | $y_{1k}$ | |
+| | $y_{21}$ | $y_{22}$ | $\cdots$ | $y_{2k}$ | |
+| | $\vdots$ | $\vdots$ | $\cdots$ | $\vdots$ | |
+| | $y_{n_1,1}$ | $y_{n_2,2}$ | $\cdots$ | $y_{n_k,k}$ | |
+| Tamaño | $n_1$ | $n_2$ | $\cdots$ | $n_k$ | $N$ |
+| Sumas | $T_1$ | $T_2$ | $\cdots$ | $T_k$ | $T$ |
+| Medias | $\bar{y}_1$ | $\bar{y}_2$ | $\cdots$ | $\bar{y}_k$ | $\bar{y}$ |
+
+donde
+
+- $y_{ij}$ es la $i$-ésima observación del tratamiento $j$.
+- $n_j$ es el tamaño de la $j$-ésima muestra.
+- $N = n_1 + n_2 + \cdots + n_k$ es la suma de todos los tamaños de muestra.
+- $T_j = y_{1j} + y_{2j} + \cdots + y_{n_j,j}$ es la suma de las observaciones de la muestra $j$-ésima.
+- $T = T_1 + T_2 + \cdots + T_k$ es la suma de todas las observaciones.
+- $\bar{y}_j = \dfrac{T_j}{n_j}$ es la media de las observaciones de la muestra $j$-ésima.
+- $\bar{y} = \dfrac{T}{N}$ es la media total de todas las observaciones.
+
+**Definición (Hipótesis en el análisis de varianza de un factor).** Si las medias
+poblacionales se representan por $\mu_1, \mu_2, \dots, \mu_k$, el análisis de varianza de un
+factor está diseñado para contrastar la hipótesis nula de que todas las medias poblacionales
+son iguales, es decir:
+
+$$H_0: \mu_1 = \mu_2 = \cdots = \mu_k
+\qquad \text{vs} \qquad
+H_1: \text{No todas las medias poblacionales son iguales}$$
+
+### Sumas de cuadrados y teorema de descomposición
+
+El contraste de igualdad de medias se fundamenta en la comparación entre dos fuentes de
+variabilidad en los datos muestrales:
+
+La primera es la variabilidad en torno a las medias muestrales individuales de los $k$ grupos
+de observaciones. Esta se denomina **variabilidad dentro de los grupos**.
+
+La segunda es la variabilidad entre las medias de los $k$ grupos. Esta se denomina
+**variabilidad entre grupos**.
+
+**Definición (Variabilidad dentro de los grupos).** Es la variación de las observaciones
+individuales respecto a su propia media muestral dentro de cada grupo. Para el grupo
+$j = 1,\dots,k$ se define como
+
+$$(SE)_j = \sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2$$
+
+**Definición (Suma de cuadrados del error, SSE).** Es la suma total de la variabilidad dentro
+de todos los grupos. También se conoce como suma de cuadrados dentro de los grupos:
+
+$$SSE = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2$$
+
+**Definición (Suma de cuadrados entre grupos, SSA).** Una medida natural de la variabilidad
+entre grupos consiste en calcular las diferencias entre las medias muestrales de cada grupo y
+la media muestral global. Estas diferencias se elevan al cuadrado para representar la
+desviación de cada grupo respecto a la media global, y como cada grupo $j$ tiene un tamaño
+$n_j$, se pondera cada diferencia por dicho tamaño:
+
+$$SSA = \sum_{j=1}^{k} n_j(\bar{y}_j - \bar{y})^2$$
+
+**Definición (Suma de cuadrados total, SST).** Es la variabilidad total de todas las
+observaciones con respecto a la media global:
+
+$$SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y})^2$$
+
+**Teorema (Descomposición de la suma de cuadrados).** Supongamos que se tienen muestras
+aleatorias independientes de tamaños $n_1, n_2, \dots, n_k$, correspondientes a $k$
+poblaciones. Con las sumas de cuadrados
+
+$$SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij}-\bar{y})^2
+      = \sum_{j=1}^{k}\sum_{i=1}^{n_j} y_{ij}^2 - \frac{T^2}{N}$$
+
+$$SSA = \sum_{j=1}^{k} n_j(\bar{y}_j-\bar{y})^2
+      = \sum_{j=1}^{k}\frac{T_j^2}{n_j} - \frac{T^2}{N}$$
+
+$$SSE = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij}-\bar{y}_j)^2$$
+
+entonces se cumple que
 
 $$SST = SSA + SSE$$
 
-$$SST = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(X_{ij} - \bar{X})^2 \qquad
-SSA = \sum_{i=1}^{k} n_i(\bar{X}_i - \bar{X})^2 \qquad
-SSE = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(X_{ij} - \bar{X}_i)^2$$
+*Demostración.* Recordemos que la suma total de cuadrados se define como
 
-$$MSA = \frac{SSA}{k-1} \qquad MSE = \frac{SSE}{n-k} \qquad F = \frac{MSA}{MSE}$$
+$$SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y})^2$$
 
-con hipótesis
+Descomponemos la diferencia $y_{ij} - \bar{y}$:
 
-$$H_0: \mu_1 = \mu_2 = \cdots = \mu_k \qquad \text{vs} \qquad
-H_1: \text{al menos una media difiere}$$
+$$y_{ij} - \bar{y} = (y_{ij} - \bar{y}_j) + (\bar{y}_j - \bar{y})$$
 
-Si todas las medias fueran iguales, la variabilidad entre grupos sería solo ruido y F
-estaría alrededor de 1. Un F grande significa que los grupos están más separados entre sí
-de lo que explica la variabilidad interna.
+Elevamos al cuadrado y aplicamos la identidad:
 
-Como el profesor no deja datos en esta sección, se usa el conjunto de edentulismo, que es
-el mismo del parcial del semestre pasado, comparando la edad promedio según el estrato
-socioeconómico.
+$$(y_{ij} - \bar{y})^2 = (y_{ij} - \bar{y}_j)^2
++ 2(y_{ij} - \bar{y}_j)(\bar{y}_j - \bar{y})
++ (\bar{y}_j - \bar{y})^2$$
 
-```{r datosedent}
-d <- read_excel("Datos/datos_edentulismo.xlsx")
+Sumamos sobre $i$ y sobre $j$:
 
-d <- d %>%
-  mutate(across(c(Genero, Educación, EDENTULISMO, Autoestima), as.factor),
-         Estrato = factor(Estrato))
+$$SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2
++ 2\sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)(\bar{y}_j - \bar{y})
++ \sum_{j=1}^{k}\sum_{i=1}^{n_j}(\bar{y}_j - \bar{y})^2$$
+
+Notemos que $\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j) = 0$, por lo tanto la segunda suma es cero.
+
+En la tercera suma, $(\bar{y}_j - \bar{y})^2$ no depende de $i$, así que
+
+$$\sum_{i=1}^{n_j}(\bar{y}_j - \bar{y})^2 = n_j(\bar{y}_j - \bar{y})^2$$
+
+Entonces
+
+$$SST = \underbrace{\sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2}_{SSE}
++ \underbrace{\sum_{j=1}^{k} n_j(\bar{y}_j - \bar{y})^2}_{SSA}$$
+
+Por tanto, se cumple la relación de descomposición
+
+$$SST = SSE + SSA \qquad \square$$
+
+**¿Por qué $\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j) = 0$?** Porque al separar la suma y usar la
+definición de la media del grupo, $\sum_{i=1}^{n_j} y_{ij} = n_j\bar{y}_j$:
+
+$$\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j) = \sum_{i=1}^{n_j} y_{ij} - \sum_{i=1}^{n_j}\bar{y}_j
+= n_j\bar{y}_j - n_j\bar{y}_j = 0$$
+
+y en consecuencia
+
+$$2\sum_{j=1}^{k}(\bar{y}_j - \bar{y}) \cdot 0 = 0$$
+
+### Estimaciones insesgadas de la varianza poblacional
+
+El contraste de igualdad de medias en el análisis de varianza se fundamenta en el supuesto de
+que las $k$ poblaciones involucradas comparten una varianza poblacional común. Si la hipótesis
+nula de igualdad de medias es verdadera, entonces tanto la suma de cuadrados entre grupos
+($SSA$) como la suma de cuadrados dentro de los grupos ($SSE$) pueden considerarse como bases
+válidas para estimar dicha varianza común.
+
+No obstante, para obtener estimaciones adecuadas es necesario dividir cada suma de cuadrados
+entre sus respectivos grados de libertad, conforme se establece en el siguiente teorema.
+
+**Teorema ($MSA$ y $MSE$ son estimadores insesgados de $\sigma^2$).** Supongamos que se tienen
+$k$ muestras aleatorias independientes, de tamaños $n_1, n_2, \dots, n_k$, procedentes de
+poblaciones con una varianza común $\sigma^2$. Sea $N$ el tamaño muestral total, de manera que
+
+$$N = n_1 + n_2 + \cdots + n_k$$
+
+Bajo la hipótesis nula de igualdad de medias, $H_0: \mu_1 = \mu_2 = \cdots = \mu_k$, sean
+$SSA$ y $SSE$ las sumas de cuadrados entre los grupos y dentro de los grupos,
+respectivamente. Entonces los cuadrados medios se definen como:
+
+**Cuadrado medio entre los grupos (o del tratamiento):**
+
+$$MSA = \frac{SSA}{k-1}$$
+
+**Cuadrado medio dentro de los grupos (o del error):**
+
+$$MSE = \frac{SSE}{N-k}$$
+
+Bajo $H_0$, ambos son estimadores insesgados de la varianza común $\sigma^2$; es decir,
+
+$$E[MSA] = E[MSE] = \sigma^2$$
+
+En la demostración se usan las propiedades del valor esperado:
+
+$$E(\bar{X}) = \mu \qquad
+E(S^2) = \sigma^2 \qquad
+E(aX) = a\,E(X) \qquad
+E(X+Y) = E(X) + E(Y)$$
+
+*Demostración.* Primero demostremos que $E[MSE] = \sigma^2$. Sabemos que
+
+$$SSE = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(Y_{ij} - \bar{Y}_j)^2
+     = \sum_{j=1}^{k}(n_j - 1)S_j^2$$
+
+donde $S_j^2$ es la varianza muestral del grupo $j$, definida por
+
+$$S_j^2 = \frac{\displaystyle\sum_{i=1}^{n_j}(Y_{ij} - \bar{Y}_j)^2}{n_j - 1}$$
+
+Cada $S_j^2$ es un estimador insesgado de la varianza común $\sigma^2$, por lo que
+
+$$E[S_j^2] = \sigma^2 \quad \Rightarrow \quad E\big[(n_j-1)S_j^2\big] = (n_j-1)\sigma^2$$
+
+Por tanto,
+
+$$E[SSE] = \sum_{j=1}^{k} E\big[(n_j-1)S_j^2\big]
+= \sum_{j=1}^{k}(n_j-1)\sigma^2 = (N-k)\sigma^2$$
+
+En consecuencia,
+
+$$E[MSE] = E\left[\frac{SSE}{N-k}\right] = \frac{E[SSE]}{N-k}
+= \frac{(N-k)\sigma^2}{N-k} = \sigma^2$$
+
+Esto prueba que $MSE$ es un estimador insesgado de $\sigma^2$.
+
+De otro lado, demostremos el comportamiento de $MSA$. Supongamos que se tienen $k$ grupos
+independientes, donde el grupo $j$ tiene $n_j$ observaciones, y que
+
+$$Y_{ij} = \mu_j + \varepsilon_{ij}, \qquad i = 1,\dots,n_j, \qquad j = 1,\dots,k$$
+
+donde los errores $\varepsilon_{ij}$ son independientes y satisfacen
+$E[\varepsilon_{ij}] = 0$ y $\mathrm{Var}(\varepsilon_{ij}) = \sigma^2$. Definamos
+
+$$\bar{Y}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} Y_{ij}, \qquad
+\bar{Y} = \frac{1}{N}\sum_{j=1}^{k} n_j\bar{Y}_j, \qquad
+N = \sum_{j=1}^{k} n_j$$
+
+La suma de cuadrados entre los grupos es
+
+$$SSA = \sum_{j=1}^{k} n_j(\bar{Y}_j - \bar{Y})^2$$
+
+Expandiendo el cuadrado,
+
+$$(\bar{Y}_j - \bar{Y})^2 = \bar{Y}_j^2 - 2\bar{Y}_j\bar{Y} + \bar{Y}^2$$
+
+luego
+
+$$SSA = \sum_{j=1}^{k} n_j\big(\bar{Y}_j^2 - 2\bar{Y}_j\bar{Y} + \bar{Y}^2\big)
+= \sum_{j=1}^{k} n_j\bar{Y}_j^2 - 2\bar{Y}\sum_{j=1}^{k} n_j\bar{Y}_j + N\bar{Y}^2$$
+
+Sabemos que $\sum_{j=1}^{k} n_j\bar{Y}_j = N\bar{Y}$, y por lo tanto
+
+$$SSA = \sum_{j=1}^{k} n_j\bar{Y}_j^2 - N\bar{Y}^2$$
+
+Para cada grupo $j$, con $\bar{Y}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} Y_{ij}$:
+
+$$E[\bar{Y}_j] = \frac{1}{n_j}\sum_{i=1}^{n_j} E[Y_{ij}]
+= \frac{1}{n_j}\sum_{i=1}^{n_j}\big(E[\mu_j] + E[\varepsilon_{ij}]\big)
+= \frac{1}{n_j}\sum_{i=1}^{n_j}\mu_j = \mu_j$$
+
+$$\mathrm{Var}(\bar{Y}_j) = \frac{1}{n_j^2}\sum_{i=1}^{n_j}\mathrm{Var}(Y_{ij})
+= \frac{1}{n_j^2}\sum_{i=1}^{n_j}\big(\mathrm{Var}(\mu_j) + \mathrm{Var}(\varepsilon_{ij})\big)
+= \frac{1}{n_j^2}\,(n_j\sigma^2) = \frac{\sigma^2}{n_j}$$
+
+entonces
+
+$$E[\bar{Y}_j^2] = \big(E[\bar{Y}_j]\big)^2 + \mathrm{Var}(\bar{Y}_j)
+= \mu_j^2 + \frac{\sigma^2}{n_j}$$
+
+Además, con la media muestral global $\bar{Y} = \frac{1}{N}\sum_{j=1}^{k} n_j\bar{Y}_j$ y la
+media poblacional global ponderada $\mu = \frac{1}{N}\sum_{j=1}^{k} n_j\mu_j$:
+
+$$E[\bar{Y}] = \frac{1}{N}\sum_{j=1}^{k}\sum_{i=1}^{n_j} E[Y_{ij}]
+= \frac{1}{N}\sum_{j=1}^{k} n_j\mu_j = \mu$$
+
+$$\mathrm{Var}(\bar{Y}) = \frac{1}{N^2}\sum_{j=1}^{k}\sum_{i=1}^{n_j}\mathrm{Var}(Y_{ij})
+= \frac{1}{N^2}\sum_{j=1}^{k} n_j\sigma^2 = \frac{1}{N^2}(N)\sigma^2 = \frac{\sigma^2}{N}$$
+
+Luego
+
+$$E[\bar{Y}^2] = \big(E[\bar{Y}]\big)^2 + \mathrm{Var}(\bar{Y}) = \mu^2 + \frac{\sigma^2}{N}$$
+
+En consecuencia,
+
+$$\begin{aligned}
+E[SSA] &= \sum_{j=1}^{k} n_j E[\bar{Y}_j^2] - N\,E[\bar{Y}^2] \\[4pt]
+&= \sum_{j=1}^{k} n_j\left(\mu_j^2 + \frac{\sigma^2}{n_j}\right)
+   - N\left(\mu^2 + \frac{\sigma^2}{N}\right) \\[4pt]
+&= \sum_{j=1}^{k} n_j\mu_j^2 + k\sigma^2 - N\mu^2 - \sigma^2 \\[4pt]
+&= \sum_{j=1}^{k} n_j\mu_j^2 - N\mu^2 + (k-1)\sigma^2
+\end{aligned}$$
+
+Como
+
+$$\sum_{j=1}^{k} n_j\mu_j^2 - N\mu^2 = \sum_{j=1}^{k} n_j(\mu_j - \mu)^2$$
+
+se concluye que
+
+$$E[SSA] = \sum_{j=1}^{k} n_j(\mu_j - \mu)^2 + (k-1)\sigma^2$$
+
+y en consecuencia
+
+$$E[MSA] = E\left[\frac{SSA}{k-1}\right]
+= \sigma^2 + \frac{\displaystyle\sum_{j=1}^{k} n_j(\mu_j - \mu)^2}{k-1}$$
+
+Bajo la hipótesis nula $H_0: \mu_1 = \mu_2 = \cdots = \mu_k$ se cumple que
+
+$$\sum_{j=1}^{k} n_j(\mu_j - \mu)^2 = 0$$
+
+Por lo tanto,
+
+$$E[MSA] = \sigma^2$$
+
+Esto prueba que, bajo $H_0$, $MSA$ es un estimador insesgado de $\sigma^2$. $\square$
+
+### Teorema de contraste para el análisis de varianza
+
+Si la hipótesis nula fuera cierta, contaríamos con dos estimaciones insesgadas de una misma
+cantidad: la varianza poblacional común. Sería razonable esperar que ambas estimaciones fueran
+numéricamente similares. Sin embargo, a mayor discrepancia entre ellas, suponiendo que todo lo
+demás permanece constante, mayor será la sospecha de que la hipótesis nula no se cumple.
+
+Por tanto, el contraste de la hipótesis nula de igualdad de medias se basa en la razón entre
+los cuadrados medios:
+
+$$F = \frac{MSA}{MSE}$$
+
+donde $MSA$ es el cuadrado medio entre grupos y $MSE$ es el cuadrado medio dentro de los
+grupos.
+
+Si el cociente $F$ se aproxima a 1, no hay evidencia para rechazar la hipótesis nula, lo que
+indicaría que las medias poblacionales son estadísticamente similares. Sin embargo, si la
+variabilidad entre grupos es considerablemente mayor en comparación con la variabilidad
+interna, entonces $F$ será sustancialmente mayor que 1, y se interpretará como evidencia
+contra la hipótesis nula.
+
+**Teorema (Contraste de hipótesis para el análisis de varianza de un factor).** Supongamos que
+se tienen muestras aleatorias independientes de tamaños $n_1, n_2, \dots, n_k$,
+correspondientes a $k$ poblaciones, y sea $N = n_1 + n_2 + \cdots + n_k$ el tamaño muestral
+total. Si las medias poblacionales se denotan por $\mu_1, \mu_2, \dots, \mu_k$, la hipótesis
+nula que se desea contrastar es
+
+$$H_0: \mu_1 = \mu_2 = \cdots = \mu_k
+\qquad \text{versus} \qquad
+H_1: \text{al menos una } \mu_j \text{ difiere}$$
+
+Bajo el supuesto de normalidad y homogeneidad de varianzas, el estadístico de prueba es
+
+$$F = \frac{MSA}{MSE}$$
+
+Este estadístico sigue una distribución $F$ con $\nu_1 = k-1$ grados de libertad en el
+numerador y $\nu_2 = N-k$ grados de libertad en el denominador. La hipótesis nula se rechaza
+al nivel de significancia $\alpha$ si
+
+$$F > F_{\alpha,\,\nu_1,\,\nu_2}$$
+
+donde $F_{\alpha,\,\nu_1,\,\nu_2}$ representa el valor crítico de la distribución F
+correspondiente al nivel de significancia $\alpha$.
+
+*Demostración.* Basta con usar el teorema de descomposición de la suma de cuadrados y el
+teorema de $MSA$ y $MSE$ insesgados de $\sigma^2$. $\square$
+
+Los cálculos necesarios para llevar a cabo este contraste se pueden resumir en la tabla de
+análisis de varianza de un factor:
+
+| Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | Razón F |
+|---|---|---|---|---|
+| Tratamientos (entre grupos) | $SSA$ | $k-1$ | $MSA = SSA/(k-1)$ | $F = MSA/MSE$ |
+| Error (dentro de grupos) | $SSE$ | $N-k$ | $MSE = SSE/(N-k)$ | |
+| Total | $SST$ | $N-1$ | | |
+
+
+## ANOVA de un factor calulando todas las ss---
+```{r}
+df <- data.frame(Empleados = c(0.66, 0.63, 0.65, 0.69, 0.44, 0.63, 0.61, 0.42, 0.59, 0.46),
+                 Agricultores = c(0.65, 0.60, 0.69, 0.73, 0.52, 0.85, 0.81, NA, NA, NA),
+                 NoExpuestos = c(0.93, 0.99, 0.96, 0.74, 0.81, 0.93, 0.63, 0.68, 0.99, NA))
+empleados<-na.omit(df$Empleados)
+agricultores<-na.omit(df$Agricultores)
+no_expuesto<-na.omit(df$NoExpuestos)
+```
+Hallamos los tamaños de cada muestra
+```{r}
+n1<-length(empleados)
+n2<-length(agricultores)
+n3<-length(no_expuesto)
+N<-n1+n2+n3
+k<-ncol(df)
+```
+Hallamos el promedio de cada muestra
+```{r}
+xbar_1<-mean(empleados)
+xbar_2<-mean(agricultores)
+xbar_3<-mean(no_expuesto)
+```
+calculalos le promedio global
+```{r}
+xbar_total<-(sum(empleados)+sum(agricultores)+sum(no_expuesto))/N
+```
+hallamos el SST
+```{r}
+SST <- sum((empleados - xbar_total)^2) +
+       sum((agricultores - xbar_total)^2) +
+       sum((no_expuesto - xbar_total)^2)
+```
+ahora el SSA
+```{r}
+SSA=n1*(xbar_1-xbar_total)^2+n2*(xbar_2-xbar_total)^2+n3*(xbar_3-xbar_total)^2
+```
+calculamos SSE
+```{r}
+SSE<-SST-SSA
 ```
 
-```{r edaedent}
-d %>%
-  group_by(Estrato) %>%
-  summarise(n = length(Edad),
-            prom = mean(Edad),
-            ds = sd(Edad),
-            varianza = var(Edad),
-            mediana = median(Edad),
-            RIC = IQR(Edad),
-            min = min(Edad),
-            max = max(Edad))
+Ahora calculamos MSA y MSE
+```{r}
+MSA=SSA/(k-1)
+MSE=SSE/(N-k)
+
+
 ```
+Estadistico F Y F tabulado
+```{r}
 
-```{r edaedentplot, fig.height=3.5}
-d %>%
-  ggplot(aes(x = Estrato, y = Edad)) +
-  geom_boxplot(fill = "#47078c", color = "black", outlier.color = "darkred") +
-  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "#b02ca5") +
-  labs(x = "Estrato socioeconómico", y = "Edad (años)") +
-  theme_bw()
+F=MSA/MSE
+alpha=0.05
+v1=k-1
+v2=N-k
+F_critico=qf(1-alpha,df1 = v1,df2 = v2)
+
+decision <- ifelse(F > F_critico, "Se rechaza H_0", "No se rechaza H_0")
+
+print(decision)
 ```
+Otra forma de realizarlo es
+```{r}
+alpha <- 0.05
+v1 <- k-1
+v2 <- N-k
 
-### Supuestos
+pvalor <- 1 - pf(F, v1, v2)
+decision <- ifelse(pvalor < alpha, "Se rechaza H_0", "No se rechaza H_0")
 
-```{r supuestosanova}
-d %>%
-  group_by(Estrato) %>%
-  summarise(n = length(Edad),
-            est_sw = shapiro.test(Edad)$statistic,
-            p_sw = shapiro.test(Edad)$p.value,
-            est_l = lillie.test(Edad)$statistic,
-            p_l = lillie.test(Edad)$p.value)
-
-bartlett.test(Edad ~ Estrato, data = d)
-
-leveneTest(Edad ~ Estrato, data = d, center = median)
+print(decision)
 ```
-
-La homogeneidad se cumple sin discusión: Bartlett da p = 0,478 y Levene p = 0,1486. La
-normalidad dentro de cada estrato se rechaza, porque la edad está sesgada a la derecha (hay
-muchos adultos jóvenes y una cola hacia los mayores). Con n = 230, 84 y 52 el ANOVA aguanta
-esa desviación por el teorema del límite central, pero conviene dejarlo anotado y confirmar
-después con Kruskal-Wallis.
-
-### Cálculo manual
-
-```{r anovamanual}
-gm <- mean(d$Edad)
-k  <- nlevels(d$Estrato)
-n  <- nrow(d)
-
-resumen <- d %>%
-  group_by(Estrato) %>%
-  summarise(ni = length(Edad), mi = mean(Edad))
-
-SSA <- sum(resumen$ni * (resumen$mi - gm)^2)
-SST <- sum((d$Edad - gm)^2)
-SSE <- SST - SSA
-
-MSA <- SSA / (k - 1)
-MSE <- SSE / (n - k)
-F_calc <- MSA / MSE
-
-tibble(media_global = gm, k, n, SST, SSA, SSE, MSA, MSE, F_calc,
-       gl1 = k - 1, gl2 = n - k,
-       F_critico = qf(0.95, k - 1, n - k),
-       p = pf(F_calc, k - 1, n - k, lower.tail = FALSE))
-```
-
-### Verificación con `aov`
-
-```{r anovaaov}
-modelo <- aov(Edad ~ Estrato, data = d)
-summary(modelo)
-```
-
-Los números coinciden: SSA = 1.926,27 con 2 grados de libertad y SSE = 57.608,71 con 363,
-lo que da MSA = 963,13, MSE = 158,70 y F = 6,0688. El valor crítico al 5% es 3,0206 y como
-$6,0688 > 3,0206$ se rechaza H0, con p = 0,00256.
-
-Vale la pena mirar la proporción: SSA es apenas el 3,2% de SST. O sea que el estrato
-explica muy poco de la variabilidad de la edad. La diferencia es estadísticamente
-significativa pero pequeña en términos prácticos, y eso pasa porque con n = 366 hasta las
-diferencias chiquitas alcanzan significancia. Es la razón por la que nunca basta con el
-p-valor.
-
-### Comparaciones múltiples
-
-```{r tukey}
-TukeyHSD(modelo)
-```
-
-```{r tukeyplot, fig.height=3.5}
-plot(TukeyHSD(modelo))
-```
-
-El ANOVA dice que al menos un par difiere, pero no cuál. Tukey compara todas las parejas
-ajustando el nivel de significancia para que el error global se mantenga en 5%. El único
-par que resulta significativo es estrato 3 contra estrato 1, con una diferencia de 6,32
-años, intervalo [1,77 ; 10,87] y p ajustado 0,0034. Los pares 2-1 y 3-2 no alcanzan
-significancia y sus intervalos contienen el cero.
-
-## Kruskal-Wallis
-
-Es la versión no paramétrica del ANOVA de un factor. En vez de descomponer sumas de
-cuadrados, ordena todas las observaciones de la muestra completa, las reemplaza por su
-rango y compara el rango promedio de cada grupo:
-
-$$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)$$
-
-que bajo H0 se distribuye aproximadamente ji-cuadrado con $k-1$ grados de libertad.
-
-Las hipótesis son
-
-$$H_0: \text{las } k \text{ poblaciones tienen la misma distribución} \qquad \text{vs}
-\qquad H_1: \text{al menos una tiende a dar valores mayores}$$
-
-Se usa cuando no se cumple la normalidad, cuando los grupos son pequeños, cuando la
-variable es ordinal o cuando hay valores extremos que distorsionarían las medias. No exige
-normalidad, pero sí que las observaciones sean independientes y que las distribuciones
-tengan forma parecida si se quiere leer el resultado como comparación de medianas.
-
-```{r kruskal}
-kruskal.test(Edad ~ Estrato, data = d)
-
-d %>%
-  kruskal_effsize(Edad ~ Estrato)
-```
-
-Da H = 11,162 con 2 grados de libertad y p = 0,00377, o sea la misma conclusión del ANOVA.
-El eta cuadrado basado en H es 0,0252, o sea que el estrato explica el 2,5% de la
-variabilidad de los rangos, un efecto pequeño. Que las dos pruebas coincidan confirma que
-la falta de normalidad dentro de los estratos no estaba afectando el resultado.
-
-### Comparaciones post-hoc
-
-```{r dunn}
-d %>%
-  dunn_test(Edad ~ Estrato, p.adjust.method = "bonferroni")
-```
-
-La prueba de Dunn es el equivalente de Tukey para Kruskal-Wallis: compara los rangos
-promedio de cada pareja y ajusta los p-valores por el número de comparaciones. Bonferroni
-es el ajuste más conservador, simplemente multiplica cada p-valor por el número de pruebas.
-
-El resultado repite el de Tukey: el único par significativo es estrato 1 contra estrato 3,
-con p ajustado 0,0055. Los otros dos pares quedan sin significancia.
+Esto significa que existe diferencia estadisticamente significativa en los niveles medios del compuesto entre al menos dos de los 3 grupos: empleados expuesto, agricultores expuestos y no expuestos. Este resultado sugiere que hay que realizar un analisis para identficar cuales son los grupos que difieren

@@ -196,17 +196,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-4"><i class="fa fa-check"></i><b>2.5.2</b> Supuesto de normalidad</a></li>
 <li class="chapter" data-level="2.5.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-rangos-con-signo-de-wilcoxon"><i class="fa fa-check"></i><b>2.5.3</b> Prueba de rangos con signo de Wilcoxon</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova"><i class="fa fa-check"></i><b>2.6</b> ANOVA</a>
+<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova-an%C3%A1lisis-de-varianza-para-comparar-m%C3%BAltiples-medias"><i class="fa fa-check"></i><b>2.6</b> ANOVA (análisis de varianza para comparar múltiples medias)</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos</a></li>
-<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#c%C3%A1lculo-manual"><i class="fa fa-check"></i><b>2.6.2</b> Cálculo manual</a></li>
-<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#verificaci%C3%B3n-con-aov"><i class="fa fa-check"></i><b>2.6.3</b> Verificación con <code>aov</code></a></li>
-<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-m%C3%BAltiples"><i class="fa fa-check"></i><b>2.6.4</b> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos-y-formulaci%C3%B3n-de-las-hip%C3%B3tesis"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos y formulación de las hipótesis</a></li>
+<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#sumas-de-cuadrados-y-teorema-de-descomposici%C3%B3n"><i class="fa fa-check"></i><b>2.6.2</b> Sumas de cuadrados y teorema de descomposición</a></li>
+<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#estimaciones-insesgadas-de-la-varianza-poblacional"><i class="fa fa-check"></i><b>2.6.3</b> Estimaciones insesgadas de la varianza poblacional</a></li>
+<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#teorema-de-contraste-para-el-an%C3%A1lisis-de-varianza"><i class="fa fa-check"></i><b>2.6.4</b> Teorema de contraste para el análisis de varianza</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#kruskal-wallis"><i class="fa fa-check"></i><b>2.7</b> Kruskal-Wallis</a>
-<ul>
-<li class="chapter" data-level="2.7.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-post-hoc"><i class="fa fa-check"></i><b>2.7.1</b> Comparaciones post-hoc</a></li>
-</ul></li>
+<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova-de-un-factor-calulando-todas-las-ss"><i class="fa fa-check"></i><b>2.7</b> ANOVA de un factor calulando todas las ss—</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html"><i class="fa fa-check"></i><b>3</b> Guía para el parcial</a>
 <ul>
@@ -1108,17 +1105,16 @@ no haya ni un solo caso en contra es poco común y anticipa un p-valor diminuto.
 da p = 6,9e-05 en el pre-test y 1,4e-07 en el post-test, Shapiro-Wilk 6,5e-07 y 1,2e-09, y
 Lilliefors 3,3e-14 y 2,4e-23. Cuando las tres apuntan en la misma dirección con p-valores
 tan pequeños no hay nada que discutir.</p>
-<p>No es sorpresa: una variable que solo toma cinco valores enteros no puede ser normal, porque
-la normal es continua. Aquí la prueba de normalidad es casi un trámite, la decisión ya
-estaba tomada desde que supimos que <code>Q1</code> es ordinal.</p>
-<p>Vale la pena fijarse en dos cosas de esta tabla. La primera es que el estadístico de
+<p>Es valido aclarar que una variable que solo toma cinco valores enteros no puede ser normal, porque
+la normal es continua. Aquí la prueba de normalidad es una prueba poco influyente, la decisión ya
+estaba tomada desde que vimos que <code>Q1</code> es ordinal.</p>
+<p>Analisando la tabla podemos ver que 2 cosas, La primera es que el estadístico de
 Kolmogorov-Smirnov y el de Lilliefors son idénticos (0,3238 y 0,4097) pero sus p-valores
 difieren en varios órdenes de magnitud. Es el mismo estadístico calculado igual; lo que
 cambia es la distribución de referencia contra la que se compara, porque Lilliefors corrige
 el hecho de que la media y la desviación se estimaron de los mismos datos. La segunda es
-que R tira un aviso de empates: con 49 respuestas repartidas en cinco valores hay
-muchísimos valores repetidos, y KS supone una variable continua sin empates. Ese aviso por
-sí solo ya es razón para no confiar en su p-valor.</p>
+que R avisa de un empate: con 49 respuestas repartidas en cinco valores hay
+muchísimos valores repetidos, y KS supone una variable continua sin empates. Ese aviso nos perimite confirmar que el p-valor no es adecuado.</p>
 <p>De todos modos, lo que el t pareado exigiría es la normalidad de las diferencias, no la de
 cada momento, así que conviene revisarla también:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb138-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(diferencias<span class="sc">$</span>d)</span></code></pre></div>
@@ -1144,215 +1140,420 @@ que hay que usar Wilcoxon.</p>
 ##   .y.   group1  group2    effsize    n1    n2 magnitude
 ## * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
 ## 1 Q1    Pretest Post-test   0.879    49    49 large</code></pre>
-<p>El estadístico da 0 y el p-valor 1,45e-09. Vale la pena entender por qué el estadístico
-salió exactamente cero: es la suma de los rangos que van en contra, y como ningún
-participante bajó, esa suma no tiene nada que sumar. Cero es el valor más extremo que puede
-tomar el estadístico, o sea la evidencia más fuerte posible contra H0 con esta muestra.</p>
+<p>El estadístico da 0 y el p-valor 1,45e-09.</p>
 <p>El tamaño del efecto es r = 0,879, muy por encima de 0,5, así que se clasifica como grande.
 Hay evidencia de que la intervención cambió las respuestas, y el cambio es sustancial.</p>
-<p>Un detalle de la salida que conviene saber leer: si se corre la versión base
-<code>wilcox.test(paired = TRUE)</code>, R avisa que no puede calcular el p-valor exacto por los
-empates y por los ceros. Eso no es un error, solo significa que usa la aproximación normal
-en vez de la distribución exacta. Con n = 49 la aproximación es perfectamente válida.</p>
 </div>
 </div>
-<div id="anova" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> ANOVA<a href="estadística-paramétrica-y-no-paramétrica.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Cuando hay más de dos grupos ya no sirve hacer varios t-test por parejas, porque cada
-prueba tiene su propia probabilidad de error tipo I y al acumularlas la probabilidad de
-equivocarse en alguna se dispara. Con tres grupos serían tres pruebas y el riesgo real
-subiría de 5% a casi 14%. El ANOVA resuelve esto con un solo contraste global.</p>
-<p>La idea es descomponer la variabilidad total en dos partes: la que hay entre los grupos y
-la que hay dentro de ellos.</p>
+<div id="anova-análisis-de-varianza-para-comparar-múltiples-medias" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> ANOVA (análisis de varianza para comparar múltiples medias)<a href="estadística-paramétrica-y-no-paramétrica.html#anova-an%C3%A1lisis-de-varianza-para-comparar-m%C3%BAltiples-medias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La técnica de análisis de varianza (ANOVA), también conocida como análisis factorial, fue
+desarrollada por Ronald Fisher en la década de 1930 y constituye una herramienta estadística
+fundamental para evaluar el efecto de uno o más factores (cada uno con dos o más niveles)
+sobre la media de una variable continua.</p>
+<p>ANOVA se utiliza cuando se desea comparar simultáneamente las medias de dos o más grupos,
+evaluando si las diferencias observadas son estadísticamente significativas. Además, esta
+técnica puede extenderse para analizar no solo los efectos principales de los factores, sino
+también sus posibles interacciones y, en ciertos casos, el efecto de los factores sobre la
+variabilidad de la variable dependiente.</p>
+<div id="supuestos-y-formulación-de-las-hipótesis" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Supuestos y formulación de las hipótesis<a href="estadística-paramétrica-y-no-paramétrica.html#supuestos-y-formulaci%C3%B3n-de-las-hip%C3%B3tesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Se consideran <span class="math inline">\(k\)</span> grupos o poblaciones, correspondientes a los <span class="math inline">\(k\)</span> tratamientos o categorías
+de un factor. Se asume que las observaciones de cada grupo están normalmente distribuidas,
+con medias poblacionales <span class="math inline">\(\mu_1, \mu_2, \dots, \mu_k\)</span>, y comparten una misma varianza común
+<span class="math inline">\(\sigma^2\)</span>. Para representarlas se extraen muestras aleatorias independientes de tamaños
+<span class="math inline">\(n_1, n_2, \dots, n_k\)</span>, respectivamente. Es decir,</p>
+<p><span class="math display">\[Y_{ij} \sim N(\mu_j, \sigma^2), \qquad i = 1,\dots,n_j, \qquad j = 1,\dots,k\]</span></p>
+<p>A lo largo del análisis se utiliza la notación <span class="math inline">\(y_{ij}\)</span> para denotar la <span class="math inline">\(i\)</span>-ésima observación
+dentro del <span class="math inline">\(j\)</span>-ésimo grupo o tratamiento.</p>
+<p>Los datos pueden organizarse por categorías de la siguiente forma:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Tratamiento 1</th>
+<th>Tratamiento 2</th>
+<th><span class="math inline">\(\cdots\)</span></th>
+<th>Tratamiento <span class="math inline">\(k\)</span></th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Observaciones</td>
+<td><span class="math inline">\(y_{11}\)</span></td>
+<td><span class="math inline">\(y_{12}\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(y_{1k}\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(y_{21}\)</span></td>
+<td><span class="math inline">\(y_{22}\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(y_{2k}\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(y_{n_1,1}\)</span></td>
+<td><span class="math inline">\(y_{n_2,2}\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(y_{n_k,k}\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Tamaño</td>
+<td><span class="math inline">\(n_1\)</span></td>
+<td><span class="math inline">\(n_2\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(n_k\)</span></td>
+<td><span class="math inline">\(N\)</span></td>
+</tr>
+<tr class="even">
+<td>Sumas</td>
+<td><span class="math inline">\(T_1\)</span></td>
+<td><span class="math inline">\(T_2\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(T_k\)</span></td>
+<td><span class="math inline">\(T\)</span></td>
+</tr>
+<tr class="odd">
+<td>Medias</td>
+<td><span class="math inline">\(\bar{y}_1\)</span></td>
+<td><span class="math inline">\(\bar{y}_2\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(\bar{y}_k\)</span></td>
+<td><span class="math inline">\(\bar{y}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>donde</p>
+<ul>
+<li><span class="math inline">\(y_{ij}\)</span> es la <span class="math inline">\(i\)</span>-ésima observación del tratamiento <span class="math inline">\(j\)</span>.</li>
+<li><span class="math inline">\(n_j\)</span> es el tamaño de la <span class="math inline">\(j\)</span>-ésima muestra.</li>
+<li><span class="math inline">\(N = n_1 + n_2 + \cdots + n_k\)</span> es la suma de todos los tamaños de muestra.</li>
+<li><span class="math inline">\(T_j = y_{1j} + y_{2j} + \cdots + y_{n_j,j}\)</span> es la suma de las observaciones de la muestra <span class="math inline">\(j\)</span>-ésima.</li>
+<li><span class="math inline">\(T = T_1 + T_2 + \cdots + T_k\)</span> es la suma de todas las observaciones.</li>
+<li><span class="math inline">\(\bar{y}_j = \dfrac{T_j}{n_j}\)</span> es la media de las observaciones de la muestra <span class="math inline">\(j\)</span>-ésima.</li>
+<li><span class="math inline">\(\bar{y} = \dfrac{T}{N}\)</span> es la media total de todas las observaciones.</li>
+</ul>
+<p><strong>Definición (Hipótesis en el análisis de varianza de un factor).</strong> Si las medias
+poblacionales se representan por <span class="math inline">\(\mu_1, \mu_2, \dots, \mu_k\)</span>, el análisis de varianza de un
+factor está diseñado para contrastar la hipótesis nula de que todas las medias poblacionales
+son iguales, es decir:</p>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2 = \cdots = \mu_k
+\qquad \text{vs} \qquad
+H_1: \text{No todas las medias poblacionales son iguales}\]</span></p>
+</div>
+<div id="sumas-de-cuadrados-y-teorema-de-descomposición" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Sumas de cuadrados y teorema de descomposición<a href="estadística-paramétrica-y-no-paramétrica.html#sumas-de-cuadrados-y-teorema-de-descomposici%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El contraste de igualdad de medias se fundamenta en la comparación entre dos fuentes de
+variabilidad en los datos muestrales:</p>
+<p>La primera es la variabilidad en torno a las medias muestrales individuales de los <span class="math inline">\(k\)</span> grupos
+de observaciones. Esta se denomina <strong>variabilidad dentro de los grupos</strong>.</p>
+<p>La segunda es la variabilidad entre las medias de los <span class="math inline">\(k\)</span> grupos. Esta se denomina
+<strong>variabilidad entre grupos</strong>.</p>
+<p><strong>Definición (Variabilidad dentro de los grupos).</strong> Es la variación de las observaciones
+individuales respecto a su propia media muestral dentro de cada grupo. Para el grupo
+<span class="math inline">\(j = 1,\dots,k\)</span> se define como</p>
+<p><span class="math display">\[(SE)_j = \sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2\]</span></p>
+<p><strong>Definición (Suma de cuadrados del error, SSE).</strong> Es la suma total de la variabilidad dentro
+de todos los grupos. También se conoce como suma de cuadrados dentro de los grupos:</p>
+<p><span class="math display">\[SSE = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2\]</span></p>
+<p><strong>Definición (Suma de cuadrados entre grupos, SSA).</strong> Una medida natural de la variabilidad
+entre grupos consiste en calcular las diferencias entre las medias muestrales de cada grupo y
+la media muestral global. Estas diferencias se elevan al cuadrado para representar la
+desviación de cada grupo respecto a la media global, y como cada grupo <span class="math inline">\(j\)</span> tiene un tamaño
+<span class="math inline">\(n_j\)</span>, se pondera cada diferencia por dicho tamaño:</p>
+<p><span class="math display">\[SSA = \sum_{j=1}^{k} n_j(\bar{y}_j - \bar{y})^2\]</span></p>
+<p><strong>Definición (Suma de cuadrados total, SST).</strong> Es la variabilidad total de todas las
+observaciones con respecto a la media global:</p>
+<p><span class="math display">\[SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y})^2\]</span></p>
+<p><strong>Teorema (Descomposición de la suma de cuadrados).</strong> Supongamos que se tienen muestras
+aleatorias independientes de tamaños <span class="math inline">\(n_1, n_2, \dots, n_k\)</span>, correspondientes a <span class="math inline">\(k\)</span>
+poblaciones. Con las sumas de cuadrados</p>
+<p><span class="math display">\[SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij}-\bar{y})^2
+      = \sum_{j=1}^{k}\sum_{i=1}^{n_j} y_{ij}^2 - \frac{T^2}{N}\]</span></p>
+<p><span class="math display">\[SSA = \sum_{j=1}^{k} n_j(\bar{y}_j-\bar{y})^2
+      = \sum_{j=1}^{k}\frac{T_j^2}{n_j} - \frac{T^2}{N}\]</span></p>
+<p><span class="math display">\[SSE = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij}-\bar{y}_j)^2\]</span></p>
+<p>entonces se cumple que</p>
 <p><span class="math display">\[SST = SSA + SSE\]</span></p>
-<p><span class="math display">\[SST = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(X_{ij} - \bar{X})^2 \qquad
-SSA = \sum_{i=1}^{k} n_i(\bar{X}_i - \bar{X})^2 \qquad
-SSE = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(X_{ij} - \bar{X}_i)^2\]</span></p>
-<p><span class="math display">\[MSA = \frac{SSA}{k-1} \qquad MSE = \frac{SSE}{n-k} \qquad F = \frac{MSA}{MSE}\]</span></p>
-<p>con hipótesis</p>
-<p><span class="math display">\[H_0: \mu_1 = \mu_2 = \cdots = \mu_k \qquad \text{vs} \qquad
-H_1: \text{al menos una media difiere}\]</span></p>
-<p>Si todas las medias fueran iguales, la variabilidad entre grupos sería solo ruido y F
-estaría alrededor de 1. Un F grande significa que los grupos están más separados entre sí
-de lo que explica la variabilidad interna.</p>
-<p>Como el profesor no deja datos en esta sección, se usa el conjunto de edentulismo, que es
-el mismo del parcial del semestre pasado, comparando la edad promedio según el estrato
-socioeconómico.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Datos/datos_edentulismo.xlsx&quot;</span>)</span>
-<span id="cb144-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-2" tabindex="-1"></a></span>
-<span id="cb144-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-3" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb144-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Genero, Educación, EDENTULISMO, Autoestima), as.factor),</span>
-<span id="cb144-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-5" tabindex="-1"></a>         <span class="at">Estrato =</span> <span class="fu">factor</span>(Estrato))</span></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb145-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Estrato) <span class="sc">%&gt;%</span></span>
-<span id="cb145-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Edad),</span>
-<span id="cb145-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Edad),</span>
-<span id="cb145-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Edad),</span>
-<span id="cb145-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-6" tabindex="-1"></a>            <span class="at">varianza =</span> <span class="fu">var</span>(Edad),</span>
-<span id="cb145-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-7" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Edad),</span>
-<span id="cb145-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-8" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Edad),</span>
-<span id="cb145-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-9" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Edad),</span>
-<span id="cb145-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-10" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Edad))</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 9
-##   Estrato     n  prom    ds varianza mediana   RIC   min   max
-##   &lt;fct&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 1         230  33.4  12.2     148.    30.5  19      18    64
-## 2 2          84  36.5  13.2     174.    34    22.5    19    64
-## 3 3          52  39.7  13.5     183.    40.5  24.2    19    64</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb147-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Estrato, <span class="at">y =</span> Edad)) <span class="sc">+</span></span>
-<span id="cb147-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
-<span id="cb147-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
-<span id="cb147-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Estrato socioeconómico&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Edad (años)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb147-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/edaedentplot-1.png" width="672" /></p>
-<div id="supuestos" class="section level3 hasAnchor" number="2.6.1">
-<h3><span class="header-section-number">2.6.1</span> Supuestos<a href="estadística-paramétrica-y-no-paramétrica.html#supuestos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb148-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Estrato) <span class="sc">%&gt;%</span></span>
-<span id="cb148-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Edad),</span>
-<span id="cb148-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-4" tabindex="-1"></a>            <span class="at">est_sw =</span> <span class="fu">shapiro.test</span>(Edad)<span class="sc">$</span>statistic,</span>
-<span id="cb148-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-5" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(Edad)<span class="sc">$</span>p.value,</span>
-<span id="cb148-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-6" tabindex="-1"></a>            <span class="at">est_l =</span> <span class="fu">lillie.test</span>(Edad)<span class="sc">$</span>statistic,</span>
-<span id="cb148-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-7" tabindex="-1"></a>            <span class="at">p_l =</span> <span class="fu">lillie.test</span>(Edad)<span class="sc">$</span>p.value)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 6
-##   Estrato     n est_sw          p_sw est_l          p_l
-##   &lt;fct&gt;   &lt;int&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
-## 1 1         230  0.932 0.00000000772 0.116 0.0000000695
-## 2 2          84  0.924 0.000105      0.156 0.0000270   
-## 3 3          52  0.944 0.0166        0.113 0.0955</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-1" tabindex="-1"></a><span class="fu">bartlett.test</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d)</span></code></pre></div>
-<pre><code>## 
-##  Bartlett test of homogeneity of variances
-## 
-## data:  Edad by Estrato
-## Bartlett&#39;s K-squared = 1.4761, df = 2, p-value = 0.478</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-1" tabindex="-1"></a><span class="fu">leveneTest</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d, <span class="at">center =</span> median)</span></code></pre></div>
-<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
-##        Df F value Pr(&gt;F)
-## group   2  1.9169 0.1486
-##       363</code></pre>
-<p>La homogeneidad se cumple sin discusión: Bartlett da p = 0,478 y Levene p = 0,1486. La
-normalidad dentro de cada estrato se rechaza, porque la edad está sesgada a la derecha (hay
-muchos adultos jóvenes y una cola hacia los mayores). Con n = 230, 84 y 52 el ANOVA aguanta
-esa desviación por el teorema del límite central, pero conviene dejarlo anotado y confirmar
-después con Kruskal-Wallis.</p>
+<p><em>Demostración.</em> Recordemos que la suma total de cuadrados se define como</p>
+<p><span class="math display">\[SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y})^2\]</span></p>
+<p>Descomponemos la diferencia <span class="math inline">\(y_{ij} - \bar{y}\)</span>:</p>
+<p><span class="math display">\[y_{ij} - \bar{y} = (y_{ij} - \bar{y}_j) + (\bar{y}_j - \bar{y})\]</span></p>
+<p>Elevamos al cuadrado y aplicamos la identidad:</p>
+<p><span class="math display">\[(y_{ij} - \bar{y})^2 = (y_{ij} - \bar{y}_j)^2
++ 2(y_{ij} - \bar{y}_j)(\bar{y}_j - \bar{y})
++ (\bar{y}_j - \bar{y})^2\]</span></p>
+<p>Sumamos sobre <span class="math inline">\(i\)</span> y sobre <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[SST = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2
++ 2\sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)(\bar{y}_j - \bar{y})
++ \sum_{j=1}^{k}\sum_{i=1}^{n_j}(\bar{y}_j - \bar{y})^2\]</span></p>
+<p>Notemos que <span class="math inline">\(\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j) = 0\)</span>, por lo tanto la segunda suma es cero.</p>
+<p>En la tercera suma, <span class="math inline">\((\bar{y}_j - \bar{y})^2\)</span> no depende de <span class="math inline">\(i\)</span>, así que</p>
+<p><span class="math display">\[\sum_{i=1}^{n_j}(\bar{y}_j - \bar{y})^2 = n_j(\bar{y}_j - \bar{y})^2\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[SST = \underbrace{\sum_{j=1}^{k}\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j)^2}_{SSE}
++ \underbrace{\sum_{j=1}^{k} n_j(\bar{y}_j - \bar{y})^2}_{SSA}\]</span></p>
+<p>Por tanto, se cumple la relación de descomposición</p>
+<p><span class="math display">\[SST = SSE + SSA \qquad \square\]</span></p>
+<p><strong>¿Por qué <span class="math inline">\(\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j) = 0\)</span>?</strong> Porque al separar la suma y usar la
+definición de la media del grupo, <span class="math inline">\(\sum_{i=1}^{n_j} y_{ij} = n_j\bar{y}_j\)</span>:</p>
+<p><span class="math display">\[\sum_{i=1}^{n_j}(y_{ij} - \bar{y}_j) = \sum_{i=1}^{n_j} y_{ij} - \sum_{i=1}^{n_j}\bar{y}_j
+= n_j\bar{y}_j - n_j\bar{y}_j = 0\]</span></p>
+<p>y en consecuencia</p>
+<p><span class="math display">\[2\sum_{j=1}^{k}(\bar{y}_j - \bar{y}) \cdot 0 = 0\]</span></p>
 </div>
-<div id="cálculo-manual" class="section level3 hasAnchor" number="2.6.2">
-<h3><span class="header-section-number">2.6.2</span> Cálculo manual<a href="estadística-paramétrica-y-no-paramétrica.html#c%C3%A1lculo-manual" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-1" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">mean</span>(d<span class="sc">$</span>Edad)</span>
-<span id="cb154-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-2" tabindex="-1"></a>k  <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(d<span class="sc">$</span>Estrato)</span>
-<span id="cb154-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-3" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(d)</span>
+<div id="estimaciones-insesgadas-de-la-varianza-poblacional" class="section level3 hasAnchor" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> Estimaciones insesgadas de la varianza poblacional<a href="estadística-paramétrica-y-no-paramétrica.html#estimaciones-insesgadas-de-la-varianza-poblacional" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El contraste de igualdad de medias en el análisis de varianza se fundamenta en el supuesto de
+que las <span class="math inline">\(k\)</span> poblaciones involucradas comparten una varianza poblacional común. Si la hipótesis
+nula de igualdad de medias es verdadera, entonces tanto la suma de cuadrados entre grupos
+(<span class="math inline">\(SSA\)</span>) como la suma de cuadrados dentro de los grupos (<span class="math inline">\(SSE\)</span>) pueden considerarse como bases
+válidas para estimar dicha varianza común.</p>
+<p>No obstante, para obtener estimaciones adecuadas es necesario dividir cada suma de cuadrados
+entre sus respectivos grados de libertad, conforme se establece en el siguiente teorema.</p>
+<p><strong>Teorema (<span class="math inline">\(MSA\)</span> y <span class="math inline">\(MSE\)</span> son estimadores insesgados de <span class="math inline">\(\sigma^2\)</span>).</strong> Supongamos que se tienen
+<span class="math inline">\(k\)</span> muestras aleatorias independientes, de tamaños <span class="math inline">\(n_1, n_2, \dots, n_k\)</span>, procedentes de
+poblaciones con una varianza común <span class="math inline">\(\sigma^2\)</span>. Sea <span class="math inline">\(N\)</span> el tamaño muestral total, de manera que</p>
+<p><span class="math display">\[N = n_1 + n_2 + \cdots + n_k\]</span></p>
+<p>Bajo la hipótesis nula de igualdad de medias, <span class="math inline">\(H_0: \mu_1 = \mu_2 = \cdots = \mu_k\)</span>, sean
+<span class="math inline">\(SSA\)</span> y <span class="math inline">\(SSE\)</span> las sumas de cuadrados entre los grupos y dentro de los grupos,
+respectivamente. Entonces los cuadrados medios se definen como:</p>
+<p><strong>Cuadrado medio entre los grupos (o del tratamiento):</strong></p>
+<p><span class="math display">\[MSA = \frac{SSA}{k-1}\]</span></p>
+<p><strong>Cuadrado medio dentro de los grupos (o del error):</strong></p>
+<p><span class="math display">\[MSE = \frac{SSE}{N-k}\]</span></p>
+<p>Bajo <span class="math inline">\(H_0\)</span>, ambos son estimadores insesgados de la varianza común <span class="math inline">\(\sigma^2\)</span>; es decir,</p>
+<p><span class="math display">\[E[MSA] = E[MSE] = \sigma^2\]</span></p>
+<p>En la demostración se usan las propiedades del valor esperado:</p>
+<p><span class="math display">\[E(\bar{X}) = \mu \qquad
+E(S^2) = \sigma^2 \qquad
+E(aX) = a\,E(X) \qquad
+E(X+Y) = E(X) + E(Y)\]</span></p>
+<p><em>Demostración.</em> Primero demostremos que <span class="math inline">\(E[MSE] = \sigma^2\)</span>. Sabemos que</p>
+<p><span class="math display">\[SSE = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(Y_{ij} - \bar{Y}_j)^2
+     = \sum_{j=1}^{k}(n_j - 1)S_j^2\]</span></p>
+<p>donde <span class="math inline">\(S_j^2\)</span> es la varianza muestral del grupo <span class="math inline">\(j\)</span>, definida por</p>
+<p><span class="math display">\[S_j^2 = \frac{\displaystyle\sum_{i=1}^{n_j}(Y_{ij} - \bar{Y}_j)^2}{n_j - 1}\]</span></p>
+<p>Cada <span class="math inline">\(S_j^2\)</span> es un estimador insesgado de la varianza común <span class="math inline">\(\sigma^2\)</span>, por lo que</p>
+<p><span class="math display">\[E[S_j^2] = \sigma^2 \quad \Rightarrow \quad E\big[(n_j-1)S_j^2\big] = (n_j-1)\sigma^2\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[E[SSE] = \sum_{j=1}^{k} E\big[(n_j-1)S_j^2\big]
+= \sum_{j=1}^{k}(n_j-1)\sigma^2 = (N-k)\sigma^2\]</span></p>
+<p>En consecuencia,</p>
+<p><span class="math display">\[E[MSE] = E\left[\frac{SSE}{N-k}\right] = \frac{E[SSE]}{N-k}
+= \frac{(N-k)\sigma^2}{N-k} = \sigma^2\]</span></p>
+<p>Esto prueba que <span class="math inline">\(MSE\)</span> es un estimador insesgado de <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>De otro lado, demostremos el comportamiento de <span class="math inline">\(MSA\)</span>. Supongamos que se tienen <span class="math inline">\(k\)</span> grupos
+independientes, donde el grupo <span class="math inline">\(j\)</span> tiene <span class="math inline">\(n_j\)</span> observaciones, y que</p>
+<p><span class="math display">\[Y_{ij} = \mu_j + \varepsilon_{ij}, \qquad i = 1,\dots,n_j, \qquad j = 1,\dots,k\]</span></p>
+<p>donde los errores <span class="math inline">\(\varepsilon_{ij}\)</span> son independientes y satisfacen
+<span class="math inline">\(E[\varepsilon_{ij}] = 0\)</span> y <span class="math inline">\(\mathrm{Var}(\varepsilon_{ij}) = \sigma^2\)</span>. Definamos</p>
+<p><span class="math display">\[\bar{Y}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} Y_{ij}, \qquad
+\bar{Y} = \frac{1}{N}\sum_{j=1}^{k} n_j\bar{Y}_j, \qquad
+N = \sum_{j=1}^{k} n_j\]</span></p>
+<p>La suma de cuadrados entre los grupos es</p>
+<p><span class="math display">\[SSA = \sum_{j=1}^{k} n_j(\bar{Y}_j - \bar{Y})^2\]</span></p>
+<p>Expandiendo el cuadrado,</p>
+<p><span class="math display">\[(\bar{Y}_j - \bar{Y})^2 = \bar{Y}_j^2 - 2\bar{Y}_j\bar{Y} + \bar{Y}^2\]</span></p>
+<p>luego</p>
+<p><span class="math display">\[SSA = \sum_{j=1}^{k} n_j\big(\bar{Y}_j^2 - 2\bar{Y}_j\bar{Y} + \bar{Y}^2\big)
+= \sum_{j=1}^{k} n_j\bar{Y}_j^2 - 2\bar{Y}\sum_{j=1}^{k} n_j\bar{Y}_j + N\bar{Y}^2\]</span></p>
+<p>Sabemos que <span class="math inline">\(\sum_{j=1}^{k} n_j\bar{Y}_j = N\bar{Y}\)</span>, y por lo tanto</p>
+<p><span class="math display">\[SSA = \sum_{j=1}^{k} n_j\bar{Y}_j^2 - N\bar{Y}^2\]</span></p>
+<p>Para cada grupo <span class="math inline">\(j\)</span>, con <span class="math inline">\(\bar{Y}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} Y_{ij}\)</span>:</p>
+<p><span class="math display">\[E[\bar{Y}_j] = \frac{1}{n_j}\sum_{i=1}^{n_j} E[Y_{ij}]
+= \frac{1}{n_j}\sum_{i=1}^{n_j}\big(E[\mu_j] + E[\varepsilon_{ij}]\big)
+= \frac{1}{n_j}\sum_{i=1}^{n_j}\mu_j = \mu_j\]</span></p>
+<p><span class="math display">\[\mathrm{Var}(\bar{Y}_j) = \frac{1}{n_j^2}\sum_{i=1}^{n_j}\mathrm{Var}(Y_{ij})
+= \frac{1}{n_j^2}\sum_{i=1}^{n_j}\big(\mathrm{Var}(\mu_j) + \mathrm{Var}(\varepsilon_{ij})\big)
+= \frac{1}{n_j^2}\,(n_j\sigma^2) = \frac{\sigma^2}{n_j}\]</span></p>
+<p>entonces</p>
+<p><span class="math display">\[E[\bar{Y}_j^2] = \big(E[\bar{Y}_j]\big)^2 + \mathrm{Var}(\bar{Y}_j)
+= \mu_j^2 + \frac{\sigma^2}{n_j}\]</span></p>
+<p>Además, con la media muestral global <span class="math inline">\(\bar{Y} = \frac{1}{N}\sum_{j=1}^{k} n_j\bar{Y}_j\)</span> y la
+media poblacional global ponderada <span class="math inline">\(\mu = \frac{1}{N}\sum_{j=1}^{k} n_j\mu_j\)</span>:</p>
+<p><span class="math display">\[E[\bar{Y}] = \frac{1}{N}\sum_{j=1}^{k}\sum_{i=1}^{n_j} E[Y_{ij}]
+= \frac{1}{N}\sum_{j=1}^{k} n_j\mu_j = \mu\]</span></p>
+<p><span class="math display">\[\mathrm{Var}(\bar{Y}) = \frac{1}{N^2}\sum_{j=1}^{k}\sum_{i=1}^{n_j}\mathrm{Var}(Y_{ij})
+= \frac{1}{N^2}\sum_{j=1}^{k} n_j\sigma^2 = \frac{1}{N^2}(N)\sigma^2 = \frac{\sigma^2}{N}\]</span></p>
+<p>Luego</p>
+<p><span class="math display">\[E[\bar{Y}^2] = \big(E[\bar{Y}]\big)^2 + \mathrm{Var}(\bar{Y}) = \mu^2 + \frac{\sigma^2}{N}\]</span></p>
+<p>En consecuencia,</p>
+<p><span class="math display">\[\begin{aligned}
+E[SSA] &amp;= \sum_{j=1}^{k} n_j E[\bar{Y}_j^2] - N\,E[\bar{Y}^2] \\[4pt]
+&amp;= \sum_{j=1}^{k} n_j\left(\mu_j^2 + \frac{\sigma^2}{n_j}\right)
+   - N\left(\mu^2 + \frac{\sigma^2}{N}\right) \\[4pt]
+&amp;= \sum_{j=1}^{k} n_j\mu_j^2 + k\sigma^2 - N\mu^2 - \sigma^2 \\[4pt]
+&amp;= \sum_{j=1}^{k} n_j\mu_j^2 - N\mu^2 + (k-1)\sigma^2
+\end{aligned}\]</span></p>
+<p>Como</p>
+<p><span class="math display">\[\sum_{j=1}^{k} n_j\mu_j^2 - N\mu^2 = \sum_{j=1}^{k} n_j(\mu_j - \mu)^2\]</span></p>
+<p>se concluye que</p>
+<p><span class="math display">\[E[SSA] = \sum_{j=1}^{k} n_j(\mu_j - \mu)^2 + (k-1)\sigma^2\]</span></p>
+<p>y en consecuencia</p>
+<p><span class="math display">\[E[MSA] = E\left[\frac{SSA}{k-1}\right]
+= \sigma^2 + \frac{\displaystyle\sum_{j=1}^{k} n_j(\mu_j - \mu)^2}{k-1}\]</span></p>
+<p>Bajo la hipótesis nula <span class="math inline">\(H_0: \mu_1 = \mu_2 = \cdots = \mu_k\)</span> se cumple que</p>
+<p><span class="math display">\[\sum_{j=1}^{k} n_j(\mu_j - \mu)^2 = 0\]</span></p>
+<p>Por lo tanto,</p>
+<p><span class="math display">\[E[MSA] = \sigma^2\]</span></p>
+<p>Esto prueba que, bajo <span class="math inline">\(H_0\)</span>, <span class="math inline">\(MSA\)</span> es un estimador insesgado de <span class="math inline">\(\sigma^2\)</span>. <span class="math inline">\(\square\)</span></p>
+</div>
+<div id="teorema-de-contraste-para-el-análisis-de-varianza" class="section level3 hasAnchor" number="2.6.4">
+<h3><span class="header-section-number">2.6.4</span> Teorema de contraste para el análisis de varianza<a href="estadística-paramétrica-y-no-paramétrica.html#teorema-de-contraste-para-el-an%C3%A1lisis-de-varianza" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Si la hipótesis nula fuera cierta, contaríamos con dos estimaciones insesgadas de una misma
+cantidad: la varianza poblacional común. Sería razonable esperar que ambas estimaciones fueran
+numéricamente similares. Sin embargo, a mayor discrepancia entre ellas, suponiendo que todo lo
+demás permanece constante, mayor será la sospecha de que la hipótesis nula no se cumple.</p>
+<p>Por tanto, el contraste de la hipótesis nula de igualdad de medias se basa en la razón entre
+los cuadrados medios:</p>
+<p><span class="math display">\[F = \frac{MSA}{MSE}\]</span></p>
+<p>donde <span class="math inline">\(MSA\)</span> es el cuadrado medio entre grupos y <span class="math inline">\(MSE\)</span> es el cuadrado medio dentro de los
+grupos.</p>
+<p>Si el cociente <span class="math inline">\(F\)</span> se aproxima a 1, no hay evidencia para rechazar la hipótesis nula, lo que
+indicaría que las medias poblacionales son estadísticamente similares. Sin embargo, si la
+variabilidad entre grupos es considerablemente mayor en comparación con la variabilidad
+interna, entonces <span class="math inline">\(F\)</span> será sustancialmente mayor que 1, y se interpretará como evidencia
+contra la hipótesis nula.</p>
+<p><strong>Teorema (Contraste de hipótesis para el análisis de varianza de un factor).</strong> Supongamos que
+se tienen muestras aleatorias independientes de tamaños <span class="math inline">\(n_1, n_2, \dots, n_k\)</span>,
+correspondientes a <span class="math inline">\(k\)</span> poblaciones, y sea <span class="math inline">\(N = n_1 + n_2 + \cdots + n_k\)</span> el tamaño muestral
+total. Si las medias poblacionales se denotan por <span class="math inline">\(\mu_1, \mu_2, \dots, \mu_k\)</span>, la hipótesis
+nula que se desea contrastar es</p>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2 = \cdots = \mu_k
+\qquad \text{versus} \qquad
+H_1: \text{al menos una } \mu_j \text{ difiere}\]</span></p>
+<p>Bajo el supuesto de normalidad y homogeneidad de varianzas, el estadístico de prueba es</p>
+<p><span class="math display">\[F = \frac{MSA}{MSE}\]</span></p>
+<p>Este estadístico sigue una distribución <span class="math inline">\(F\)</span> con <span class="math inline">\(\nu_1 = k-1\)</span> grados de libertad en el
+numerador y <span class="math inline">\(\nu_2 = N-k\)</span> grados de libertad en el denominador. La hipótesis nula se rechaza
+al nivel de significancia <span class="math inline">\(\alpha\)</span> si</p>
+<p><span class="math display">\[F &gt; F_{\alpha,\,\nu_1,\,\nu_2}\]</span></p>
+<p>donde <span class="math inline">\(F_{\alpha,\,\nu_1,\,\nu_2}\)</span> representa el valor crítico de la distribución F
+correspondiente al nivel de significancia <span class="math inline">\(\alpha\)</span>.</p>
+<p><em>Demostración.</em> Basta con usar el teorema de descomposición de la suma de cuadrados y el
+teorema de <span class="math inline">\(MSA\)</span> y <span class="math inline">\(MSE\)</span> insesgados de <span class="math inline">\(\sigma^2\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>Los cálculos necesarios para llevar a cabo este contraste se pueden resumir en la tabla de
+análisis de varianza de un factor:</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fuente de variación</th>
+<th>Suma de cuadrados</th>
+<th>Grados de libertad</th>
+<th>Cuadrado medio</th>
+<th>Razón F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tratamientos (entre grupos)</td>
+<td><span class="math inline">\(SSA\)</span></td>
+<td><span class="math inline">\(k-1\)</span></td>
+<td><span class="math inline">\(MSA = SSA/(k-1)\)</span></td>
+<td><span class="math inline">\(F = MSA/MSE\)</span></td>
+</tr>
+<tr class="even">
+<td>Error (dentro de grupos)</td>
+<td><span class="math inline">\(SSE\)</span></td>
+<td><span class="math inline">\(N-k\)</span></td>
+<td><span class="math inline">\(MSE = SSE/(N-k)\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(SST\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="anova-de-un-factor-calulando-todas-las-ss" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> ANOVA de un factor calulando todas las ss—<a href="estadística-paramétrica-y-no-paramétrica.html#anova-de-un-factor-calulando-todas-las-ss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Empleados =</span> <span class="fu">c</span>(<span class="fl">0.66</span>, <span class="fl">0.63</span>, <span class="fl">0.65</span>, <span class="fl">0.69</span>, <span class="fl">0.44</span>, <span class="fl">0.63</span>, <span class="fl">0.61</span>, <span class="fl">0.42</span>, <span class="fl">0.59</span>, <span class="fl">0.46</span>),</span>
+<span id="cb144-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-2" tabindex="-1"></a>                 <span class="at">Agricultores =</span> <span class="fu">c</span>(<span class="fl">0.65</span>, <span class="fl">0.60</span>, <span class="fl">0.69</span>, <span class="fl">0.73</span>, <span class="fl">0.52</span>, <span class="fl">0.85</span>, <span class="fl">0.81</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb144-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-3" tabindex="-1"></a>                 <span class="at">NoExpuestos =</span> <span class="fu">c</span>(<span class="fl">0.93</span>, <span class="fl">0.99</span>, <span class="fl">0.96</span>, <span class="fl">0.74</span>, <span class="fl">0.81</span>, <span class="fl">0.93</span>, <span class="fl">0.63</span>, <span class="fl">0.68</span>, <span class="fl">0.99</span>, <span class="cn">NA</span>))</span>
+<span id="cb144-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-4" tabindex="-1"></a>empleados<span class="ot">&lt;-</span><span class="fu">na.omit</span>(df<span class="sc">$</span>Empleados)</span>
+<span id="cb144-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-5" tabindex="-1"></a>agricultores<span class="ot">&lt;-</span><span class="fu">na.omit</span>(df<span class="sc">$</span>Agricultores)</span>
+<span id="cb144-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb144-6" tabindex="-1"></a>no_expuesto<span class="ot">&lt;-</span><span class="fu">na.omit</span>(df<span class="sc">$</span>NoExpuestos)</span></code></pre></div>
+<p>Hallamos los tamaños de cada muestra</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-1" tabindex="-1"></a>n1<span class="ot">&lt;-</span><span class="fu">length</span>(empleados)</span>
+<span id="cb145-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-2" tabindex="-1"></a>n2<span class="ot">&lt;-</span><span class="fu">length</span>(agricultores)</span>
+<span id="cb145-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-3" tabindex="-1"></a>n3<span class="ot">&lt;-</span><span class="fu">length</span>(no_expuesto)</span>
+<span id="cb145-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-4" tabindex="-1"></a>N<span class="ot">&lt;-</span>n1<span class="sc">+</span>n2<span class="sc">+</span>n3</span>
+<span id="cb145-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb145-5" tabindex="-1"></a>k<span class="ot">&lt;-</span><span class="fu">ncol</span>(df)</span></code></pre></div>
+<p>Hallamos el promedio de cada muestra</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb146-1" tabindex="-1"></a>xbar_1<span class="ot">&lt;-</span><span class="fu">mean</span>(empleados)</span>
+<span id="cb146-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb146-2" tabindex="-1"></a>xbar_2<span class="ot">&lt;-</span><span class="fu">mean</span>(agricultores)</span>
+<span id="cb146-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb146-3" tabindex="-1"></a>xbar_3<span class="ot">&lt;-</span><span class="fu">mean</span>(no_expuesto)</span></code></pre></div>
+<p>calculalos le promedio global</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb147-1" tabindex="-1"></a>xbar_total<span class="ot">&lt;-</span>(<span class="fu">sum</span>(empleados)<span class="sc">+</span><span class="fu">sum</span>(agricultores)<span class="sc">+</span><span class="fu">sum</span>(no_expuesto))<span class="sc">/</span>N</span></code></pre></div>
+<p>hallamos el SST</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-1" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fu">sum</span>((empleados <span class="sc">-</span> xbar_total)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb148-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-2" tabindex="-1"></a>       <span class="fu">sum</span>((agricultores <span class="sc">-</span> xbar_total)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb148-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb148-3" tabindex="-1"></a>       <span class="fu">sum</span>((no_expuesto <span class="sc">-</span> xbar_total)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<p>ahora el SSA</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb149-1" tabindex="-1"></a>SSA<span class="ot">=</span>n1<span class="sc">*</span>(xbar_1<span class="sc">-</span>xbar_total)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>n2<span class="sc">*</span>(xbar_2<span class="sc">-</span>xbar_total)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>n3<span class="sc">*</span>(xbar_3<span class="sc">-</span>xbar_total)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<p>calculamos SSE</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb150-1" tabindex="-1"></a>SSE<span class="ot">&lt;-</span>SST<span class="sc">-</span>SSA</span></code></pre></div>
+<p>Ahora calculamos MSA y MSE</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-1" tabindex="-1"></a>MSA<span class="ot">=</span>SSA<span class="sc">/</span>(k<span class="dv">-1</span>)</span>
+<span id="cb151-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb151-2" tabindex="-1"></a>MSE<span class="ot">=</span>SSE<span class="sc">/</span>(N<span class="sc">-</span>k)</span></code></pre></div>
+<p>Estadistico F Y F tabulado</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-1" tabindex="-1"></a>F<span class="ot">=</span>MSA<span class="sc">/</span>MSE</span>
+<span id="cb152-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-2" tabindex="-1"></a>alpha<span class="ot">=</span><span class="fl">0.05</span></span>
+<span id="cb152-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-3" tabindex="-1"></a>v1<span class="ot">=</span>k<span class="dv">-1</span></span>
+<span id="cb152-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-4" tabindex="-1"></a>v2<span class="ot">=</span>N<span class="sc">-</span>k</span>
+<span id="cb152-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-5" tabindex="-1"></a>F_critico<span class="ot">=</span><span class="fu">qf</span>(<span class="dv">1</span><span class="sc">-</span>alpha,<span class="at">df1 =</span> v1,<span class="at">df2 =</span> v2)</span>
+<span id="cb152-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-6" tabindex="-1"></a></span>
+<span id="cb152-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-7" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(F <span class="sc">&gt;</span> F_critico, <span class="st">&quot;Se rechaza H_0&quot;</span>, <span class="st">&quot;No se rechaza H_0&quot;</span>)</span>
+<span id="cb152-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-8" tabindex="-1"></a></span>
+<span id="cb152-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb152-9" tabindex="-1"></a><span class="fu">print</span>(decision)</span></code></pre></div>
+<pre><code>## [1] &quot;Se rechaza H_0&quot;</code></pre>
+<p>Otra forma de realizarlo es</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-1" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb154-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-2" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> k<span class="dv">-1</span></span>
+<span id="cb154-3"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-3" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> N<span class="sc">-</span>k</span>
 <span id="cb154-4"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-4" tabindex="-1"></a></span>
-<span id="cb154-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-5" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb154-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-6" tabindex="-1"></a>  <span class="fu">group_by</span>(Estrato) <span class="sc">%&gt;%</span></span>
-<span id="cb154-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ni =</span> <span class="fu">length</span>(Edad), <span class="at">mi =</span> <span class="fu">mean</span>(Edad))</span>
-<span id="cb154-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-8" tabindex="-1"></a></span>
-<span id="cb154-9"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-9" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>(resumen<span class="sc">$</span>ni <span class="sc">*</span> (resumen<span class="sc">$</span>mi <span class="sc">-</span> gm)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb154-10"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-10" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fu">sum</span>((d<span class="sc">$</span>Edad <span class="sc">-</span> gm)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb154-11"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-11" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> SST <span class="sc">-</span> SSA</span>
-<span id="cb154-12"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-12" tabindex="-1"></a></span>
-<span id="cb154-13"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-13" tabindex="-1"></a>MSA <span class="ot">&lt;-</span> SSA <span class="sc">/</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb154-14"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-14" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE <span class="sc">/</span> (n <span class="sc">-</span> k)</span>
-<span id="cb154-15"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-15" tabindex="-1"></a>F_calc <span class="ot">&lt;-</span> MSA <span class="sc">/</span> MSE</span>
-<span id="cb154-16"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-16" tabindex="-1"></a></span>
-<span id="cb154-17"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-17" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">media_global =</span> gm, k, n, SST, SSA, SSE, MSA, MSE, F_calc,</span>
-<span id="cb154-18"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-18" tabindex="-1"></a>       <span class="at">gl1 =</span> k <span class="sc">-</span> <span class="dv">1</span>, <span class="at">gl2 =</span> n <span class="sc">-</span> k,</span>
-<span id="cb154-19"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-19" tabindex="-1"></a>       <span class="at">F_critico =</span> <span class="fu">qf</span>(<span class="fl">0.95</span>, k <span class="sc">-</span> <span class="dv">1</span>, n <span class="sc">-</span> k),</span>
-<span id="cb154-20"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-20" tabindex="-1"></a>       <span class="at">p =</span> <span class="fu">pf</span>(F_calc, k <span class="sc">-</span> <span class="dv">1</span>, n <span class="sc">-</span> k, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 13
-##   media_global     k     n    SST   SSA    SSE   MSA   MSE F_calc   gl1   gl2
-##          &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1         35.0     3   366 59535. 1926. 57609.  963.  159.   6.07     2   363
-## # ℹ 2 more variables: F_critico &lt;dbl&gt;, p &lt;dbl&gt;</code></pre>
-</div>
-<div id="verificación-con-aov" class="section level3 hasAnchor" number="2.6.3">
-<h3><span class="header-section-number">2.6.3</span> Verificación con <code>aov</code><a href="estadística-paramétrica-y-no-paramétrica.html#verificaci%C3%B3n-con-aov" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb156-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">aov</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d)</span>
-<span id="cb156-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb156-2" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
-<pre><code>##              Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-## Estrato       2   1926   963.1   6.069 0.00256 **
-## Residuals   363  57609   158.7                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Los números coinciden: SSA = 1.926,27 con 2 grados de libertad y SSE = 57.608,71 con 363,
-lo que da MSA = 963,13, MSE = 158,70 y F = 6,0688. El valor crítico al 5% es 3,0206 y como
-<span class="math inline">\(6,0688 &gt; 3,0206\)</span> se rechaza H0, con p = 0,00256.</p>
-<p>Vale la pena mirar la proporción: SSA es apenas el 3,2% de SST. O sea que el estrato
-explica muy poco de la variabilidad de la edad. La diferencia es estadísticamente
-significativa pero pequeña en términos prácticos, y eso pasa porque con n = 366 hasta las
-diferencias chiquitas alcanzan significancia. Es la razón por la que nunca basta con el
-p-valor.</p>
-</div>
-<div id="comparaciones-múltiples" class="section level3 hasAnchor" number="2.6.4">
-<h3><span class="header-section-number">2.6.4</span> Comparaciones múltiples<a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-m%C3%BAltiples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb158-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(modelo)</span></code></pre></div>
-<pre><code>##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = Edad ~ Estrato, data = d)
-## 
-## $Estrato
-##         diff        lwr       upr     p adj
-## 2-1 3.055590 -0.7239745  6.835155 0.1393892
-## 3-1 6.322074  1.7696835 10.874464 0.0033906
-## 3-2 3.266484 -1.9648047  8.497772 0.3068550</code></pre>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb160-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(modelo))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/tukeyplot-1.png" width="672" /></p>
-<p>El ANOVA dice que al menos un par difiere, pero no cuál. Tukey compara todas las parejas
-ajustando el nivel de significancia para que el error global se mantenga en 5%. El único
-par que resulta significativo es estrato 3 contra estrato 1, con una diferencia de 6,32
-años, intervalo [1,77 ; 10,87] y p ajustado 0,0034. Los pares 2-1 y 3-2 no alcanzan
-significancia y sus intervalos contienen el cero.</p>
-</div>
-</div>
-<div id="kruskal-wallis" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Kruskal-Wallis<a href="estadística-paramétrica-y-no-paramétrica.html#kruskal-wallis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Es la versión no paramétrica del ANOVA de un factor. En vez de descomponer sumas de
-cuadrados, ordena todas las observaciones de la muestra completa, las reemplaza por su
-rango y compara el rango promedio de cada grupo:</p>
-<p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)\]</span></p>
-<p>que bajo H0 se distribuye aproximadamente ji-cuadrado con <span class="math inline">\(k-1\)</span> grados de libertad.</p>
-<p>Las hipótesis son</p>
-<p><span class="math display">\[H_0: \text{las } k \text{ poblaciones tienen la misma distribución} \qquad \text{vs}
-\qquad H_1: \text{al menos una tiende a dar valores mayores}\]</span></p>
-<p>Se usa cuando no se cumple la normalidad, cuando los grupos son pequeños, cuando la
-variable es ordinal o cuando hay valores extremos que distorsionarían las medias. No exige
-normalidad, pero sí que las observaciones sean independientes y que las distribuciones
-tengan forma parecida si se quiere leer el resultado como comparación de medianas.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb161-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(Edad <span class="sc">~</span> Estrato, <span class="at">data =</span> d)</span></code></pre></div>
-<pre><code>## 
-##  Kruskal-Wallis rank sum test
-## 
-## data:  Edad by Estrato
-## Kruskal-Wallis chi-squared = 11.162, df = 2, p-value = 0.003769</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb163-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb163-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb163-2" tabindex="-1"></a>  <span class="fu">kruskal_effsize</span>(Edad <span class="sc">~</span> Estrato)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 5
-##   .y.       n effsize method  magnitude
-## * &lt;chr&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;ord&gt;    
-## 1 Edad    366  0.0252 eta2[H] small</code></pre>
-<p>Da H = 11,162 con 2 grados de libertad y p = 0,00377, o sea la misma conclusión del ANOVA.
-El eta cuadrado basado en H es 0,0252, o sea que el estrato explica el 2,5% de la
-variabilidad de los rangos, un efecto pequeño. Que las dos pruebas coincidan confirma que
-la falta de normalidad dentro de los estratos no estaba afectando el resultado.</p>
-<div id="comparaciones-post-hoc" class="section level3 hasAnchor" number="2.7.1">
-<h3><span class="header-section-number">2.7.1</span> Comparaciones post-hoc<a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-post-hoc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="estadística-paramétrica-y-no-paramétrica.html#cb165-1" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb165-2"><a href="estadística-paramétrica-y-no-paramétrica.html#cb165-2" tabindex="-1"></a>  <span class="fu">dunn_test</span>(Edad <span class="sc">~</span> Estrato, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 9
-##   .y.   group1 group2    n1    n2 statistic       p   p.adj p.adj.signif
-## * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
-## 1 Edad  1      2        230    84      1.86 0.0625  0.188   ns          
-## 2 Edad  1      3        230    52      3.12 0.00182 0.00546 **          
-## 3 Edad  2      3         84    52      1.37 0.171   0.514   ns</code></pre>
-<p>La prueba de Dunn es el equivalente de Tukey para Kruskal-Wallis: compara los rangos
-promedio de cada pareja y ajusta los p-valores por el número de comparaciones. Bonferroni
-es el ajuste más conservador, simplemente multiplica cada p-valor por el número de pruebas.</p>
-<p>El resultado repite el de Tukey: el único par significativo es estrato 1 contra estrato 3,
-con p ajustado 0,0055. Los otros dos pares quedan sin significancia.</p>
+<span id="cb154-5"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-5" tabindex="-1"></a>pvalor <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(F, v1, v2)</span>
+<span id="cb154-6"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-6" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pvalor <span class="sc">&lt;</span> alpha, <span class="st">&quot;Se rechaza H_0&quot;</span>, <span class="st">&quot;No se rechaza H_0&quot;</span>)</span>
+<span id="cb154-7"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-7" tabindex="-1"></a></span>
+<span id="cb154-8"><a href="estadística-paramétrica-y-no-paramétrica.html#cb154-8" tabindex="-1"></a><span class="fu">print</span>(decision)</span></code></pre></div>
+<pre><code>## [1] &quot;Se rechaza H_0&quot;</code></pre>
+<p>Esto significa que existe diferencia estadisticamente significativa en los niveles medios del compuesto entre al menos dos de los 3 grupos: empleados expuesto, agricultores expuestos y no expuestos. Este resultado sugiere que hay que realizar un analisis para identficar cuales son los grupos que difieren</p>
 
-</div>
 </div>
 </div>
             </section>

@@ -196,17 +196,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-4"><i class="fa fa-check"></i><b>2.5.2</b> Supuesto de normalidad</a></li>
 <li class="chapter" data-level="2.5.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-rangos-con-signo-de-wilcoxon"><i class="fa fa-check"></i><b>2.5.3</b> Prueba de rangos con signo de Wilcoxon</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova"><i class="fa fa-check"></i><b>2.6</b> ANOVA</a>
+<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova-an%C3%A1lisis-de-varianza-para-comparar-m%C3%BAltiples-medias"><i class="fa fa-check"></i><b>2.6</b> ANOVA (análisis de varianza para comparar múltiples medias)</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos</a></li>
-<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#c%C3%A1lculo-manual"><i class="fa fa-check"></i><b>2.6.2</b> Cálculo manual</a></li>
-<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#verificaci%C3%B3n-con-aov"><i class="fa fa-check"></i><b>2.6.3</b> Verificación con <code>aov</code></a></li>
-<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-m%C3%BAltiples"><i class="fa fa-check"></i><b>2.6.4</b> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos-y-formulaci%C3%B3n-de-las-hip%C3%B3tesis"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos y formulación de las hipótesis</a></li>
+<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#sumas-de-cuadrados-y-teorema-de-descomposici%C3%B3n"><i class="fa fa-check"></i><b>2.6.2</b> Sumas de cuadrados y teorema de descomposición</a></li>
+<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#estimaciones-insesgadas-de-la-varianza-poblacional"><i class="fa fa-check"></i><b>2.6.3</b> Estimaciones insesgadas de la varianza poblacional</a></li>
+<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#teorema-de-contraste-para-el-an%C3%A1lisis-de-varianza"><i class="fa fa-check"></i><b>2.6.4</b> Teorema de contraste para el análisis de varianza</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#kruskal-wallis"><i class="fa fa-check"></i><b>2.7</b> Kruskal-Wallis</a>
-<ul>
-<li class="chapter" data-level="2.7.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#comparaciones-post-hoc"><i class="fa fa-check"></i><b>2.7.1</b> Comparaciones post-hoc</a></li>
-</ul></li>
+<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova-de-un-factor-calulando-todas-las-ss"><i class="fa fa-check"></i><b>2.7</b> ANOVA de un factor calulando todas las ss—</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html"><i class="fa fa-check"></i><b>3</b> Guía para el parcial</a>
 <ul>
@@ -497,16 +494,16 @@ gl = \frac{\left(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}\right)^2}
 <div id="comandos-de-rescate-en-r" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Comandos de rescate en R<a href="guía-para-el-parcial.html#comandos-de-rescate-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Cuando en el parcial no se recuerda un valor crítico o la forma exacta de una función:</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="guía-para-el-parcial.html#cb167-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, gl)               <span class="co"># valor critico t de dos colas al 5%</span></span>
-<span id="cb167-2"><a href="guía-para-el-parcial.html#cb167-2" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, gl1, gl2)          <span class="co"># valor critico F de una cola al 5%</span></span>
-<span id="cb167-3"><a href="guía-para-el-parcial.html#cb167-3" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, gl)            <span class="co"># valor critico ji-cuadrado</span></span>
-<span id="cb167-4"><a href="guía-para-el-parcial.html#cb167-4" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                <span class="co"># valor critico z de dos colas al 5%</span></span>
-<span id="cb167-5"><a href="guía-para-el-parcial.html#cb167-5" tabindex="-1"></a></span>
-<span id="cb167-6"><a href="guía-para-el-parcial.html#cb167-6" tabindex="-1"></a><span class="fu">pt</span>(<span class="fu">abs</span>(t), gl, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span>      <span class="co"># p-valor de un t</span></span>
-<span id="cb167-7"><a href="guía-para-el-parcial.html#cb167-7" tabindex="-1"></a><span class="fu">pf</span>(F, gl1, gl2, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)         <span class="co"># p-valor de un F</span></span>
-<span id="cb167-8"><a href="guía-para-el-parcial.html#cb167-8" tabindex="-1"></a></span>
-<span id="cb167-9"><a href="guía-para-el-parcial.html#cb167-9" tabindex="-1"></a>?t.test                     <span class="co"># ayuda de cualquier funcion</span></span>
-<span id="cb167-10"><a href="guía-para-el-parcial.html#cb167-10" tabindex="-1"></a><span class="fu">args</span>(wilcox.test)           <span class="co"># solo los argumentos</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="guía-para-el-parcial.html#cb156-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, gl)               <span class="co"># valor critico t de dos colas al 5%</span></span>
+<span id="cb156-2"><a href="guía-para-el-parcial.html#cb156-2" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, gl1, gl2)          <span class="co"># valor critico F de una cola al 5%</span></span>
+<span id="cb156-3"><a href="guía-para-el-parcial.html#cb156-3" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, gl)            <span class="co"># valor critico ji-cuadrado</span></span>
+<span id="cb156-4"><a href="guía-para-el-parcial.html#cb156-4" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                <span class="co"># valor critico z de dos colas al 5%</span></span>
+<span id="cb156-5"><a href="guía-para-el-parcial.html#cb156-5" tabindex="-1"></a></span>
+<span id="cb156-6"><a href="guía-para-el-parcial.html#cb156-6" tabindex="-1"></a><span class="fu">pt</span>(<span class="fu">abs</span>(t), gl, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span>      <span class="co"># p-valor de un t</span></span>
+<span id="cb156-7"><a href="guía-para-el-parcial.html#cb156-7" tabindex="-1"></a><span class="fu">pf</span>(F, gl1, gl2, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)         <span class="co"># p-valor de un F</span></span>
+<span id="cb156-8"><a href="guía-para-el-parcial.html#cb156-8" tabindex="-1"></a></span>
+<span id="cb156-9"><a href="guía-para-el-parcial.html#cb156-9" tabindex="-1"></a>?t.test                     <span class="co"># ayuda de cualquier funcion</span></span>
+<span id="cb156-10"><a href="guía-para-el-parcial.html#cb156-10" tabindex="-1"></a><span class="fu">args</span>(wilcox.test)           <span class="co"># solo los argumentos</span></span></code></pre></div>
 
 </div>
 </div>
