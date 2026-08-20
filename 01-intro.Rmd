@@ -1,6 +1,6 @@
 # Análisis exploratorio de datos {#intro}
 
-Corresponde a la sección 3 del libro del profesor. Los datos son los precios de vivienda
+Esta sección correspode a la seccion 3 del libro del profesor. Los datos son los precios de vivienda
 del estado de California y la variable respuesta es `median_house_value`.
 
 ```{r libreria, message=FALSE, warning=FALSE}
@@ -15,7 +15,7 @@ library(GGally)
 data <- read.csv("Datos/housing.csv")
 ```
 
-Muestrame las 5 primeras filas
+Muestra las 5 primeras filas
 
 ```{r filas}
 head(data, n = 5)
@@ -40,7 +40,7 @@ Otra forma de detectar valores faltantes
 missmap(data)
 ```
 
-Los 207 faltantes están todos en `total_bedrooms`, que es el 1% de los registros. Como es
+como podemos ver en las secion de datos faltantes los 207 faltantes están todos en `total_bedrooms`. Como es
 una proporción pequeña y la variable es numérica, imputar por la media no mueve casi nada
 la distribución.
 
@@ -61,7 +61,7 @@ df %>%
   summarise(across(everything(), ~ sum(is.na(.)), .names = "NA_.{col}"))
 ```
 
-vamos a convertir la variable `ocean_proximity`
+vamos a convertir la variable `ocean_proximity` para cumplir ETL (extraccion, transformacion y carga)
 
 ```{r ocean proximity}
 df$ocean_proximity <- factor(df$ocean_proximity)
@@ -90,23 +90,23 @@ df %>% summarise(n = length(median_house_value),
 Centro de la distribución
 
 La media es 206.855 y la mediana es 179.700. El dato clave aquí es que la media es
-bastante mayor que la mediana. Cuando eso pasa, significa que hay casas muy caras,
+considerablemente mayor que la mediana. Cuando eso pasa, significa que hay casas muy caras,
 mientras que la mitad de las casas valen 179.700 o menos.
 
 Dispersión (qué tan regados están los datos)
 
 La desviación estándar es 115.395, muy grande respecto a la media, los precios están muy
-dispersos, no concentrados. El RIC (rango intercuartílico, Q3−Q1) es 145.125. El 50%
-central de las casas cae entre Q1 = 119.600 y Q3 = 264.725.
+dispersos, no concentrados. El RIC (rango intercuartílico, Q3−Q1) es 145.125 motrando que el precio del 50% central de los valores de la casa presenta una dispercion del 145.125 entre el Q1-Q3. El 50%
+central de las casas se encuentran entre Q1 = 119.600 y Q3 = 264.725.
 
 Extremos
 
-Mínimo 14.999 y máximo 500.001
+Mínimo 14.999 y máximo 500.001 de este valor maximo podemos ver como coincide con un limite superior del conjunto de datos
 
 Forma de la distribución
 
 Asimetría = 0.98. Es positiva (sesgo a la derecha). Un valor cercano a 1 indica un sesgo
-moderado-alto. Esto es coherente con lo que veías en media > mediana. Curtosis = 3.33.
+moderado-alto. Esto es coherente con lo que se veia en una media > mediana. Curtosis = 3.33.
 Como el valor de referencia de una distribución normal es 3, la distribución está apenas
 por encima. Es ligeramente leptocúrtica
 
@@ -125,28 +125,13 @@ df %>%
   theme_bw()
 ```
 
-La distribución presenta un sesgo positivo (a la derecha): la mayor concentración de
+Como se afirmaba anteriormente la distribución presenta un sesgo positivo (a la derecha): la mayor concentración de
 viviendas se ubica en valores bajos-medios, con una cola que se extiende hacia precios
-altos. Se observa además una acumulación anómala en el extremo derecho, atribuible al
-truncamiento de los datos en 500.000.
+altos. Tambien se observa una acumulación fuera de lo comun en el extremo derecho, atribuible al limite superior del conjunto de datos en 500.000.
 
-Los mercados inmobiliarios casi siempre son sesgados a la derecha: la mayoría de viviendas
-se concentra en un rango asequible-medio y una minoría de propiedades de lujo forma la
-cola. Que tu distribución empírica coincida con lo que la teoría económica predice es un
-buen cierre: los datos son consistentes con la realidad del fenómeno.
-
-Sobre el truncamiento, vale la pena ponerle número:
-
-```{r truncamiento}
-df %>%
-  summarise(topes = sum(median_house_value >= 500001),
-            total = n(),
-            porcentaje = round(100 * topes / total, 2))
-```
-
-Son 965 barrios, el 4,67% de la muestra, todos pegados en el mismo valor. Ese pico no es
-un comportamiento del mercado sino una limitación de cómo se recogieron los datos: a todo
-lo que valía más de medio millón le pusieron 500.001.
+Los mercados inmobiliarios casi siempre son sesgados a la derecha ya que la mayoría de viviendas
+se concentra en un rango asequible y una minoría de propiedades de lujo forma la
+cola.
 
 ```{r boxhousevalue}
 df %>%
@@ -186,7 +171,7 @@ df %>%
             curtosis = kurtosis(valor))
 ```
 
-### Ejercicio 1. Gráficas e interpretación de las variables características
+### Ejercicio 1.1. Gráficas e interpretación de las variables características
 
 ::: {.ejercicio}
 **Enunciado.** Realizar las gráficas de las otras variables, además la interpretación de la tabla y el gráfico quedan como ejercicio.
@@ -194,30 +179,24 @@ df %>%
 [Sección 3.4.4 del libro del profesor]{.fuente}
 :::
 
-**Solución.** Interpretación de la tabla. Las ocho variables se dejan separar en tres grupos según lo
-que dicen la asimetría y la curtosis.
+**Solución.** Para la interpretacion de las tablas se realizaz un proceso de agrupacion de las ocho variables dejandolas en tres conjuntos según lo
+que dicen la asimetría, la curtosis y lo que mide la variable.
 
-El primero es el de las variables de conteo: `total_rooms`, `total_bedrooms`,
-`population` y `households`. Todas tienen media muy por encima de la mediana, asimetría
-entre 3,4 y 4,9 y curtosis entre 25 y 76. Son distribuciones muy sesgadas a la derecha y
-con colas pesadísimas. `population` es el caso extremo: la mediana es 1.166 habitantes
-pero el máximo llega a 35.682, y la curtosis de 76,5 dice que ese máximo no es un caso
-aislado sino que hay toda una cola de barrios enormes. Esto tiene sentido porque cada fila
-es un bloque censal y los bloques no tienen el mismo tamaño.
+El primer grupo son las variables de conteo: `total_rooms`, `total_bedrooms`,
+`population` y `households`. Todas tienen media por encima de la mediana, tambien una asimetría
+entre 3,4 y 4,9 y curtosis entre 25 y 76. Son distribuciones muy sesgadas a la derecha. `population` es el caso extremo: la mediana es 1.166 habitantes
+pero el máximo llega a 35.682, y la curtosis de 76,5 afirmado que el maximo no es caso aislado.
 
-El segundo es `median_income` y `housing_median_age`, que son variables ya resumidas por
-barrio. El ingreso tiene asimetría 1,65 y curtosis 7,95, o sea sesgo a la derecha pero
-mucho más suave que los conteos; además está truncado en 15, igual que el precio.
-`housing_median_age` es la más simétrica de todas, con asimetría 0,06 y curtosis 2,2, y
-tiene un tope artificial en 52 años.
+El segundo es `median_income` y `housing_median_age`, que son variables que ya representan una medida de tendencia central. El ingreso tiene asimetría 1,65 y curtosis 7,95, o sea sesgo a la derecha pero
+mucho más suave que el grupo anterior.
+`housing_median_age` es la más simétrica de todas, con asimetría 0,06 y curtosis 2,2.
 
-El tercero es el par de coordenadas, `latitude` y `longitude`. Aquí la asimetría y la
-curtosis no significan nada sustantivo porque no son magnitudes, son posiciones en el
-mapa. La curtosis por debajo de 3 en ambas refleja que California es alargada y que los
-barrios están repartidos en dos zonas densas, no que haya algo raro en los datos.
+El tercero es el par de coordenadas, `latitude` y `longitude`. Aquí la asimetría y el
+curtosis no significan mucho porque no son magnitudes, son posiciones en el
+mapa. La curtosis por debajo de 3 en ambas refleja que California es alargada.
 
-Vamos a ver las cajas de todas las variables características. Como están en escalas muy
-distintas, no sirve ponerlas en un mismo eje, así que van con `facet_wrap` y escala libre.
+Ahora vamos a ver las cajas de las variables características. Como están en escalas muy
+distintas, no sirve ponerlas en un mismo eje, así que van con `facet_wrap` y escala libre para una mejor visualización
 
 ```{r cajascaract, fig.height=6}
 df %>%
@@ -250,43 +229,11 @@ df %>%
   theme_bw()
 ```
 
-Interpretación de los gráficos. Los cuatro conteos muestran la misma figura: caja
-aplastada contra el eje y una nube larga de puntos rojos hacia arriba. Eso es exactamente
+La interpretacion grafica de los cuatro conteos muestran la misma figura: caja
+aplastada contra el eje y una larga linea de puntos rojos hacia arriba. Eso es exactamente
 lo que anunciaban la asimetría y la curtosis de la tabla. En `median_income` la caja ya se
-ve más centrada, pero se alcanza a notar la barra del tope en 15. `housing_median_age` es
-la única cuya caja queda más o menos en la mitad del rango y casi sin puntos fuera, con la
-barra alta del final que son las casas topeadas en 52 años.
-
-Los tres boxplot que trae el profesor en su libro son un caso particular de esto, y se
-arman con `patchwork`:
-
-```{r trescajas}
-df %>%
-  ggplot(aes(x = "", y = median_house_value)) +
-  geom_boxplot(fill = "#47078c", color = "black",
-               outlier.color = "darkred") +
-  stat_summary(fun = mean, geom = "point", shape = 20,
-               size = 3, color = "#b02ca5") +
-  theme_bw() -> p1
-
-df %>%
-  ggplot(aes(x = "", y = total_rooms)) +
-  geom_boxplot(fill = "#47078c", color = "black",
-               outlier.color = "darkred") +
-  stat_summary(fun = mean, geom = "point", shape = 20,
-               size = 3, color = "#b02ca5") +
-  theme_bw() -> p2
-
-df %>%
-  ggplot(aes(x = "", y = total_bedrooms)) +
-  geom_boxplot(fill = "#47078c", color = "black",
-               outlier.color = "darkred") +
-  stat_summary(fun = mean, geom = "point", shape = 20,
-               size = 3, color = "#b02ca5") +
-  theme_bw() -> p3
-
-p1 + p2 + p3
-```
+ve más centrada, pero se alcanza a ver como en 15 hay una gran aglomeracion de datos lo que puede indicar otro limite artificial. `housing_median_age` es
+la única cuya caja queda alrededor de la mitad del rango y casi sin puntos fuera, mientras que en el histograma podemos ver como hay una barra anomala en el 52 indicanco igual que con `median_income` que hay un limite.
 
 Ahora la única variable categórica del conjunto.
 
@@ -317,10 +264,9 @@ tabla_ocean_b %>%
   theme_bw()
 ```
 
-Casi la mitad de los barrios (44,26%) están a menos de una hora del océano y un tercio
-(31,74%) son de tierra adentro. La categoría `ISLAND` tiene apenas 5 registros, el 0,02%,
-así que cualquier promedio que se calcule ahí no es confiable y hay que decirlo cuando
-aparezca en las comparaciones.
+Casi la mitad de las casa (44,26%) están a menos de una hora del océano y un tercio
+(31,74%) son interior. La categoría `ISLAND` tiene apenas 5 registros, el 0,02%,
+así que cualquier promedio que se calcule ahí no es significativo.
 
 ## Analisis exploratorio bivariado
 
@@ -334,14 +280,14 @@ df %>%
   facet_grid(. ~ "Dispersion entre ingreso medio y el valor medio de la vivienda")
 ```
 
-Se ve una relación positiva clara: a mayor ingreso medio del barrio, mayor valor de la
+Se ve una relación positiva clara: a mayor ingreso medio, mayor valor de la
 vivienda. También se ve la línea horizontal de puntos en 500.001, que es otra vez el tope
 artificial, y unas líneas más tenues en 450.000 y 350.000.
 
-### Ejercicio 2. Diagramas de dispersión con las demás variables
+### Ejercicio 1.2. Diagramas de dispersión con las demás variables
 
 ::: {.ejercicio}
-**Enunciado.** Realiza los diagramas de dispersión de la variable `median_house_value` con respecto a las variables independientes que hacen falta.
+**Enunciado.** Realiza los diagramas de dispersión de la variable `median_house_value` con respecto a las variables independientes que hacen falta. Analiza e interpreta la relación observada entre estas variables, indicando si existe una tendencia lineal, la presencia de valores atípicos y el grado de asociación con la variable objetivo.
 
 [Sección 3.4.5 del libro del profesor]{.fuente}
 :::
@@ -374,12 +320,20 @@ df %>%
   arrange(desc(abs(correlacion)))
 ```
 
-`median_income` es la única con una relación fuerte, r = 0,688. Las demás quedan por
-debajo de 0,15 en valor absoluto, o sea que por sí solas casi no explican el precio. Los
-cuatro conteos forman nubes pegadas al eje izquierdo porque están muy sesgados, y ahí la
-correlación de Pearson no es una buena medida de la relación. `latitude` da −0,144 y esa
-correlación tampoco hay que leerla como causa: lo que dice es que el norte y el sur de
-California tienen precios distintos, no que la latitud haga subir el precio.
+`median_income` es la única con una relación fuerte, r = 0,688, mientras que las demas quedan por
+debajo de 0,15 en valor absoluto, o sea que por sí mismas casi no explican `median_house_value`. Los
+cuatro conteos (definidos en seccion 1.2.1) forman nubes pegadas al eje izquierdo porque están muy sesgados, y ahí la
+correlación de Pearson no es una buena medida de la relación por ello seria mejor trabajar con Spearman ya qye trabaja con el orden de los datos no con sus valores. `latitude` da −0,144 y esa
+correlación no tiene significancia
+
+En cuanto a los valores atipicos, la línea horizontal de puntos en 500.001 atraviesa todos los gráficos. No son atípicos:
+es el truncamiento del target que ya vimos. Lo mismo pasa con
+la barra vertical en 15 del panel de `median_income`. Los dos son artefactos que reflejan un limite artificial en `median_income` y `median_house_value`.
+
+Los cuatro conteos sí tienen atípicos de verdad. En cada uno se ven unos pocos puntos
+disparados hacia la derecha, muy lejos de la nube principal: `population` llega a 35.682 y
+`total_rooms` a 39.320. Estos son valores legítimos y no habría que quitarlos, porque
+corresponden a registros que realmete son mucho más grandes que el resto.
 
 Ahora comparemos el valor medio de la vivienda segun la aproximidad al oceano
 
@@ -413,11 +367,52 @@ df %>%
 ```
 
 `INLAND` es el grupo claramente más barato, con mediana de 108.500 frente a 214.850 de
-`<1H OCEAN` y 233.800 de `NEAR BAY`. Los tres grupos costeros se parecen bastante entre
-sí. `ISLAND` aparece con la media más alta de todas, 380.440, pero son 5 barrios, así que
+`<1H OCEAN` y 233.800 de `NEAR BAY`. Los tres grupos costeros (`<1H OCEAN`, `NEAR BAY` y `NEAR OCEAN`) se parecen bastante entre
+sí. `ISLAND` aparece con la media más alta de todas, 380.440, pero son 5 viviendas, así que
 esa caja no se puede comparar con las otras.
 
-### Ejercicio 3. Errores del gráfico de `ggpairs`
+### Ejercicio 1.3. Dispersión entre las variables independientes
+
+::: {.ejercicio}
+**Enunciado.** Realiza el gráfico de dispersión de las variables independientes numéricas y su interpretación.
+
+[Sección 3.4.5 del libro del profesor]{.fuente}
+:::
+
+**Solución.** A diferencia del ejercicio anterior, aquí no se cruzan las variables contra el
+target sino entre ellas mismas.
+
+```{r dispindep, fig.height=8, fig.width=8}
+df %>%
+  select(where(is.numeric), -median_house_value) %>%
+  pairs()
+```
+
+Lo que salta a la vista es un bloque de cuatro paneles casi rectos, arriba a la derecha:
+`total_rooms`, `total_bedrooms`, `population` y `households` se relacionan entre sí de forma
+casi perfecta. Sus correlaciones van de 0,857 a 0,975, siendo la más alta la de
+`total_bedrooms` con `households`.Esto tiene sentido, porque las cuatro miden en el fondo lo
+mismo: qué tan grande es el registro. Donde hay más hogares hay más cuartos, más
+habitaciones y más gente.
+
+Eso se llama colinealidad, y es un hallazgo que importa: esas cuatro variables aportan
+información repetida. Si más adelante alguien quisiera construir un modelo para predecir el
+precio, meterlas todas juntas sería redundante.
+
+`median_income` es el caso opuesto. Su correlación con las demás no pasa de 0,198 y con
+varias es prácticamente cero. O sea que aporta información que ninguna otra trae, y eso la
+vuelve la más valiosa del conjunto: ya sabíamos que es la única con relación fuerte con el
+precio, y ahora sabemos además que esa información no está duplicada.
+
+`housing_median_age` tiene correlaciones negativas moderadas con los cuatro conteos, entre
+−0,296 y −0,361. Esto nos puede llevar a que las casa con construcciones más antiguas tienden a ser
+más pequeñas.
+
+Y por ultimo queda: `longitude` contra `latitude` da −0,925, la segunda correlación
+más alta de toda la matriz. Pero no describe ninguna relación entre variables, describe la
+forma de California, que se extiende en diagonal de noroeste a sureste.
+
+### Ejercicio 1.4. Errores del gráfico de `ggpairs`
 
 ::: {.ejercicio}
 **Enunciado.** Menciona los errores que puedes encontrar en el gráfico.
@@ -427,31 +422,27 @@ esa caja no se puede comparar con las otras.
 
 **Solución.** El gráfico en cuestión es este:
 
-```{r ggpairs, message=FALSE, warning=FALSE, fig.height=7}
+```{r ggpairs, message=FALSE, warning=FALSE, fig.height=9, fig.width=9}
 df %>%
-  select(median_house_value, median_income, housing_median_age,
-         total_rooms, population) %>%
   ggpairs()
 ```
 
-El primero es de legibilidad. Si se le pasa el `df` completo, `ggpairs()` arma una malla
-de 10×10 con 20.640 puntos en cada panel; los ejes quedan ilegibles y el gráfico tarda
-muchísimo en dibujarse. Por eso arriba se seleccionaron solo cinco variables.
+El primero es de legibilidad. Con el `df` completo, `ggpairs()` arma un recuadro de 10×10 con
+20.640 puntos en cada panel; los ejes quedan ilegibles, las etiquetas se sobreponen y el
+gráfico tarda mucho tiempo en mostrarse. Para que realmete tenga una buena utilidad habria que seleccionar menos variables.
 
 El segundo es que mete `longitude` y `latitude` como si fueran variables cuantitativas
 cualquiera. Calcula su media, su densidad y su correlación con el precio, y ninguna de
-esas tres cosas significa algo: la media de una longitud es un punto en el mar y la
-correlación entre latitud y precio no describe una relación lineal sino la geografía de
-California. Esas dos variables se deberían ver en un mapa, no en un panel de dispersión.
+esas tres cosas significa algo. Esas dos variables se deberían ver en un mapa.
 
 El tercero es que las correlaciones que reporta son de Pearson, que supone relación lineal
-y es muy sensible a los valores extremos. Con variables tan sesgadas como `population` o
-`total_rooms` ese número subestima la asociación real. Para ese caso serviría más Spearman.
+y es muy sensible a los valores extremos y como tenemos variables tan sesgadas como `population` o
+`total_rooms` ese número subestimara la asociación real por lo cual para este caso serviría más Spearman.
 
 El cuarto es que el truncamiento de `median_house_value` en 500.001 contamina toda la fila
 y toda la columna del target: la densidad muestra un pico falso al final y las nubes de
-puntos muestran una línea horizontal que no es un patrón del mercado.
+puntos muestran una línea horizontal que no es un patrón realista.
 
 Y el quinto es que `ggpairs()` ignora `ocean_proximity` si no se incluye. Como ya vimos que
-ese factor separa fuerte los precios, mirar solo las relaciones numéricas deja por fuera la
+ese factor influye fuertemente en los precios, mirar solo las relaciones numéricas deja por fuera la
 variable que más ordena el conjunto.

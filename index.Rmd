@@ -14,34 +14,33 @@ description: "Notas de clase y ejercicios del curso de Métodos Estadísticos"
 
 # Presentación {-}
 
-Este libro recoge lo que hemos trabajado en el curso de Métodos Estadísticos, siguiendo
-las notas del profesor Carlos de Oro Aguado
+Este libro recoge lo que hemos trabajado en el curso de Métodos Estadísticos. Basado en las notas del profesor Carlos de Oro Aguado
 (<https://cdeoroaguado.github.io/rbook_met_estad/>).
 
 Va organizado en tres partes. La primera es el análisis exploratorio de datos, donde
 trabajamos el conjunto de viviendas de California. La segunda es la comparación de dos o
 más grupos, tanto por la vía paramétrica como por la no paramétrica. La tercera es una
 guía de repaso para el parcial, con el árbol de decisión de qué prueba usar y cómo se lee
-cada salida de R.
+cada salida de R (contenido para estudiar).
 
-Los ejercicios que el profesor deja asignados en su libro van numerados del 1 al 13 y cada
-uno tiene su propia sección, así que aparecen en el índice de la izquierda y se puede
+Los ejercicios asignados van numerados por capítulo (1.1 a 1.4 y 2.1 a 2.10) y cada
+uno tiene su propia sección, apareciendo en el índice de la izquierda y se pueda
 saltar directo a cualquiera. El enunciado va en un recuadro morado como este:
 
 ::: {.ejercicio}
-**Enunciado.** Enunciado del ejercicio tal como lo deja el profesor.
+**Enunciado.** Enunciado del ejercicio.
 
 [Sección x.y.z del libro del profesor]{.fuente}
 :::
 
-Debajo del recuadro empieza la solución, y termina donde arranca la siguiente sección.
-Los ejercicios 1 a 3 están en el capítulo de análisis exploratorio y los ejercicios 4 a 13
-en el de estadística paramétrica y no paramétrica.
+Y debajo del recuadro empieza la solución, terminando donde arranca la siguiente sección.
+Los ejercicios 1.1 a 1.4 están en el capítulo de análisis exploratorio y los 2.1 a 2.10 en
+el de estadística paramétrica y no paramétrica.
 
 ## Datos y paquetes {-}
 
 Los archivos que se usan están en la carpeta `Datos` del proyecto. Todos los capítulos
-asumen que el libro se compila desde la raíz, así que las rutas van relativas.
+se compila desde la raíz, así que las rutas son relativas.
 
 Estos son los paquetes que hay que tener instalados:
 

@@ -1,6 +1,6 @@
 # Estadística paramétrica y no paramétrica
 
-Corresponde a la sección 4 del libro del profesor. La pregunta de fondo siempre es la
+Corresponde a la sección 4 del libro del profesor. Acá la pregunta de fondo siempre es la
 misma: dos o más grupos, una variable numérica, y queremos saber si la diferencia que
 vemos entre ellos es real o es del azar del muestreo. Lo que cambia de una sección a otra
 son tres cosas: si los grupos son independientes o pareados, si se cumple normalidad, y si
@@ -37,7 +37,7 @@ dfd <- df %>%
   pull(Valores)
 ```
 
-### Ejercicio 4. Análisis exploratorio de los datos de presión
+### Ejercicio 2.1. Análisis exploratorio de los datos de presión
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -67,23 +67,22 @@ df %>%
   ggplot(aes(x = Valores, fill = Presion)) +
   geom_density(alpha = 0.5, color = "black") +
   scale_fill_manual(values = c("#47078c", "#008B8B")) +
-  labs(x = "Presión (mmHg)", y = "Densidad") +
+  labs(x = "Presión", y = "Densidad") +
   theme_bw()
 
 df %>%
   ggplot(aes(x = Presion, y = Valores)) +
   geom_boxplot(fill = "#47078c", color = "black", outlier.color = "darkred") +
   stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "#b02ca5") +
-  labs(x = "", y = "Presión (mmHg)") +
+  labs(x = "", y = "Presión") +
   theme_bw()
 ```
 
-Son dos grupos de 100 mediciones cada uno. La sistólica promedia 120,90 mmHg y la
+Son dos grupos de 100 mediciones cada uno. La sistólica promedia 120,90 y la
 diastólica 78,95, o sea unos 42 mmHg de diferencia, que es un valor grandísimo comparado
 con la dispersión de cada grupo (9,13 y 9,48). En los dos grupos la media y la mediana
-casi coinciden, la asimetría está cerca de cero y la curtosis cerca de 3, que es lo que se
-espera de datos normales. Las cajas quedan completamente separadas, sin ningún traslape,
-así que la prueba formal casi seguro va a confirmar lo que ya se ve.
+casi coinciden, la asimetría está cerca de cero y la curtosis cerca de 3, que es esperada dado los datos normales. Las cajas quedan claramente separadas, así que la prueba formal debería confirmar lo que
+ya se ve.
 
 ### Supuesto de normalidad
 
@@ -105,15 +104,15 @@ Shapiro-Wilk da p = 0,0369, que a un 5% sí rechaza.
 
 Cuando los tests se contradicen hay que mirar por qué. Shapiro-Wilk es el más potente de
 los tres, o sea que con n = 100 detecta desviaciones pequeñas que a los otros se les
-pasan. Pero potencia alta también significa que con muestras grandes rechaza por
+escapa. Pero potencia alta también significa que con muestras grandes rechaza por
 desviaciones que no tienen importancia práctica. Aquí la asimetría y la curtosis están
 dentro de lo esperado y el histograma se ve simétrico, así que la desviación es leve y el
 t-test, que es bastante robusto con n = 100 por grupo, se puede aplicar sin problema.
 
-### Ejercicio 5. Verificación de `var.test` con el teorema de razón de varianzas
+### Ejercicio 2.2. Verificación de `var.test` con el teorema de razón de varianzas
 
 ::: {.ejercicio}
-**Enunciado.** Usando el teorema de razón de varianzas verifica la salida de la función `var.test`.
+**Enunciado.** Usando el teorema de razón de varianzas verifica la salida de la función `var.test` con los datos de presión arterial.
 
 [Sección 4.1 del libro del profesor]{.fuente}
 :::
@@ -148,19 +147,23 @@ F_inf <- qf(0.025, gl1, gl2)
 F_sup <- qf(0.975, gl1, gl2)
 p_val <- 2 * min(pf(F_calc, gl1, gl2), pf(F_calc, gl1, gl2, lower.tail = FALSE))
 
-tibble(s1_2, s2_2, F_calc, gl1, gl2, F_inf, F_sup, p_val)
+IC_inf <- F_calc / F_sup
+IC_sup <- F_calc / F_inf
+
+tibble(s1_2, s2_2, F_calc, gl1, gl2, F_inf, F_sup, p_val, IC_inf, IC_sup)
 ```
 
 El F calculado a mano da 0,92784, con 99 y 99 grados de libertad, y el p-valor 0,7102.
-Son exactamente los mismos números que reporta `var.test`. Como F cae entre 0,6728 y
+Son exactamente los mismos números que da `var.test`. Como F cae entre 0,6728 y
 1,4862, que son los valores críticos al 5%, no se rechaza H0. Además el intervalo de
-confianza de la razón, [0,6243 ; 1,3790], contiene el 1, que es otra forma de leer lo
-mismo: no hay evidencia de que las varianzas sean distintas.
+confianza de la razón, [0,6243 ; 1,3790], contiene el 1, que nos lleva a que no hay evidencia de que las varianzas sean distintas.
 
-### Ejercicio 6. Teorema de la diferencia de medias
+### Ejercicio 2.3. Teorema de la diferencia de medias
 
 ::: {.ejercicio}
-**Enunciado.** Aplica el teorema de diferencia de medias con la distribución normal.
+**Enunciado.** Usando el teorema de la diferencia de medias verifica la salida de la función `t.test` con los datos de presión arterial.
+
+1. Aplica el teorema de diferencia de medias con la distribución normal.
 
 [Sección 4.1 del libro del profesor]{.fuente}
 :::
@@ -198,25 +201,29 @@ gl <- n1 + n2 - 2
 ee_z <- sqrt(s1_2/n1 + s2_2/n2)
 z_calc <- (m1 - m2) / ee_z
 
+IC_inf <- (m1 - m2) - qt(0.975, gl) * ee_t
+IC_sup <- (m1 - m2) + qt(0.975, gl) * ee_t
+
 tibble(dif = m1 - m2,
        Sp_2, Sp, ee_t, t_calc, gl,
        t_critico = qt(0.975, gl),
        p_t = 2 * pt(abs(t_calc), gl, lower.tail = FALSE),
        ee_z, z_calc,
        z_critico = qnorm(0.975),
-       p_z = 2 * pnorm(abs(z_calc), lower.tail = FALSE))
+       p_z = 2 * pnorm(abs(z_calc), lower.tail = FALSE),
+       IC_inf,IC_sup)
 ```
 
 La varianza combinada da 86,563 y el error estándar de la diferencia 1,3158, con lo que el
 t manual queda en 31,888 con 198 grados de libertad, idéntico a la salida de `t.test`. El
 valor crítico al 5% es 1,972, y como $|31,888| > 1,972$ se rechaza H0.
 
-Por la vía normal el estadístico da 31,890, prácticamente el mismo número. Esto pasa
+Por la forma normal el estadístico da 31,890, prácticamente el mismo número. Esto pasa
 porque las dos varianzas son casi iguales y porque con 198 grados de libertad la t ya es
 indistinguible de la normal: el crítico de la t es 1,9720 y el de la normal 1,9600. La
 diferencia entre los dos caminos solo se nota cuando la muestra es pequeña.
 
-La conclusión sustantiva: la presión sistólica promedio es 41,96 mmHg mayor que la
+La conclusión sustantiva: la presión sistólica promedio es 41,96 mayor que la
 diastólica, con intervalo de confianza al 95% de [39,36 ; 44,55]. El intervalo no contiene
 el cero, así que la diferencia es significativa.
 
@@ -229,9 +236,8 @@ cohen.d(dfs, dfd, paired = FALSE)
 La d de Cohen da 4,51, que se clasifica como grande (el corte convencional para "grande"
 es 0,8). Es importante separar las dos cosas: el p-valor dice que la diferencia existe, la
 d dice qué tan grande es. Aquí la diferencia entre los grupos es de más de cuatro
-desviaciones estándar, lo que confirma que no es un hallazgo apenas detectable sino una
-separación enorme. Esto tiene sentido fisiológico: la sistólica y la diastólica miden
-momentos distintos del ciclo cardíaco.
+desviaciones estándar, por lo cual se confirma que no es un hallazgo apenas detectable sino una
+separación muy grande.
 
 ## Precios por tipo de cuenta, con varianzas distintas
 
@@ -248,7 +254,7 @@ dfg <- df %>%
   pull(Precio)
 ```
 
-### Ejercicio 7. Análisis exploratorio de los precios
+### Ejercicio 2.4. Análisis exploratorio de los precios
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -282,12 +288,12 @@ df %>%
   theme_bw()
 ```
 
-Aquí la historia es distinta a la de la presión. Las cuentas de inversión promedian
-5.090.406 y las de ganancia 778.491, o sea una relación de casi 6,5 a 1 en el promedio.
+En este ejercicio la historia es distinta a la de la presión, las cuentas de inversión promedian
+5.090.406 y las de ganancia 778.491.
 Pero lo que salta a la vista es la dispersión: la desviación estándar de inversión es
 912.816 y la de ganancia 193.397, casi cinco veces menor. El coeficiente de variación, en
-cambio, es casi el mismo en los dos grupos (alrededor de 0,18 y 0,25), lo que sugiere que
-la dispersión crece proporcional a la magnitud, que es lo típico de variables de dinero.
+cambio, es practicamente el mismo en los dos grupos (alrededor de 0,18 y 0,25), lo que sugiere que
+la dispersión crece proporcional a la magnitud.
 Con varianzas tan distintas, el t-test clásico no aplica.
 
 ### Supuesto de normalidad
@@ -307,14 +313,13 @@ Mismo panorama que antes: KS y Lilliefors no rechazan en ninguno de los dos grup
 Shapiro-Wilk rechaza levemente en el grupo de ganancia (p = 0,0369). Con n = 100 por grupo
 se puede seguir por la vía paramétrica.
 
-### Ejercicio 8. Bartlett, Levene y Fligner-Killeen
+### Ejercicio 2.5. Bartlett, Levene y Fligner-Killeen
 
 ::: {.ejercicio}
-**Enunciado.** Aplica las pruebas de Bartlett, Levene y Fligner-Killeen, explica detalladamente.
+**Enunciado.** Aplica las pruebas de Bartlett, Levene y Fligner-Killeen, explica detalladamente cada prueba y cuál distribución usa y después interpreta el resultado.
 
 [Sección 4.1 del libro del profesor]{.fuente}
 :::
-
 **Solución.** Las tres prueban lo mismo, $H_0: \sigma_1^2 = \sigma_2^2$, pero por caminos distintos.
 
 ```{r homogecon}
@@ -328,20 +333,24 @@ var.test(dfi, dfg)
 ```
 
 Bartlett compara las varianzas mediante un estadístico basado en el logaritmo de las
-varianzas de cada grupo, que bajo H0 se distribuye ji-cuadrado. Es el más potente de los
-tres cuando los datos sí son normales, pero también el más frágil: si hay colas pesadas o
-asimetría, rechaza aunque las varianzas sean iguales. Aquí da K² = 177,81 con p < 2,2e-16.
+varianzas de cada grupo, que bajo H0 se distribuye ji-cuadrado con k − 1 grados de
+libertad, o sea 1 en este caso porque son dos grupos. Es el más potente de los tres cuando
+los datos sí son normales, pero también el más frágil: si hay colas pesadas o asimetría,
+rechaza aunque las varianzas sean iguales. Aquí da K² = 177,81 con 1 grado de libertad y
+p < 2,2e-16.
 
 Levene no trabaja con las varianzas sino con las distancias de cada dato al centro de su
 grupo. Convierte cada observación en $|x_{ij} - \tilde{x}_i|$ y le corre un ANOVA a esas
-distancias: si un grupo está más disperso, sus distancias promedio serán mayores. Usar la
-mediana como centro (`center = median`) en vez de la media es lo que lo vuelve robusto a
-los valores extremos. Aquí da F = 107,2 con p < 2,2e-16.
+distancias: si un grupo está más disperso, sus distancias promedio serán mayores. Como el
+contraste es un ANOVA, su estadístico se distribuye F con k − 1 y n − k grados de
+libertad, aquí 1 y 198. Usar la mediana como centro (`center = median`) en vez de la media
+es lo que lo vuelve robusto a los valores extremos. Aquí da F = 107,2 con p < 2,2e-16.
 
 Fligner-Killeen va un paso más allá y trabaja con los rangos de esas distancias en lugar
 de con las distancias mismas. Al pasar a rangos deja de importar la forma de la
 distribución, así que es el más robusto de los tres y el recomendado cuando hay dudas
-serias sobre la normalidad. Aquí da ji-cuadrado = 82,798 con p < 2,2e-16.
+serias sobre la normalidad. Su estadístico también se distribuye ji-cuadrado con k − 1
+grados de libertad. Aquí da ji-cuadrado = 82,798 con 1 grado de libertad y p < 2,2e-16.
 
 Las tres coinciden en rechazar H0, y `var.test` lo confirma: la razón de varianzas es
 22,28 con intervalo [14,99 ; 33,11], que ni de cerca contiene el 1. Que los tres métodos
@@ -364,7 +373,7 @@ cohen.d(dfi, dfg, paired = FALSE)
 Welch no usa varianza combinada; calcula el error estándar como
 $\sqrt{S_1^2/n_1 + S_2^2/n_2}$ y ajusta los grados de libertad con la fórmula de
 Welch-Satterthwaite. Por eso los grados de libertad salen 107,87 y no 198: cuando las
-varianzas son muy distintas, la prueba "castiga" y deja menos grados de libertad de los
+varianzas son muy distintas, la prueba castiga y deja menos grados de libertad de los
 que habría con muestras equilibradas.
 
 El resultado es t = 46,212 con p < 2,2e-16 y una diferencia de 4.311.915 con intervalo
@@ -385,7 +394,7 @@ datos <- data.frame(
 )
 ```
 
-### Ejercicio 9. Análisis exploratorio de los tiempos
+### Ejercicio 2.6. Análisis exploratorio de los tiempos
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -427,9 +436,9 @@ datos %>%
   theme_bw()
 ```
 
-El promedio pasa de 14,48 a 14,53, o sea 0,05 de diferencia, que al lado de una desviación
+El promedio pasa de 14,48 a 14,53, osea 0,05 de diferencia, que al lado de una desviación
 estándar de 2,39 no es nada. El gráfico de líneas muestra por qué el análisis pareado es
-el correcto aquí: las líneas se cruzan poco, cada estudiante conserva su nivel, y lo que
+el correcto aquí ya que las líneas se cruzan poco, cada estudiante conserva su nivel, y lo que
 cambia es poco y en direcciones opuestas. Seis estudiantes bajaron su tiempo y cuatro lo
 subieron. La diferencia individual va de −0,8 a 1,6 con media 0,05 y desviación 0,74.
 
@@ -446,10 +455,10 @@ normalidad de las diferencias, no de cada medición por separado. Con n = 10 no 
 para descuidar ese supuesto porque el teorema del límite central no ayuda con muestras tan
 pequeñas.
 
-### Ejercicio 10. Teorema de la diferencia de medias para datos pareados
+### Ejercicio 2.7. Teorema de la diferencia de medias para datos pareados
 
 ::: {.ejercicio}
-**Enunciado.** Usando el teorema de la diferencia de medias para datos pareados verifica la salida.
+**Enunciado.** Usando el teorema de la diferencia de medias para datos pareados verifica la salida de la función `t.test` con los datos de la intervención educativa.
 
 [Sección 4.2 del libro del profesor]{.fuente}
 :::
@@ -484,7 +493,7 @@ tibble(d_bar, S_d, ee_d, t_par, gl_par, t_crit,
        IC_sup = d_bar + t_crit * ee_d)
 ```
 
-El t manual da 0,21331 con 9 grados de libertad, el mismo que reporta `t.test`, y el
+El t manual da 0,21331 con 9 grados de libertad, el mismo que afirma `t.test` y el
 intervalo de confianza [−0,4803 ; 0,5803] también coincide. Como $|0,213| < 2,262$ no se
 rechaza H0.
 
@@ -494,9 +503,8 @@ cohen.d(datos$despues, datos$antes, paired = TRUE)
 
 La d de Cohen da 0,017, clasificada como despreciable. No hay evidencia de que la
 intervención educativa haya cambiado los tiempos. Y aquí conviene señalar una cosa: con
-n = 10 la prueba tiene muy poca potencia, así que "no se rechaza" no es lo mismo que "se
-demostró que no hay efecto". Lo único que se puede afirmar es que con esta muestra no se
-detecta ninguno, y el intervalo de confianza es lo que dice cuánto efecto seguiría siendo
+n = 10 la prueba tiene muy poca potencia, así que lo único que se puede afirmar es que con esta muestra no se
+detecta ninguno efecto, y el intervalo de confianza es lo que dice cuánto efecto seguiría siendo
 compatible con los datos: cualquier cambio entre −0,48 y 0,58.
 
 ## Dos grupos independientes, no paramétrica
@@ -514,7 +522,7 @@ df <- births
 
 Vamos a caracterizar el peso del bebé según si la madre fuma o no.
 
-### Ejercicio 11. Análisis exploratorio del peso al nacer
+### Ejercicio 2.8. Análisis exploratorio del peso al nacer
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -556,13 +564,11 @@ df %>%
 
 Son 100 no fumadoras y 50 fumadoras. El peso promedio es 7,18 libras contra 6,78, o sea
 0,40 libras de diferencia, con desviaciones de 1,43 y 1,60. Las cajas se traslapan
-bastante, así que a ojo la diferencia no se ve concluyente.
+bastante, por ello podemos ver que la diferencia no se ve concluyente.
 
 Lo importante para decidir la prueba es la forma: la asimetría es −1,20 y −1,33 en cada
 grupo y la curtosis 5,38 y 5,06. Las dos distribuciones están sesgadas a la izquierda y
-tienen colas más pesadas que la normal, que es lo esperable en peso al nacer porque los
-prematuros forman una cola larga hacia abajo mientras que por arriba el peso tiene un
-límite biológico.
+tienen colas más pesadas que la normal.
 
 ### Supuesto de normalidad
 
@@ -581,12 +587,11 @@ df %>%
 
 Shapiro-Wilk rechaza con fuerza en los dos grupos (p = 2,2e-05 y p = 3,3e-04) y Lilliefors
 también (p = 0,00018 y p = 0,048). Kolmogorov-Smirnov es el único que se queda corto en el
-grupo de no fumadoras (p = 0,060), y además tira un aviso de empates: como el peso está
-redondeado a dos decimales hay valores repetidos, y KS supone distribución continua sin
+grupo de no fumadoras (p = 0,060), y además tira un aviso de empates ya que hay valores repetidos, y KS supone distribución continua sin
 empates. Ese aviso ya es razón suficiente para no confiar en ese p-valor.
 
 Con dos de tres pruebas rechazando, más la asimetría y la curtosis que ya habíamos visto,
-la normalidad no se sostiene y toca ir por la vía no paramétrica.
+la normalidad no se sostiene y toca ir por el camino de no paramétrica.
 
 ### Homogeneidad de varianzas
 
@@ -610,10 +615,9 @@ df %>%
 ```
 
 El estadístico da W = 2879 con p = 0,131, por encima de 0,05, así que no se rechaza H0. El
-tamaño del efecto r = 0,123 es pequeño. No hay evidencia de que el peso del bebé difiera
-según si la madre fuma, al menos con esta muestra.
+tamaño del efecto r = 0,123 es pequeño. No hay evidencia de que si la madre fuma esto influya en el peso del bebe.
 
-### Ejercicio 12. ¿Se puede usar una prueba paramétrica?
+### Ejercicio 2.9. ¿Se puede usar una prueba paramétrica?
 
 ::: {.ejercicio}
 **Enunciado.** ¿Puedes usar una prueba paramétrica? En caso afirmativo, ejecútela.
@@ -672,7 +676,7 @@ Son 49 participantes medidos dos veces, antes y después de una intervención fo
 cuestionario tiene cuatro preguntas (`Q1` a `Q4`) y aquí se trabaja con `Q1`, siguiendo al
 profesor.
 
-### Ejercicio 13. Análisis exploratorio del cuestionario
+### Ejercicio 2.10. Análisis exploratorio del cuestionario
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -680,24 +684,7 @@ profesor.
 [Sección 4.4 del libro del profesor]{.fuente}
 :::
 
-**Solución.** Primero quiénes son los participantes:
-
-```{r edaqcontexto}
-datos %>%
-  filter(Experimento == "Pretest") %>%
-  summarise(n = length(Edad),
-            edad_media = mean(Edad),
-            edad_ds = sd(Edad),
-            edad_min = min(Edad),
-            edad_max = max(Edad),
-            labor_mediana = median(`Tiempo de labor`))
-
-datos %>%
-  filter(Experimento == "Pretest") %>%
-  count(Genero, `Nivel educativo`)
-```
-
-Y ahora la variable de interés, `Q1`, en cada momento:
+**Solución.** La variable de interés, `Q1`, en cada momento:
 
 ```{r edaq}
 datos %>%
@@ -724,11 +711,6 @@ datos %>%
   labs(x = "Respuesta Q1", y = "Frecuencia", fill = "") +
   theme_bw()
 ```
-
-Los 49 participantes tienen en promedio 46 años, entre 24 y 67, con una mediana de 7 años
-de labor. Son 30 mujeres y 19 hombres, repartidos casi por mitades entre los dos niveles
-educativos, así que el grupo es razonablemente homogéneo y no hay un subgrupo diminuto que
-distorsione.
 
 En `Q1` el cambio es grande y evidente. El promedio pasa de 2,57 a 4,63 y la mediana de 2 a
 5. La tabla de frecuencias lo muestra mejor que cualquier promedio: en el pre-test 27 de
@@ -763,20 +745,35 @@ no haya ni un solo caso en contra es poco común y anticipa un p-valor diminuto.
 
 ### Supuesto de normalidad
 
-```{r normq}
+```{r normq, warning=FALSE}
 datos %>%
   group_by(Experimento) %>%
   summarise(n = length(Q1),
+            est_ks = ks.test(scale(Q1), "pnorm")$statistic,
+            p_ks = ks.test(scale(Q1), "pnorm")$p.value,
             estsw = shapiro.test(Q1)$statistic,
             p_sw = shapiro.test(Q1)$p.value,
             est_lt = lillie.test(Q1)$statistic,
             p_lt = lillie.test(Q1)$p.value)
 ```
 
-Shapiro-Wilk y Lilliefors rechazan la normalidad en los dos momentos, con p-valores del
-orden de 1e-07 o menores. No es sorpresa: una variable que solo toma cinco valores enteros
-no puede ser normal, porque la normal es continua. Aquí la prueba de normalidad es casi un
-trámite, la decisión ya estaba tomada desde que supimos que `Q1` es ordinal.
+Las tres pruebas coinciden en rechazar la normalidad en los dos momentos. Kolmogorov-Smirnov
+da p = 6,9e-05 en el pre-test y 1,4e-07 en el post-test, Shapiro-Wilk 6,5e-07 y 1,2e-09, y
+Lilliefors 3,3e-14 y 2,4e-23. Cuando las tres apuntan en la misma dirección con p-valores
+tan pequeños no hay nada que discutir.
+
+No es sorpresa: una variable que solo toma cinco valores enteros no puede ser normal, porque
+la normal es continua. Aquí la prueba de normalidad es casi un trámite, la decisión ya
+estaba tomada desde que supimos que `Q1` es ordinal.
+
+Vale la pena fijarse en dos cosas de esta tabla. La primera es que el estadístico de
+Kolmogorov-Smirnov y el de Lilliefors son idénticos (0,3238 y 0,4097) pero sus p-valores
+difieren en varios órdenes de magnitud. Es el mismo estadístico calculado igual; lo que
+cambia es la distribución de referencia contra la que se compara, porque Lilliefors corrige
+el hecho de que la media y la desviación se estimaron de los mismos datos. La segunda es
+que R tira un aviso de empates: con 49 respuestas repartidas en cinco valores hay
+muchísimos valores repetidos, y KS supone una variable continua sin empates. Ese aviso por
+sí solo ya es razón para no confiar en su p-valor.
 
 De todos modos, lo que el t pareado exigiría es la normalidad de las diferencias, no la de
 cada momento, así que conviene revisarla también:
