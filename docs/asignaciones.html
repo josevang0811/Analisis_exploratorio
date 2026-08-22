@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Asignaciones | Notas de Métodos Estadísticos</title>
+  <meta name="description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Asignaciones | Notas de Métodos Estadísticos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  <meta name="github-repo" content="josevang0811/Analisis_exploratorio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Asignaciones | Notas de Métodos Estadísticos" />
+  
+  <meta name="twitter:description" content="Notas de clase y ejercicios del curso de Métodos Estadísticos" />
+  
+
+<meta name="author" content="Jose Fernando Van Strahlen y Jairo Hernandez" />
+
+
+<meta name="date" content="2026-08-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="intro.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notas de Métodos Estadísticos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#datos-y-paquetes"><i class="fa fa-check"></i>Datos y paquetes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html"><i class="fa fa-check"></i>Asignaciones</a>
+<ul>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-1-1"><i class="fa fa-check"></i>Ejercicio 1.1. Gráficas e interpretación de las variables características</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-1-2"><i class="fa fa-check"></i>Ejercicio 1.2. Diagramas de dispersión con las demás variables</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-1-3"><i class="fa fa-check"></i>Ejercicio 1.3. Dispersión entre las variables independientes</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-1-4"><i class="fa fa-check"></i>Ejercicio 1.4. Errores del gráfico de <code>ggpairs</code></a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-1"><i class="fa fa-check"></i>Ejercicio 2.1. Análisis exploratorio de los datos de presión</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-2"><i class="fa fa-check"></i>Ejercicio 2.2. Verificación de <code>var.test</code> con el teorema de razón de varianzas</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-3"><i class="fa fa-check"></i>Ejercicio 2.3. Teorema de la diferencia de medias</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-4"><i class="fa fa-check"></i>Ejercicio 2.4. Análisis exploratorio de los precios</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-5"><i class="fa fa-check"></i>Ejercicio 2.5. Bartlett, Levene y Fligner-Killeen</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-6"><i class="fa fa-check"></i>Ejercicio 2.6. Análisis exploratorio de los tiempos</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-7"><i class="fa fa-check"></i>Ejercicio 2.7. Teorema de la diferencia de medias para datos pareados</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-8"><i class="fa fa-check"></i>Ejercicio 2.8. Análisis exploratorio del peso al nacer</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-9"><i class="fa fa-check"></i>Ejercicio 2.9. ¿Se puede usar una prueba paramétrica?</a></li>
+<li class="chapter" data-level="" data-path="asignaciones.html"><a href="asignaciones.html#asig-ej-2-10"><i class="fa fa-check"></i>Ejercicio 2.10. Análisis exploratorio del cuestionario</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Análisis exploratorio de datos</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#analisis-exploratorio-de-median_house_value"><i class="fa fa-check"></i><b>1.1</b> Analisis exploratorio de median_house_value</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#analisis-de-las-variables-independientes-caracteristicas"><i class="fa fa-check"></i><b>1.2</b> Analisis de las variables independientes (Caracteristicas)</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#ej-1-1"><i class="fa fa-check"></i><b>1.2.1</b> Ejercicio 1.1. Gráficas e interpretación de las variables características</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#analisis-exploratorio-bivariado"><i class="fa fa-check"></i><b>1.3</b> Analisis exploratorio bivariado</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#ej-1-2"><i class="fa fa-check"></i><b>1.3.1</b> Ejercicio 1.2. Diagramas de dispersión con las demás variables</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ej-1-3"><i class="fa fa-check"></i><b>1.3.2</b> Ejercicio 1.3. Dispersión entre las variables independientes</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#ej-1-4"><i class="fa fa-check"></i><b>1.3.3</b> Ejercicio 1.4. Errores del gráfico de <code>ggpairs</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html"><i class="fa fa-check"></i><b>2</b> Estadística paramétrica y no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#presi%C3%B3n-sist%C3%B3lica-contra-diast%C3%B3lica-independientes-param%C3%A9trica"><i class="fa fa-check"></i><b>2.1</b> Presión sistólica contra diastólica (independientes, paramétrica)</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-1"><i class="fa fa-check"></i><b>2.1.1</b> Ejercicio 2.1. Análisis exploratorio de los datos de presión</a></li>
+<li class="chapter" data-level="2.1.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad"><i class="fa fa-check"></i><b>2.1.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-2"><i class="fa fa-check"></i><b>2.1.3</b> Ejercicio 2.2. Verificación de <code>var.test</code> con el teorema de razón de varianzas</a></li>
+<li class="chapter" data-level="2.1.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-3"><i class="fa fa-check"></i><b>2.1.4</b> Ejercicio 2.3. Teorema de la diferencia de medias</a></li>
+<li class="chapter" data-level="2.1.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#tama%C3%B1o-del-efecto"><i class="fa fa-check"></i><b>2.1.5</b> Tamaño del efecto</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#precios-por-tipo-de-cuenta-con-varianzas-distintas"><i class="fa fa-check"></i><b>2.2</b> Precios por tipo de cuenta, con varianzas distintas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-4"><i class="fa fa-check"></i><b>2.2.1</b> Ejercicio 2.4. Análisis exploratorio de los precios</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-1"><i class="fa fa-check"></i><b>2.2.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.2.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-5"><i class="fa fa-check"></i><b>2.2.3</b> Ejercicio 2.5. Bartlett, Levene y Fligner-Killeen</a></li>
+<li class="chapter" data-level="2.2.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-t-con-la-correcci%C3%B3n-de-welch"><i class="fa fa-check"></i><b>2.2.4</b> Prueba t con la corrección de Welch</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-param%C3%A9trica"><i class="fa fa-check"></i><b>2.3</b> Dos grupos pareados, paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-6"><i class="fa fa-check"></i><b>2.3.1</b> Ejercicio 2.6. Análisis exploratorio de los tiempos</a></li>
+<li class="chapter" data-level="2.3.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-2"><i class="fa fa-check"></i><b>2.3.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.3.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-7"><i class="fa fa-check"></i><b>2.3.3</b> Ejercicio 2.7. Teorema de la diferencia de medias para datos pareados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-independientes-no-param%C3%A9trica"><i class="fa fa-check"></i><b>2.4</b> Dos grupos independientes, no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-8"><i class="fa fa-check"></i><b>2.4.1</b> Ejercicio 2.8. Análisis exploratorio del peso al nacer</a></li>
+<li class="chapter" data-level="2.4.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-3"><i class="fa fa-check"></i><b>2.4.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.4.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#homogeneidad-de-varianzas"><i class="fa fa-check"></i><b>2.4.3</b> Homogeneidad de varianzas</a></li>
+<li class="chapter" data-level="2.4.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-mann-whitney"><i class="fa fa-check"></i><b>2.4.4</b> Prueba de Mann-Whitney</a></li>
+<li class="chapter" data-level="2.4.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-9"><i class="fa fa-check"></i><b>2.4.5</b> Ejercicio 2.9. ¿Se puede usar una prueba paramétrica?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#dos-grupos-pareados-no-param%C3%A9trica"><i class="fa fa-check"></i><b>2.5</b> Dos grupos pareados, no paramétrica</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-10"><i class="fa fa-check"></i><b>2.5.1</b> Ejercicio 2.10. Análisis exploratorio del cuestionario</a></li>
+<li class="chapter" data-level="2.5.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuesto-de-normalidad-4"><i class="fa fa-check"></i><b>2.5.2</b> Supuesto de normalidad</a></li>
+<li class="chapter" data-level="2.5.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#prueba-de-rangos-con-signo-de-wilcoxon"><i class="fa fa-check"></i><b>2.5.3</b> Prueba de rangos con signo de Wilcoxon</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova-an%C3%A1lisis-de-varianza-para-comparar-m%C3%BAltiples-medias"><i class="fa fa-check"></i><b>2.6</b> ANOVA (análisis de varianza para comparar múltiples medias)</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#supuestos-y-formulaci%C3%B3n-de-las-hip%C3%B3tesis"><i class="fa fa-check"></i><b>2.6.1</b> Supuestos y formulación de las hipótesis</a></li>
+<li class="chapter" data-level="2.6.2" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#sumas-de-cuadrados-y-teorema-de-descomposici%C3%B3n"><i class="fa fa-check"></i><b>2.6.2</b> Sumas de cuadrados y teorema de descomposición</a></li>
+<li class="chapter" data-level="2.6.3" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#estimaciones-insesgadas-de-la-varianza-poblacional"><i class="fa fa-check"></i><b>2.6.3</b> Estimaciones insesgadas de la varianza poblacional</a></li>
+<li class="chapter" data-level="2.6.4" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#teorema-de-contraste-para-el-an%C3%A1lisis-de-varianza"><i class="fa fa-check"></i><b>2.6.4</b> Teorema de contraste para el análisis de varianza</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="estadística-paramétrica-y-no-paramétrica.html"><a href="estadística-paramétrica-y-no-paramétrica.html#anova-de-un-factor-calulando-todas-las-ss"><i class="fa fa-check"></i><b>2.7</b> ANOVA de un factor calulando todas las ss—</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html"><i class="fa fa-check"></i><b>3</b> Guía para el parcial</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-decide-qu%C3%A9-prueba-usar"><i class="fa fa-check"></i><b>3.1</b> Cómo se decide qué prueba usar</a></li>
+<li class="chapter" data-level="3.2" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-lee-cada-salida"><i class="fa fa-check"></i><b>3.2</b> Cómo se lee cada salida</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#pruebas-de-normalidad"><i class="fa fa-check"></i><b>3.2.1</b> Pruebas de normalidad</a></li>
+<li class="chapter" data-level="3.2.2" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#var.test"><i class="fa fa-check"></i><b>3.2.2</b> <code>var.test</code></a></li>
+<li class="chapter" data-level="3.2.3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#t.test"><i class="fa fa-check"></i><b>3.2.3</b> <code>t.test</code></a></li>
+<li class="chapter" data-level="3.2.4" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#cohen.d-y-wilcox_effsize"><i class="fa fa-check"></i><b>3.2.4</b> <code>cohen.d</code> y <code>wilcox_effsize</code></a></li>
+<li class="chapter" data-level="3.2.5" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#aov-y-tukeyhsd"><i class="fa fa-check"></i><b>3.2.5</b> <code>aov</code> y <code>TukeyHSD</code></a></li>
+<li class="chapter" data-level="3.2.6" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#kruskal.test-y-dunn_test"><i class="fa fa-check"></i><b>3.2.6</b> <code>kruskal.test</code> y <code>dunn_test</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#c%C3%B3mo-se-redacta-la-conclusi%C3%B3n"><i class="fa fa-check"></i><b>3.3</b> Cómo se redacta la conclusión</a></li>
+<li class="chapter" data-level="3.4" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#errores-que-cuestan-puntos"><i class="fa fa-check"></i><b>3.4</b> Errores que cuestan puntos</a></li>
+<li class="chapter" data-level="3.5" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#f%C3%B3rmulas-para-tener-a-mano"><i class="fa fa-check"></i><b>3.5</b> Fórmulas para tener a mano</a></li>
+<li class="chapter" data-level="3.6" data-path="guía-para-el-parcial.html"><a href="guía-para-el-parcial.html#comandos-de-rescate-en-r"><i class="fa fa-check"></i><b>3.6</b> Comandos de rescate en R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas de Métodos Estadísticos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="asignaciones" class="section level1 unnumbered hasAnchor">
+<h1>Asignaciones<a href="asignaciones.html#asignaciones" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Este capítulo reúne los catorce ejercicios que asignó el profesor, cada uno con su enunciado
+y su solución completa. Son los mismos que están en los capítulos 1 y 2, acá quedan juntos y
+en orden para repasarlos de corrido. Debajo de cada enunciado hay un enlace a la sección
+donde se trabajó, por si hace falta el contexto de alrededor.</p>
+<p>El código se vuelve a ejecutar acá, así que las tablas y los gráficos son los mismos. Cada
+conjunto de datos se carga dentro del primer ejercicio que lo usa, de modo que el capítulo
+funciona por sí solo.</p>
+<p>Los paquetes que se usan a lo largo del capítulo:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="asignaciones.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="asignaciones.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb2-3"><a href="asignaciones.html#cb2-3" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb2-4"><a href="asignaciones.html#cb2-4" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-5"><a href="asignaciones.html#cb2-5" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb2-6"><a href="asignaciones.html#cb2-6" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
+<span id="cb2-7"><a href="asignaciones.html#cb2-7" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb2-8"><a href="asignaciones.html#cb2-8" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb2-9"><a href="asignaciones.html#cb2-9" tabindex="-1"></a><span class="fu">library</span>(openintro)</span></code></pre></div>
+<div id="asig-ej-1-1" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 1.1. Gráficas e interpretación de las variables características<a href="asignaciones.html#asig-ej-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realizar las gráficas de las otras variables, además la interpretación de la tabla y el gráfico quedan como ejercicio.</p>
+<p><span class="fuente">Sección 3.4.4 del libro del profesor</span></p>
+</div>
+<p><em><a href="intro.html#ej-1-1">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Los datos son los precios de vivienda de California, con los 207 faltantes de
+<code>total_bedrooms</code> imputados por la media y <code>ocean_proximity</code> convertida a factor:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="asignaciones.html#cb3-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Datos/housing.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="asignaciones.html#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="asignaciones.html#cb3-3" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="asignaciones.html#cb3-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb3-5"><a href="asignaciones.html#cb3-5" tabindex="-1"></a>    <span class="fu">where</span>(is.numeric),</span>
+<span id="cb3-6"><a href="asignaciones.html#cb3-6" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.), <span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), .)</span>
+<span id="cb3-7"><a href="asignaciones.html#cb3-7" tabindex="-1"></a>  )) <span class="ot">-&gt;</span> df</span>
+<span id="cb3-8"><a href="asignaciones.html#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="asignaciones.html#cb3-9" tabindex="-1"></a>df<span class="sc">$</span>ocean_proximity <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>ocean_proximity)</span></code></pre></div>
+<p>La tabla que hay que interpretar es la del resumen de las variables características:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="asignaciones.html#cb4-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="asignaciones.html#cb4-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric), <span class="sc">-</span>median_house_value) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="asignaciones.html#cb4-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb4-4"><a href="asignaciones.html#cb4-4" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb4-5"><a href="asignaciones.html#cb4-5" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
+<span id="cb4-6"><a href="asignaciones.html#cb4-6" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span></span>
+<span id="cb4-7"><a href="asignaciones.html#cb4-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="asignaciones.html#cb4-8" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="asignaciones.html#cb4-9" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(valor),</span>
+<span id="cb4-10"><a href="asignaciones.html#cb4-10" tabindex="-1"></a>            <span class="at">media =</span> <span class="fu">mean</span>(valor),</span>
+<span id="cb4-11"><a href="asignaciones.html#cb4-11" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(valor),</span>
+<span id="cb4-12"><a href="asignaciones.html#cb4-12" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(valor),</span>
+<span id="cb4-13"><a href="asignaciones.html#cb4-13" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(valor),</span>
+<span id="cb4-14"><a href="asignaciones.html#cb4-14" tabindex="-1"></a>            <span class="at">Q1 =</span> <span class="fu">quantile</span>(valor, <span class="fl">0.25</span>),</span>
+<span id="cb4-15"><a href="asignaciones.html#cb4-15" tabindex="-1"></a>            <span class="at">Q3 =</span> <span class="fu">quantile</span>(valor, <span class="fl">0.75</span>),</span>
+<span id="cb4-16"><a href="asignaciones.html#cb4-16" tabindex="-1"></a>            <span class="at">minimo =</span> <span class="fu">min</span>(valor),</span>
+<span id="cb4-17"><a href="asignaciones.html#cb4-17" tabindex="-1"></a>            <span class="at">maximo =</span> <span class="fu">max</span>(valor),</span>
+<span id="cb4-18"><a href="asignaciones.html#cb4-18" tabindex="-1"></a>            <span class="at">asimetria =</span> <span class="fu">skewness</span>(valor),</span>
+<span id="cb4-19"><a href="asignaciones.html#cb4-19" tabindex="-1"></a>            <span class="at">curtosis =</span> <span class="fu">kurtosis</span>(valor))</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 12
+##   variable      n   media     sd mediana    RIC      Q1      Q3   minimo  maximo
+##   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+## 1 househol… 20640  500.   3.82e2  409    3.25e2  280     605       1      6082  
+## 2 housing_… 20640   28.6  1.26e1   29    1.9 e1   18      37       1        52  
+## 3 latitude  20640   35.6  2.14e0   34.3  3.78e0   33.9    37.7    32.5      42.0
+## 4 longitude 20640 -120.   2.00e0 -118.   3.79e0 -122.   -118.   -124.     -114. 
+## 5 median_i… 20640    3.87 1.90e0    3.53 2.18e0    2.56    4.74    0.500    15.0
+## 6 populati… 20640 1425.   1.13e3 1166    9.38e2  787    1725       3     35682  
+## 7 total_be… 20640  538.   4.19e2  438    3.46e2  297     643.      1      6445  
+## 8 total_ro… 20640 2636.   2.18e3 2127    1.70e3 1448.   3148       2     39320  
+## # ℹ 2 more variables: asimetria &lt;dbl&gt;, curtosis &lt;dbl&gt;</code></pre>
+<p>Para la interpretacion de las tablas se realizaz un proceso de agrupacion de las ocho variables dejandolas en tres conjuntos según lo
+que dicen la asimetría, la curtosis y lo que mide la variable.</p>
+<p>El primer grupo son las variables de conteo: <code>total_rooms</code>, <code>total_bedrooms</code>,
+<code>population</code> y <code>households</code>. Todas tienen media por encima de la mediana, tambien una asimetría
+entre 3,4 y 4,9 y curtosis entre 25 y 76. Son distribuciones muy sesgadas a la derecha. <code>population</code> es el caso extremo: la mediana es 1.166 habitantes
+pero el máximo llega a 35.682, y la curtosis de 76,5 afirmado que el maximo no es caso aislado.</p>
+<p>El segundo es <code>median_income</code> y <code>housing_median_age</code>, que son variables que ya representan una medida de tendencia central. El ingreso tiene asimetría 1,65 y curtosis 7,95, o sea sesgo a la derecha pero
+mucho más suave que el grupo anterior.
+<code>housing_median_age</code> es la más simétrica de todas, con asimetría 0,06 y curtosis 2,2.</p>
+<p>El tercero es el par de coordenadas, <code>latitude</code> y <code>longitude</code>. Aquí la asimetría y el
+curtosis no significan mucho porque no son magnitudes, son posiciones en el
+mapa. La curtosis por debajo de 3 en ambas refleja que California es alargada.</p>
+<p>Ahora vamos a ver las cajas de las variables características. Como están en escalas muy
+distintas, no sirve ponerlas en un mismo eje, así que van con <code>facet_wrap</code> y escala libre para una mejor visualización</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="asignaciones.html#cb6-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="asignaciones.html#cb6-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric), <span class="sc">-</span>median_house_value, <span class="sc">-</span>latitude, <span class="sc">-</span>longitude) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="asignaciones.html#cb6-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb6-4"><a href="asignaciones.html#cb6-4" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
+<span id="cb6-5"><a href="asignaciones.html#cb6-5" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="asignaciones.html#cb6-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> valor)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="asignaciones.html#cb6-7" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb6-8"><a href="asignaciones.html#cb6-8" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="asignaciones.html#cb6-9" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>,</span>
+<span id="cb6-10"><a href="asignaciones.html#cb6-10" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="asignaciones.html#cb6-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="asignaciones.html#cb6-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="asignaciones.html#cb6-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-cajascaract-1.png" width="672" /></p>
+<p>Y los histogramas de las mismas variables:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="asignaciones.html#cb7-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="asignaciones.html#cb7-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric), <span class="sc">-</span>median_house_value, <span class="sc">-</span>latitude, <span class="sc">-</span>longitude) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="asignaciones.html#cb7-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb7-4"><a href="asignaciones.html#cb7-4" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
+<span id="cb7-5"><a href="asignaciones.html#cb7-5" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="asignaciones.html#cb7-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="asignaciones.html#cb7-7" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">&quot;#008B8B&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="asignaciones.html#cb7-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="asignaciones.html#cb7-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="asignaciones.html#cb7-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-histcaract-1.png" width="672" /></p>
+<p>La interpretacion grafica de los cuatro conteos muestran la misma figura: caja
+aplastada contra el eje y una larga linea de puntos rojos hacia arriba. Eso es exactamente
+lo que anunciaban la asimetría y la curtosis de la tabla. En <code>median_income</code> la caja ya se
+ve más centrada, pero se alcanza a ver como en 15 hay una gran aglomeracion de datos lo que puede indicar otro limite artificial. <code>housing_median_age</code> es
+la única cuya caja queda alrededor de la mitad del rango y casi sin puntos fuera, mientras que en el histograma podemos ver como hay una barra anomala en el 52 indicanco igual que con <code>median_income</code> que hay un limite.</p>
+<p>Ahora la única variable categórica del conjunto.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="asignaciones.html#cb8-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="asignaciones.html#cb8-2" tabindex="-1"></a>  <span class="fu">count</span>(ocean_proximity, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="asignaciones.html#cb8-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>((n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb8-4"><a href="asignaciones.html#cb8-4" tabindex="-1"></a>         <span class="at">Variable   =</span> <span class="st">&quot;Ocean_proximity&quot;</span>,</span>
+<span id="cb8-5"><a href="asignaciones.html#cb8-5" tabindex="-1"></a>         <span class="at">Categoria  =</span> <span class="fu">as.character</span>(ocean_proximity)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="asignaciones.html#cb8-6" tabindex="-1"></a>  <span class="fu">select</span>(Variable, Categoria, n, Porcentaje) <span class="ot">-&gt;</span> tabla_ocean</span>
+<span id="cb8-7"><a href="asignaciones.html#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="asignaciones.html#cb8-8" tabindex="-1"></a>tabla_ocean</span></code></pre></div>
+<pre><code>##          Variable  Categoria    n Porcentaje
+## 1 Ocean_proximity  &lt;1H OCEAN 9136      44.26
+## 2 Ocean_proximity     INLAND 6551      31.74
+## 3 Ocean_proximity     ISLAND    5       0.02
+## 4 Ocean_proximity   NEAR BAY 2290      11.09
+## 5 Ocean_proximity NEAR OCEAN 2658      12.88</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="asignaciones.html#cb10-1" tabindex="-1"></a>tabla_ocean_b <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="asignaciones.html#cb10-2" tabindex="-1"></a>  <span class="fu">count</span>(ocean_proximity, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="asignaciones.html#cb10-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>((n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb10-4"><a href="asignaciones.html#cb10-4" tabindex="-1"></a>         <span class="at">Etiqueta =</span> <span class="fu">paste0</span>(n, <span class="st">&quot; (&quot;</span>, Porcentaje, <span class="st">&quot;%)&quot;</span>))</span>
+<span id="cb10-5"><a href="asignaciones.html#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="asignaciones.html#cb10-6" tabindex="-1"></a>tabla_ocean_b <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="asignaciones.html#cb10-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ocean_proximity, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="asignaciones.html#cb10-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#008B8B&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="asignaciones.html#cb10-9" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Etiqueta), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">4.5</span>) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="asignaciones.html#cb10-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="asignaciones.html#cb10-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución de la variable ocean proximity&quot;</span>,</span>
+<span id="cb10-12"><a href="asignaciones.html#cb10-12" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;ocean_proximity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="asignaciones.html#cb10-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-barraocean-1.png" width="672" /></p>
+<p>Casi la mitad de las casa (44,26%) están a menos de una hora del océano y un tercio
+(31,74%) son interior. La categoría <code>ISLAND</code> tiene apenas 5 registros, el 0,02%,
+así que cualquier promedio que se calcule ahí no es significativo.</p>
+</div>
+<div id="asig-ej-1-2" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 1.2. Diagramas de dispersión con las demás variables<a href="asignaciones.html#asig-ej-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza los diagramas de dispersión de la variable <code>median_house_value</code> con respecto a las variables independientes que hacen falta. Analiza e interpreta la relación observada entre estas variables, indicando si existe una tendencia lineal, la presencia de valores atípicos y el grado de asociación con la variable objetivo.</p>
+<p><span class="fuente">Sección 3.4.5 del libro del profesor</span></p>
+</div>
+<p><em><a href="intro.html#ej-1-2">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="asignaciones.html#cb11-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="asignaciones.html#cb11-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="asignaciones.html#cb11-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>median_house_value,</span>
+<span id="cb11-4"><a href="asignaciones.html#cb11-4" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
+<span id="cb11-5"><a href="asignaciones.html#cb11-5" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="asignaciones.html#cb11-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> valor, <span class="at">y =</span> median_house_value)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="asignaciones.html#cb11-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">&quot;#1E90FF&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="asignaciones.html#cb11-8" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;#47078c&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="asignaciones.html#cb11-9" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="asignaciones.html#cb11-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Valor medio de la casa (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="asignaciones.html#cb11-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdown-demo_files/figure-html/asig-dispersiones-1.png" width="672" /></p>
+<p>Y el coeficiente de correlación de cada una con el precio, para ponerle número a lo que
+se ve:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="asignaciones.html#cb13-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="asignaciones.html#cb13-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="asignaciones.html#cb13-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="sc">-</span>median_house_value,</span>
+<span id="cb13-4"><a href="asignaciones.html#cb13-4" tabindex="-1"></a>                   <span class="sc">~</span> <span class="fu">cor</span>(.x, median_house_value))) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="asignaciones.html#cb13-5" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;correlacion&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="asignaciones.html#cb13-6" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(correlacion)))</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 2
+##   variable           correlacion
+##   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 median_income           0.688 
+## 2 latitude               -0.144 
+## 3 total_rooms             0.134 
+## 4 housing_median_age      0.106 
+## 5 households              0.0658
+## 6 total_bedrooms          0.0495
+## 7 longitude              -0.0460
+## 8 population             -0.0246</code></pre>
+<p><code>median_income</code> es la única con una relación fuerte, r = 0,688, mientras que las demas quedan por
+debajo de 0,15 en valor absoluto, o sea que por sí mismas casi no explican <code>median_house_value</code>. Los
+cuatro conteos (definidos en seccion 1.2.1) forman nubes pegadas al eje izquierdo porque están muy sesgados, y ahí la
+correlación de Pearson no es una buena medida de la relación por ello seria mejor trabajar con Spearman ya qye trabaja con el orden de los datos no con sus valores. <code>latitude</code> da −0,144 y esa
+correlación no tiene significancia</p>
+<p>En cuanto a los valores atipicos, la línea horizontal de puntos en 500.001 atraviesa todos los gráficos. No son atípicos:
+es el truncamiento del target que ya vimos. Lo mismo pasa con
+la barra vertical en 15 del panel de <code>median_income</code>. Los dos son artefactos que reflejan un limite artificial en <code>median_income</code> y <code>median_house_value</code>.</p>
+<p>Los cuatro conteos sí tienen atípicos de verdad. En cada uno se ven unos pocos puntos
+disparados hacia la derecha, muy lejos de la nube principal: <code>population</code> llega a 35.682 y
+<code>total_rooms</code> a 39.320. Estos son valores legítimos y no habría que quitarlos, porque
+corresponden a registros que realmete son mucho más grandes que el resto.</p>
+<p>Ahora comparemos el valor medio de la vivienda segun la aproximidad al oceano</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="asignaciones.html#cb15-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="asignaciones.html#cb15-2" tabindex="-1"></a>  <span class="fu">group_by</span>(ocean_proximity) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="asignaciones.html#cb15-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(median_house_value),</span>
+<span id="cb15-4"><a href="asignaciones.html#cb15-4" tabindex="-1"></a>            <span class="at">media =</span> <span class="fu">mean</span>(median_house_value),</span>
+<span id="cb15-5"><a href="asignaciones.html#cb15-5" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(median_house_value),</span>
+<span id="cb15-6"><a href="asignaciones.html#cb15-6" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(median_house_value),</span>
+<span id="cb15-7"><a href="asignaciones.html#cb15-7" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(median_house_value),</span>
+<span id="cb15-8"><a href="asignaciones.html#cb15-8" tabindex="-1"></a>            <span class="at">Q1 =</span> <span class="fu">quantile</span>(median_house_value, <span class="fl">0.25</span>),</span>
+<span id="cb15-9"><a href="asignaciones.html#cb15-9" tabindex="-1"></a>            <span class="at">Q3 =</span> <span class="fu">quantile</span>(median_house_value, <span class="fl">0.75</span>),</span>
+<span id="cb15-10"><a href="asignaciones.html#cb15-10" tabindex="-1"></a>            <span class="at">minimo =</span> <span class="fu">min</span>(median_house_value),</span>
+<span id="cb15-11"><a href="asignaciones.html#cb15-11" tabindex="-1"></a>            <span class="at">maximo =</span> <span class="fu">max</span>(median_house_value),</span>
+<span id="cb15-12"><a href="asignaciones.html#cb15-12" tabindex="-1"></a>            <span class="at">asimetria =</span> <span class="fu">skewness</span>(median_house_value),</span>
+<span id="cb15-13"><a href="asignaciones.html#cb15-13" tabindex="-1"></a>            <span class="at">curtosis =</span> <span class="fu">kurtosis</span>(median_house_value))</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 12
+##   ocean_proximity     n  media     sd mediana    RIC     Q1     Q3 minimo maximo
+##   &lt;fct&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 &lt;1H OCEAN        9136 2.40e5 1.06e5  214850 125000 164100 289100  17500 500001
+## 2 INLAND           6551 1.25e5 7.00e4  108500  71450  77500 148950  14999 500001
+## 3 ISLAND              5 3.80e5 8.06e4  414700 150000 300000 450000 287500 450000
+## 4 NEAR BAY         2290 2.59e5 1.23e5  233800 183200 162500 345700  22500 500001
+## 5 NEAR OCEAN       2658 2.49e5 1.22e5  229450 172750 150000 322750  22500 500001
+## # ℹ 2 more variables: asimetria &lt;dbl&gt;, curtosis &lt;dbl&gt;</code></pre>
+<p>Veamos un grafico de caja y bigotes</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="asignaciones.html#cb17-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="asignaciones.html#cb17-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ocean_proximity, <span class="at">y =</span> median_house_value)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="asignaciones.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb17-4"><a href="asignaciones.html#cb17-4" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="asignaciones.html#cb17-5" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>,</span>
+<span id="cb17-6"><a href="asignaciones.html#cb17-6" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="asignaciones.html#cb17-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Proximidad al oceano&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Valor medio de la casa (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="asignaciones.html#cb17-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-bibocplot-1.png" width="672" /></p>
+<p><code>INLAND</code> es el grupo claramente más barato, con mediana de 108.500 frente a 214.850 de
+<code>&lt;1H OCEAN</code> y 233.800 de <code>NEAR BAY</code>. Los tres grupos costeros (<code>&lt;1H OCEAN</code>, <code>NEAR BAY</code> y <code>NEAR OCEAN</code>) se parecen bastante entre
+sí. <code>ISLAND</code> aparece con la media más alta de todas, 380.440, pero son 5 viviendas, así que
+esa caja no se puede comparar con las otras.</p>
+</div>
+<div id="asig-ej-1-3" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 1.3. Dispersión entre las variables independientes<a href="asignaciones.html#asig-ej-1-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el gráfico de dispersión de las variables independientes numéricas y su interpretación.</p>
+<p><span class="fuente">Sección 3.4.5 del libro del profesor</span></p>
+</div>
+<p><em><a href="intro.html#ej-1-3">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> A diferencia del ejercicio anterior, aquí no se cruzan las variables contra el
+target sino entre ellas mismas.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="asignaciones.html#cb18-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="asignaciones.html#cb18-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric), <span class="sc">-</span>median_house_value) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="asignaciones.html#cb18-3" tabindex="-1"></a>  <span class="fu">pairs</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-dispindep-1.png" width="768" /></p>
+<p>Lo que salta a la vista es un bloque de cuatro paneles casi rectos, arriba a la derecha:
+<code>total_rooms</code>, <code>total_bedrooms</code>, <code>population</code> y <code>households</code> se relacionan entre sí de forma
+casi perfecta. Sus correlaciones van de 0,857 a 0,975, siendo la más alta la de
+<code>total_bedrooms</code> con <code>households</code>.Esto tiene sentido, porque las cuatro miden en el fondo lo
+mismo: qué tan grande es el registro. Donde hay más hogares hay más cuartos, más
+habitaciones y más gente.</p>
+<p>Eso se llama colinealidad, y es un hallazgo que importa: esas cuatro variables aportan
+información repetida. Si más adelante alguien quisiera construir un modelo para predecir el
+precio, meterlas todas juntas sería redundante.</p>
+<p><code>median_income</code> es el caso opuesto. Su correlación con las demás no pasa de 0,198 y con
+varias es prácticamente cero. O sea que aporta información que ninguna otra trae, y eso la
+vuelve la más valiosa del conjunto: ya sabíamos que es la única con relación fuerte con el
+precio, y ahora sabemos además que esa información no está duplicada.</p>
+<p><code>housing_median_age</code> tiene correlaciones negativas moderadas con los cuatro conteos, entre
+−0,296 y −0,361. Esto nos puede llevar a que las casa con construcciones más antiguas tienden a ser
+más pequeñas.</p>
+<p>Y por ultimo queda: <code>longitude</code> contra <code>latitude</code> da −0,925, la segunda correlación
+más alta de toda la matriz. Pero no describe ninguna relación entre variables, describe la
+forma de California, que se extiende en diagonal de noroeste a sureste.</p>
+</div>
+<div id="asig-ej-1-4" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 1.4. Errores del gráfico de <code>ggpairs</code><a href="asignaciones.html#asig-ej-1-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Menciona los errores que puedes encontrar en el gráfico.</p>
+<p><span class="fuente">Sección 3.4.5 del libro del profesor</span></p>
+</div>
+<p><em><a href="intro.html#ej-1-4">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> El gráfico en cuestión es este:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="asignaciones.html#cb19-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="asignaciones.html#cb19-2" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-ggpairs-1.png" width="864" /></p>
+<p>El primero es de legibilidad. Con el <code>df</code> completo, <code>ggpairs()</code> arma un recuadro de 10×10 con
+20.640 puntos en cada panel; los ejes quedan ilegibles, las etiquetas se sobreponen y el
+gráfico tarda mucho tiempo en mostrarse. Para que realmete tenga una buena utilidad habria que seleccionar menos variables.</p>
+<p>El segundo es que mete <code>longitude</code> y <code>latitude</code> como si fueran variables cuantitativas
+cualquiera. Calcula su media, su densidad y su correlación con el precio, y ninguna de
+esas tres cosas significa algo. Esas dos variables se deberían ver en un mapa.</p>
+<p>El tercero es que las correlaciones que reporta son de Pearson, que supone relación lineal
+y es muy sensible a los valores extremos y como tenemos variables tan sesgadas como <code>population</code> o
+<code>total_rooms</code> ese número subestimara la asociación real por lo cual para este caso serviría más Spearman.</p>
+<p>El cuarto es que el truncamiento de <code>median_house_value</code> en 500.001 contamina toda la fila
+y toda la columna del target: la densidad muestra un pico falso al final y las nubes de
+puntos muestran una línea horizontal que no es un patrón realista.</p>
+<p>Y el quinto es que <code>ggpairs()</code> ignora <code>ocean_proximity</code> si no se incluye. Como ya vimos que
+ese factor influye fuertemente en los precios, mirar solo las relaciones numéricas deja por fuera la
+variable que más ordena el conjunto.</p>
+</div>
+<div id="asig-ej-2-1" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.1. Análisis exploratorio de los datos de presión<a href="asignaciones.html#asig-ej-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-1">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Los datos vienen en formato largo: una columna dice de qué presión se trata y
+la otra trae el valor. Para las pruebas que reciben dos vectores hay que separarlos.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="asignaciones.html#cb20-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Datos/datos_medicos.xlsx&quot;</span>)</span>
+<span id="cb20-2"><a href="asignaciones.html#cb20-2" tabindex="-1"></a>df<span class="sc">$</span>Presion <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Presion)</span>
+<span id="cb20-3"><a href="asignaciones.html#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="asignaciones.html#cb20-4" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="asignaciones.html#cb20-5" tabindex="-1"></a>  <span class="fu">filter</span>(Presion <span class="sc">==</span> <span class="st">&quot;PresionSistolica&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="asignaciones.html#cb20-6" tabindex="-1"></a>  <span class="fu">pull</span>(Valores)</span>
+<span id="cb20-7"><a href="asignaciones.html#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="asignaciones.html#cb20-8" tabindex="-1"></a>dfd <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb20-9"><a href="asignaciones.html#cb20-9" tabindex="-1"></a>  <span class="fu">filter</span>(Presion <span class="sc">==</span> <span class="st">&quot;PresionDiastolica&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-10"><a href="asignaciones.html#cb20-10" tabindex="-1"></a>  <span class="fu">pull</span>(Valores)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="asignaciones.html#cb21-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="asignaciones.html#cb21-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Presion) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="asignaciones.html#cb21-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Valores),</span>
+<span id="cb21-4"><a href="asignaciones.html#cb21-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Valores),</span>
+<span id="cb21-5"><a href="asignaciones.html#cb21-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Valores),</span>
+<span id="cb21-6"><a href="asignaciones.html#cb21-6" tabindex="-1"></a>            <span class="at">varianza =</span> <span class="fu">var</span>(Valores),</span>
+<span id="cb21-7"><a href="asignaciones.html#cb21-7" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Valores),</span>
+<span id="cb21-8"><a href="asignaciones.html#cb21-8" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Valores),</span>
+<span id="cb21-9"><a href="asignaciones.html#cb21-9" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Valores),</span>
+<span id="cb21-10"><a href="asignaciones.html#cb21-10" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Valores),</span>
+<span id="cb21-11"><a href="asignaciones.html#cb21-11" tabindex="-1"></a>            <span class="at">asimetria =</span> <span class="fu">skewness</span>(Valores),</span>
+<span id="cb21-12"><a href="asignaciones.html#cb21-12" tabindex="-1"></a>            <span class="at">curtosis =</span> <span class="fu">kurtosis</span>(Valores))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 11
+##   Presion             n  prom    ds varianza mediana   RIC   min   max asimetria
+##   &lt;fct&gt;           &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+## 1 PresionDiastol…   100  78.9  9.48     89.8    77.8  12.4  59.9  112.    0.639 
+## 2 PresionSistoli…   100 121.   9.13     83.3   121.   11.9  96.9  142.    0.0605
+## # ℹ 1 more variable: curtosis &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="asignaciones.html#cb23-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="asignaciones.html#cb23-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Valores, <span class="at">fill =</span> Presion)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="asignaciones.html#cb23-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="asignaciones.html#cb23-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="asignaciones.html#cb23-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Presión&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="asignaciones.html#cb23-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edamedplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="asignaciones.html#cb24-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="asignaciones.html#cb24-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Presion, <span class="at">y =</span> Valores)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="asignaciones.html#cb24-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="asignaciones.html#cb24-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="asignaciones.html#cb24-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Presión&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="asignaciones.html#cb24-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edamedplot-2.png" width="672" /></p>
+<p>Son dos grupos de 100 mediciones cada uno. La sistólica promedia 120,90 y la
+diastólica 78,95, o sea unos 42 mmHg de diferencia, que es un valor grandísimo comparado
+con la dispersión de cada grupo (9,13 y 9,48). En los dos grupos la media y la mediana
+casi coinciden, la asimetría está cerca de cero y la curtosis cerca de 3, que es esperada dado los datos normales. Las cajas quedan claramente separadas, así que la prueba formal debería confirmar lo que
+ya se ve.</p>
+</div>
+<div id="asig-ej-2-2" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.2. Verificación de <code>var.test</code> con el teorema de razón de varianzas<a href="asignaciones.html#asig-ej-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Usando el teorema de razón de varianzas verifica la salida de la función <code>var.test</code> con los datos de presión arterial.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-2">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Primero se obtiene la salida de R, que es la que hay que reproducir a mano:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="asignaciones.html#cb25-1" tabindex="-1"></a><span class="fu">var.test</span>(dfs, dfd)</span></code></pre></div>
+<pre><code>## 
+##  F test to compare two variances
+## 
+## data:  dfs and dfd
+## F = 0.92784, num df = 99, denom df = 99, p-value = 0.7102
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.6242897 1.3789878
+## sample estimates:
+## ratio of variances 
+##          0.9278405</code></pre>
+<p>El teorema dice que si dos muestras independientes vienen de poblaciones normales, el
+cociente de las varianzas muestrales sigue una distribución F:</p>
+<p><span class="math display">\[F = \frac{S_1^2}{S_2^2} \sim F_{n_1-1,\; n_2-1}\]</span></p>
+<p>con hipótesis</p>
+<p><span class="math display">\[H_0: \sigma_1^2 = \sigma_2^2 \qquad \text{vs} \qquad H_1: \sigma_1^2 \neq \sigma_2^2\]</span></p>
+<p>Como la prueba es de dos colas, se rechaza si <span class="math inline">\(F &lt; F_{\alpha/2}\)</span> o si
+<span class="math inline">\(F &gt; F_{1-\alpha/2}\)</span>.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="asignaciones.html#cb27-1" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(dfs); n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(dfd)</span>
+<span id="cb27-2"><a href="asignaciones.html#cb27-2" tabindex="-1"></a>s1_2 <span class="ot">&lt;-</span> <span class="fu">var</span>(dfs);  s2_2 <span class="ot">&lt;-</span> <span class="fu">var</span>(dfd)</span>
+<span id="cb27-3"><a href="asignaciones.html#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="asignaciones.html#cb27-4" tabindex="-1"></a>F_calc <span class="ot">&lt;-</span> s1_2 <span class="sc">/</span> s2_2</span>
+<span id="cb27-5"><a href="asignaciones.html#cb27-5" tabindex="-1"></a>gl1 <span class="ot">&lt;-</span> n1 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb27-6"><a href="asignaciones.html#cb27-6" tabindex="-1"></a>gl2 <span class="ot">&lt;-</span> n2 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb27-7"><a href="asignaciones.html#cb27-7" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="asignaciones.html#cb27-8" tabindex="-1"></a>F_inf <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="fl">0.025</span>, gl1, gl2)</span>
+<span id="cb27-9"><a href="asignaciones.html#cb27-9" tabindex="-1"></a>F_sup <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="fl">0.975</span>, gl1, gl2)</span>
+<span id="cb27-10"><a href="asignaciones.html#cb27-10" tabindex="-1"></a>p_val <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">min</span>(<span class="fu">pf</span>(F_calc, gl1, gl2), <span class="fu">pf</span>(F_calc, gl1, gl2, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb27-11"><a href="asignaciones.html#cb27-11" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="asignaciones.html#cb27-12" tabindex="-1"></a>IC_inf <span class="ot">&lt;-</span> F_calc <span class="sc">/</span> F_sup</span>
+<span id="cb27-13"><a href="asignaciones.html#cb27-13" tabindex="-1"></a>IC_sup <span class="ot">&lt;-</span> F_calc <span class="sc">/</span> F_inf</span>
+<span id="cb27-14"><a href="asignaciones.html#cb27-14" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="asignaciones.html#cb27-15" tabindex="-1"></a><span class="fu">tibble</span>(s1_2, s2_2, F_calc, gl1, gl2, F_inf, F_sup, p_val, IC_inf, IC_sup)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 10
+##    s1_2  s2_2 F_calc   gl1   gl2 F_inf F_sup p_val IC_inf IC_sup
+##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1  83.3  89.8  0.928    99    99 0.673  1.49 0.710  0.624   1.38</code></pre>
+<p>El F calculado a mano da 0,92784, con 99 y 99 grados de libertad, y el p-valor 0,7102.
+Son exactamente los mismos números que da <code>var.test</code>. Como F cae entre 0,6728 y
+1,4862, que son los valores críticos al 5%, no se rechaza H0. Además el intervalo de
+confianza de la razón, [0,6243 ; 1,3790], contiene el 1, que nos lleva a que no hay evidencia de que las varianzas sean distintas.</p>
+</div>
+<div id="asig-ej-2-3" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.3. Teorema de la diferencia de medias<a href="asignaciones.html#asig-ej-2-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Usando el teorema de la diferencia de medias verifica la salida de la función <code>t.test</code> con los datos de presión arterial.</p>
+<ol style="list-style-type: decimal">
+<li>Aplica el teorema de diferencia de medias con la distribución normal.</li>
+</ol>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-3">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Con normalidad e igualdad de varianzas se puede aplicar el t-test clásico, que es la salida a reproducir:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="asignaciones.html#cb29-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> dfs, <span class="at">y =</span> dfd, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  dfs and dfd
+## t = 31.888, df = 198, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  39.36328 44.55275
+## sample estimates:
+## mean of x mean of y 
+## 120.90406  78.94604</code></pre>
+<p>El teorema del t de Student con varianzas iguales usa la varianza combinada:</p>
+<p><span class="math display">\[t = \frac{\bar{X}_1 - \bar{X}_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+\qquad
+S_p = \sqrt{\frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1 + n_2 - 2}}
+\qquad
+gl = n_1 + n_2 - 2\]</span></p>
+<p>Cuando las muestras son grandes, la t se aproxima a la normal estándar y el estadístico se
+puede escribir directamente como</p>
+<p><span class="math display">\[Z = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}\]</span></p>
+<p>Se hacen los dos y se comparan.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="asignaciones.html#cb31-1" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dfs); m2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dfd)</span>
+<span id="cb31-2"><a href="asignaciones.html#cb31-2" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="asignaciones.html#cb31-3" tabindex="-1"></a>Sp_2 <span class="ot">&lt;-</span> ((n1 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s1_2 <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2_2) <span class="sc">/</span> (n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb31-4"><a href="asignaciones.html#cb31-4" tabindex="-1"></a>Sp   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(Sp_2)</span>
+<span id="cb31-5"><a href="asignaciones.html#cb31-5" tabindex="-1"></a>ee_t <span class="ot">&lt;-</span> Sp <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2)</span>
+<span id="cb31-6"><a href="asignaciones.html#cb31-6" tabindex="-1"></a>t_calc <span class="ot">&lt;-</span> (m1 <span class="sc">-</span> m2) <span class="sc">/</span> ee_t</span>
+<span id="cb31-7"><a href="asignaciones.html#cb31-7" tabindex="-1"></a>gl <span class="ot">&lt;-</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb31-8"><a href="asignaciones.html#cb31-8" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="asignaciones.html#cb31-9" tabindex="-1"></a>ee_z <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(s1_2<span class="sc">/</span>n1 <span class="sc">+</span> s2_2<span class="sc">/</span>n2)</span>
+<span id="cb31-10"><a href="asignaciones.html#cb31-10" tabindex="-1"></a>z_calc <span class="ot">&lt;-</span> (m1 <span class="sc">-</span> m2) <span class="sc">/</span> ee_z</span>
+<span id="cb31-11"><a href="asignaciones.html#cb31-11" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="asignaciones.html#cb31-12" tabindex="-1"></a>IC_inf <span class="ot">&lt;-</span> (m1 <span class="sc">-</span> m2) <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, gl) <span class="sc">*</span> ee_t</span>
+<span id="cb31-13"><a href="asignaciones.html#cb31-13" tabindex="-1"></a>IC_sup <span class="ot">&lt;-</span> (m1 <span class="sc">-</span> m2) <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, gl) <span class="sc">*</span> ee_t</span>
+<span id="cb31-14"><a href="asignaciones.html#cb31-14" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="asignaciones.html#cb31-15" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">dif =</span> m1 <span class="sc">-</span> m2,</span>
+<span id="cb31-16"><a href="asignaciones.html#cb31-16" tabindex="-1"></a>       Sp_2, Sp, ee_t, t_calc, gl,</span>
+<span id="cb31-17"><a href="asignaciones.html#cb31-17" tabindex="-1"></a>       <span class="at">t_critico =</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, gl),</span>
+<span id="cb31-18"><a href="asignaciones.html#cb31-18" tabindex="-1"></a>       <span class="at">p_t =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_calc), gl, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb31-19"><a href="asignaciones.html#cb31-19" tabindex="-1"></a>       ee_z, z_calc,</span>
+<span id="cb31-20"><a href="asignaciones.html#cb31-20" tabindex="-1"></a>       <span class="at">z_critico =</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>),</span>
+<span id="cb31-21"><a href="asignaciones.html#cb31-21" tabindex="-1"></a>       <span class="at">p_z =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z_calc), <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb31-22"><a href="asignaciones.html#cb31-22" tabindex="-1"></a>       IC_inf,IC_sup)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 14
+##     dif  Sp_2    Sp  ee_t t_calc    gl t_critico      p_t  ee_z z_calc z_critico
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1  42.0  86.6  9.30  1.32   31.9   198      1.97 6.20e-80  1.32   31.9      1.96
+## # ℹ 3 more variables: p_z &lt;dbl&gt;, IC_inf &lt;dbl&gt;, IC_sup &lt;dbl&gt;</code></pre>
+<p>La varianza combinada da 86,563 y el error estándar de la diferencia 1,3158, con lo que el
+t manual queda en 31,888 con 198 grados de libertad, idéntico a la salida de <code>t.test</code>. El
+valor crítico al 5% es 1,972, y como <span class="math inline">\(|31,888| &gt; 1,972\)</span> se rechaza H0.</p>
+<p>Por la forma normal el estadístico da 31,890, prácticamente el mismo número. Esto pasa
+porque las dos varianzas son casi iguales y porque con 198 grados de libertad la t ya es
+indistinguible de la normal: el crítico de la t es 1,9720 y el de la normal 1,9600. La
+diferencia entre los dos caminos solo se nota cuando la muestra es pequeña.</p>
+<p>La conclusión sustantiva: la presión sistólica promedio es 41,96 mayor que la
+diastólica, con intervalo de confianza al 95% de [39,36 ; 44,55]. El intervalo no contiene
+el cero, así que la diferencia es significativa.</p>
+</div>
+<div id="asig-ej-2-4" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.4. Análisis exploratorio de los precios<a href="asignaciones.html#asig-ej-2-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-4">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Los datos son los precios por tipo de cuenta, separados también en dos vectores:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="asignaciones.html#cb33-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Datos/datos_economia.xlsx&quot;</span>)</span>
+<span id="cb33-2"><a href="asignaciones.html#cb33-2" tabindex="-1"></a>df<span class="sc">$</span><span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>)</span>
+<span id="cb33-3"><a href="asignaciones.html#cb33-3" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="asignaciones.html#cb33-4" tabindex="-1"></a>dfi <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="asignaciones.html#cb33-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;Inversion&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="asignaciones.html#cb33-6" tabindex="-1"></a>  <span class="fu">pull</span>(Precio)</span>
+<span id="cb33-7"><a href="asignaciones.html#cb33-7" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="asignaciones.html#cb33-8" tabindex="-1"></a>dfg <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb33-9"><a href="asignaciones.html#cb33-9" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;Ganancia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-10"><a href="asignaciones.html#cb33-10" tabindex="-1"></a>  <span class="fu">pull</span>(Precio)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="asignaciones.html#cb34-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="asignaciones.html#cb34-2" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="asignaciones.html#cb34-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Precio),</span>
+<span id="cb34-4"><a href="asignaciones.html#cb34-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Precio),</span>
+<span id="cb34-5"><a href="asignaciones.html#cb34-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Precio),</span>
+<span id="cb34-6"><a href="asignaciones.html#cb34-6" tabindex="-1"></a>            <span class="at">varianza =</span> <span class="fu">var</span>(Precio),</span>
+<span id="cb34-7"><a href="asignaciones.html#cb34-7" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Precio),</span>
+<span id="cb34-8"><a href="asignaciones.html#cb34-8" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Precio),</span>
+<span id="cb34-9"><a href="asignaciones.html#cb34-9" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Precio),</span>
+<span id="cb34-10"><a href="asignaciones.html#cb34-10" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Precio),</span>
+<span id="cb34-11"><a href="asignaciones.html#cb34-11" tabindex="-1"></a>            <span class="at">CV =</span> <span class="fu">sd</span>(Precio) <span class="sc">/</span> <span class="fu">mean</span>(Precio))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 10
+##   `Tipo de cuenta`     n     prom      ds  varianza mediana    RIC    min    max
+##   &lt;fct&gt;            &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Ganancia           100  778491. 193397.   3.74e10  7.55e5 2.54e5 3.89e5 1.45e6
+## 2 Inversion          100 5090406. 912816.   8.33e11  5.06e6 1.19e6 2.69e6 7.19e6
+## # ℹ 1 more variable: CV &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="asignaciones.html#cb36-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="asignaciones.html#cb36-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">y =</span> Precio)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="asignaciones.html#cb36-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="asignaciones.html#cb36-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="asignaciones.html#cb36-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="asignaciones.html#cb36-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="asignaciones.html#cb36-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edaeconplot-1.png" width="672" /></p>
+<p>En este ejercicio la historia es distinta a la de la presión, las cuentas de inversión promedian
+5.090.406 y las de ganancia 778.491.
+Pero lo que salta a la vista es la dispersión: la desviación estándar de inversión es
+912.816 y la de ganancia 193.397, casi cinco veces menor. El coeficiente de variación, en
+cambio, es practicamente el mismo en los dos grupos (alrededor de 0,18 y 0,25), lo que sugiere que
+la dispersión crece proporcional a la magnitud.
+Con varianzas tan distintas, el t-test clásico no aplica.</p>
+</div>
+<div id="asig-ej-2-5" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.5. Bartlett, Levene y Fligner-Killeen<a href="asignaciones.html#asig-ej-2-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Aplica las pruebas de Bartlett, Levene y Fligner-Killeen, explica detalladamente cada prueba y cuál distribución usa y después interpreta el resultado.</p>
+<p><span class="fuente">Sección 4.1 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-5">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Las tres prueban lo mismo, <span class="math inline">\(H_0: \sigma_1^2 = \sigma_2^2\)</span>, pero por caminos distintos.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="asignaciones.html#cb37-1" tabindex="-1"></a><span class="fu">bartlett.test</span>(Precio <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">data =</span> df)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  Precio by Tipo de cuenta
+## Bartlett&#39;s K-squared = 177.81, df = 1, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="asignaciones.html#cb39-1" tabindex="-1"></a><span class="fu">leveneTest</span>(Precio <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">data =</span> df, <span class="at">center =</span> median)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##        Df F value    Pr(&gt;F)    
+## group   1   107.2 &lt; 2.2e-16 ***
+##       198                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="asignaciones.html#cb41-1" tabindex="-1"></a><span class="fu">fligner.test</span>(Precio <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cuenta</span><span class="st">`</span>, <span class="at">data =</span> df)</span></code></pre></div>
+<pre><code>## 
+##  Fligner-Killeen test of homogeneity of variances
+## 
+## data:  Precio by Tipo de cuenta
+## Fligner-Killeen:med chi-squared = 82.798, df = 1, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="asignaciones.html#cb43-1" tabindex="-1"></a><span class="fu">var.test</span>(dfi, dfg)</span></code></pre></div>
+<pre><code>## 
+##  F test to compare two variances
+## 
+## data:  dfi and dfg
+## F = 22.277, num df = 99, denom df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  14.9892 33.1095
+## sample estimates:
+## ratio of variances 
+##           22.27745</code></pre>
+<p>Bartlett compara las varianzas mediante un estadístico basado en el logaritmo de las
+varianzas de cada grupo, que bajo H0 se distribuye ji-cuadrado con k − 1 grados de
+libertad, o sea 1 en este caso porque son dos grupos. Es el más potente de los tres cuando
+los datos sí son normales, pero también el más frágil: si hay colas pesadas o asimetría,
+rechaza aunque las varianzas sean iguales. Aquí da K² = 177,81 con 1 grado de libertad y
+p &lt; 2,2e-16.</p>
+<p>Levene no trabaja con las varianzas sino con las distancias de cada dato al centro de su
+grupo. Convierte cada observación en <span class="math inline">\(|x_{ij} - \tilde{x}_i|\)</span> y le corre un ANOVA a esas
+distancias: si un grupo está más disperso, sus distancias promedio serán mayores. Como el
+contraste es un ANOVA, su estadístico se distribuye F con k − 1 y n − k grados de
+libertad, aquí 1 y 198. Usar la mediana como centro (<code>center = median</code>) en vez de la media
+es lo que lo vuelve robusto a los valores extremos. Aquí da F = 107,2 con p &lt; 2,2e-16.</p>
+<p>Fligner-Killeen va un paso más allá y trabaja con los rangos de esas distancias en lugar
+de con las distancias mismas. Al pasar a rangos deja de importar la forma de la
+distribución, así que es el más robusto de los tres y el recomendado cuando hay dudas
+serias sobre la normalidad. Su estadístico también se distribuye ji-cuadrado con k − 1
+grados de libertad. Aquí da ji-cuadrado = 82,798 con 1 grado de libertad y p &lt; 2,2e-16.</p>
+<p>Las tres coinciden en rechazar H0, y <code>var.test</code> lo confirma: la razón de varianzas es
+22,28 con intervalo [14,99 ; 33,11], que ni de cerca contiene el 1. Que los tres métodos
+coincidan es la situación cómoda; cuando se contradicen, la regla práctica es hacerle caso
+a Levene o a Fligner, porque Bartlett suele estar rechazando por falta de normalidad y no
+por diferencia real de varianzas.</p>
+</div>
+<div id="asig-ej-2-6" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.6. Análisis exploratorio de los tiempos<a href="asignaciones.html#asig-ej-2-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.2 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-6">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Son diez estudiantes medidos antes y después de una intervención educativa:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="asignaciones.html#cb45-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb45-2"><a href="asignaciones.html#cb45-2" tabindex="-1"></a>  <span class="at">estudiante =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>),</span>
+<span id="cb45-3"><a href="asignaciones.html#cb45-3" tabindex="-1"></a>  <span class="at">antes =</span> <span class="fu">c</span>(<span class="fl">12.9</span>, <span class="fl">13.5</span>, <span class="fl">12.8</span>, <span class="fl">15.6</span>, <span class="fl">17.2</span>, <span class="fl">19.2</span>, <span class="fl">12.6</span>, <span class="fl">15.3</span>, <span class="fl">14.4</span>, <span class="fl">11.3</span>),</span>
+<span id="cb45-4"><a href="asignaciones.html#cb45-4" tabindex="-1"></a>  <span class="at">despues =</span> <span class="fu">c</span>(<span class="fl">12.7</span>, <span class="fl">13.6</span>, <span class="fl">12.0</span>, <span class="fl">15.2</span>, <span class="fl">16.8</span>, <span class="fl">20.0</span>, <span class="fl">12.0</span>, <span class="fl">15.9</span>, <span class="fl">16.0</span>, <span class="fl">11.1</span>)</span>
+<span id="cb45-5"><a href="asignaciones.html#cb45-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="asignaciones.html#cb46-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="asignaciones.html#cb46-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diferencia =</span> despues <span class="sc">-</span> antes)</span>
+<span id="cb46-3"><a href="asignaciones.html#cb46-3" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="asignaciones.html#cb46-4" tabindex="-1"></a>datos</span></code></pre></div>
+<pre><code>##    estudiante antes despues diferencia
+## 1           1  12.9    12.7       -0.2
+## 2           2  13.5    13.6        0.1
+## 3           3  12.8    12.0       -0.8
+## 4           4  15.6    15.2       -0.4
+## 5           5  17.2    16.8       -0.4
+## 6           6  19.2    20.0        0.8
+## 7           7  12.6    12.0       -0.6
+## 8           8  15.3    15.9        0.6
+## 9           9  14.4    16.0        1.6
+## 10         10  11.3    11.1       -0.2</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="asignaciones.html#cb48-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="asignaciones.html#cb48-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(antes, despues, diferencia),</span>
+<span id="cb48-3"><a href="asignaciones.html#cb48-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;momento&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;tiempo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="asignaciones.html#cb48-4" tabindex="-1"></a>  <span class="fu">group_by</span>(momento) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="asignaciones.html#cb48-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(tiempo),</span>
+<span id="cb48-6"><a href="asignaciones.html#cb48-6" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(tiempo),</span>
+<span id="cb48-7"><a href="asignaciones.html#cb48-7" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(tiempo),</span>
+<span id="cb48-8"><a href="asignaciones.html#cb48-8" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(tiempo),</span>
+<span id="cb48-9"><a href="asignaciones.html#cb48-9" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(tiempo),</span>
+<span id="cb48-10"><a href="asignaciones.html#cb48-10" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(tiempo),</span>
+<span id="cb48-11"><a href="asignaciones.html#cb48-11" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(tiempo))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 8
+##   momento        n    prom    ds mediana   RIC    min   max
+##   &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 antes         10 14.5    2.39   14.0   2.70  11.3    19.2
+## 2 despues       10 14.5    2.76   14.4   3.8   11.1    20  
+## 3 diferencia    10  0.0500 0.741  -0.200 0.875 -0.800   1.6</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="asignaciones.html#cb50-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="asignaciones.html#cb50-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(antes, despues),</span>
+<span id="cb50-3"><a href="asignaciones.html#cb50-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;momento&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;tiempo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="asignaciones.html#cb50-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">momento =</span> <span class="fu">fct_relevel</span>(momento, <span class="st">&quot;antes&quot;</span>, <span class="st">&quot;despues&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-5"><a href="asignaciones.html#cb50-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> momento, <span class="at">y =</span> tiempo, <span class="at">group =</span> estudiante)) <span class="sc">+</span></span>
+<span id="cb50-6"><a href="asignaciones.html#cb50-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;grey60&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-7"><a href="asignaciones.html#cb50-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> momento), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb50-8"><a href="asignaciones.html#cb50-8" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb50-9"><a href="asignaciones.html#cb50-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tiempo&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-10"><a href="asignaciones.html#cb50-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edaparplot-1.png" width="672" /></p>
+<p>El promedio pasa de 14,48 a 14,53, osea 0,05 de diferencia, que al lado de una desviación
+estándar de 2,39 no es nada. El gráfico de líneas muestra por qué el análisis pareado es
+el correcto aquí ya que las líneas se cruzan poco, cada estudiante conserva su nivel, y lo que
+cambia es poco y en direcciones opuestas. Seis estudiantes bajaron su tiempo y cuatro lo
+subieron. La diferencia individual va de −0,8 a 1,6 con media 0,05 y desviación 0,74.</p>
+</div>
+<div id="asig-ej-2-7" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.7. Teorema de la diferencia de medias para datos pareados<a href="asignaciones.html#asig-ej-2-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Usando el teorema de la diferencia de medias para datos pareados verifica la salida de la función <code>t.test</code> con los datos de la intervención educativa.</p>
+<p><span class="fuente">Sección 4.2 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-7">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> La salida a reproducir es esta:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="asignaciones.html#cb51-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> datos<span class="sc">$</span>despues, <span class="at">y =</span> datos<span class="sc">$</span>antes, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  datos$despues and datos$antes
+## t = 0.21331, df = 9, p-value = 0.8358
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -0.4802549  0.5802549
+## sample estimates:
+## mean difference 
+##            0.05</code></pre>
+<p>El teorema reduce el problema a una sola muestra, la de las diferencias
+<span class="math inline">\(d_i = X_{2i} - X_{1i}\)</span>:</p>
+<p><span class="math display">\[t = \frac{\bar{d}}{S_d / \sqrt{n}} \qquad gl = n - 1\]</span></p>
+<p>con <span class="math inline">\(H_0: \mu_d = 0\)</span>.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="asignaciones.html#cb53-1" tabindex="-1"></a>d  <span class="ot">&lt;-</span> datos<span class="sc">$</span>diferencia</span>
+<span id="cb53-2"><a href="asignaciones.html#cb53-2" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">length</span>(d)</span>
+<span id="cb53-3"><a href="asignaciones.html#cb53-3" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="asignaciones.html#cb53-4" tabindex="-1"></a>d_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(d)</span>
+<span id="cb53-5"><a href="asignaciones.html#cb53-5" tabindex="-1"></a>S_d   <span class="ot">&lt;-</span> <span class="fu">sd</span>(d)</span>
+<span id="cb53-6"><a href="asignaciones.html#cb53-6" tabindex="-1"></a>ee_d  <span class="ot">&lt;-</span> S_d <span class="sc">/</span> <span class="fu">sqrt</span>(nd)</span>
+<span id="cb53-7"><a href="asignaciones.html#cb53-7" tabindex="-1"></a>t_par <span class="ot">&lt;-</span> d_bar <span class="sc">/</span> ee_d</span>
+<span id="cb53-8"><a href="asignaciones.html#cb53-8" tabindex="-1"></a>gl_par <span class="ot">&lt;-</span> nd <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb53-9"><a href="asignaciones.html#cb53-9" tabindex="-1"></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, gl_par)</span>
+<span id="cb53-10"><a href="asignaciones.html#cb53-10" tabindex="-1"></a></span>
+<span id="cb53-11"><a href="asignaciones.html#cb53-11" tabindex="-1"></a><span class="fu">tibble</span>(d_bar, S_d, ee_d, t_par, gl_par, t_crit,</span>
+<span id="cb53-12"><a href="asignaciones.html#cb53-12" tabindex="-1"></a>       <span class="at">p =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_par), gl_par, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb53-13"><a href="asignaciones.html#cb53-13" tabindex="-1"></a>       <span class="at">IC_inf =</span> d_bar <span class="sc">-</span> t_crit <span class="sc">*</span> ee_d,</span>
+<span id="cb53-14"><a href="asignaciones.html#cb53-14" tabindex="-1"></a>       <span class="at">IC_sup =</span> d_bar <span class="sc">+</span> t_crit <span class="sc">*</span> ee_d)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##    d_bar   S_d  ee_d t_par gl_par t_crit     p IC_inf IC_sup
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.0500 0.741 0.234 0.213      9   2.26 0.836 -0.480  0.580</code></pre>
+<p>El t manual da 0,21331 con 9 grados de libertad, el mismo que afirma <code>t.test</code> y el
+intervalo de confianza [−0,4803 ; 0,5803] también coincide. Como <span class="math inline">\(|0,213| &lt; 2,262\)</span> no se
+rechaza H0.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="asignaciones.html#cb55-1" tabindex="-1"></a><span class="fu">cohen.d</span>(datos<span class="sc">$</span>despues, datos<span class="sc">$</span>antes, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 0.0169815 (negligible)
+## 95 percent confidence interval:
+##      lower      upper 
+## -0.1502851  0.1842481</code></pre>
+<p>La d de Cohen da 0,017, clasificada como despreciable. No hay evidencia de que la
+intervención educativa haya cambiado los tiempos. Y aquí conviene señalar una cosa: con
+n = 10 la prueba tiene muy poca potencia, así que lo único que se puede afirmar es que con esta muestra no se
+detecta ninguno efecto, y el intervalo de confianza es lo que dice cuánto efecto seguiría siendo
+compatible con los datos: cualquier cambio entre −0,48 y 0,58.</p>
+</div>
+<div id="asig-ej-2-8" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.8. Análisis exploratorio del peso al nacer<a href="asignaciones.html#asig-ej-2-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.3 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-8">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Los datos salen del paquete <code>openintro</code> y se va a caracterizar el peso del bebé
+según si la madre fuma o no:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="asignaciones.html#cb57-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;births&quot;</span>)</span>
+<span id="cb57-2"><a href="asignaciones.html#cb57-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> births</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="asignaciones.html#cb58-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="asignaciones.html#cb58-2" tabindex="-1"></a>  <span class="fu">group_by</span>(smoke) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="asignaciones.html#cb58-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(weight),</span>
+<span id="cb58-4"><a href="asignaciones.html#cb58-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb58-5"><a href="asignaciones.html#cb58-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(weight),</span>
+<span id="cb58-6"><a href="asignaciones.html#cb58-6" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(weight),</span>
+<span id="cb58-7"><a href="asignaciones.html#cb58-7" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(weight),</span>
+<span id="cb58-8"><a href="asignaciones.html#cb58-8" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(weight),</span>
+<span id="cb58-9"><a href="asignaciones.html#cb58-9" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(weight),</span>
+<span id="cb58-10"><a href="asignaciones.html#cb58-10" tabindex="-1"></a>            <span class="at">asimetria =</span> <span class="fu">skewness</span>(weight),</span>
+<span id="cb58-11"><a href="asignaciones.html#cb58-11" tabindex="-1"></a>            <span class="at">curtosis =</span> <span class="fu">kurtosis</span>(weight))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 10
+##   smoke         n  prom    ds mediana   RIC   min   max asimetria curtosis
+##   &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 nonsmoker   100  7.18  1.43    7.44  1.36  1.63 10.1      -1.20     5.38
+## 2 smoker       50  6.78  1.60    6.97  1.59  1.69  9.13     -1.33     5.06</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="asignaciones.html#cb60-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="asignaciones.html#cb60-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">fill =</span> smoke)) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="asignaciones.html#cb60-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb60-4"><a href="asignaciones.html#cb60-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb60-5"><a href="asignaciones.html#cb60-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Peso del bebé (libras)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb60-6"><a href="asignaciones.html#cb60-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edabirthsplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="asignaciones.html#cb61-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="asignaciones.html#cb61-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> smoke, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="asignaciones.html#cb61-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#47078c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb61-4"><a href="asignaciones.html#cb61-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#b02ca5&quot;</span>) <span class="sc">+</span></span>
+<span id="cb61-5"><a href="asignaciones.html#cb61-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Peso del bebé (libras)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb61-6"><a href="asignaciones.html#cb61-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edabirthsplot-2.png" width="672" /></p>
+<p>Son 100 no fumadoras y 50 fumadoras. El peso promedio es 7,18 libras contra 6,78, o sea
+0,40 libras de diferencia, con desviaciones de 1,43 y 1,60. Las cajas se traslapan
+bastante, por ello podemos ver que la diferencia no se ve concluyente.</p>
+<p>Lo importante para decidir la prueba es la forma: la asimetría es −1,20 y −1,33 en cada
+grupo y la curtosis 5,38 y 5,06. Las dos distribuciones están sesgadas a la izquierda y
+tienen colas más pesadas que la normal.</p>
+</div>
+<div id="asig-ej-2-9" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.9. ¿Se puede usar una prueba paramétrica?<a href="asignaciones.html#asig-ej-2-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> ¿Puedes usar una prueba paramétrica? En caso afirmativo, ejecútela.</p>
+<p><span class="fuente">Sección 4.3 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-9">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Sí se puede, y la razón no es que los datos sean normales, porque ya vimos que no lo son.
+La razón es el teorema del límite central: lo que el t-test necesita no es que los datos
+sean normales sino que lo sea la distribución de la media muestral, y con n = 100 y n = 50
+esa distribución ya es aproximadamente normal aunque la variable original esté sesgada. La
+regla práctica de n ≥ 30 por grupo se cumple con holgura, la asimetría es moderada (por
+debajo de 2 en valor absoluto) y Levene confirmó que las varianzas son homogéneas.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="asignaciones.html#cb62-1" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> smoke, <span class="at">data =</span> df, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  weight by smoke
+## t = 1.5517, df = 148, p-value = 0.1229
+## alternative hypothesis: true difference in means between group nonsmoker and group smoker is not equal to 0
+## 95 percent confidence interval:
+##  -0.1095531  0.9105531
+## sample estimates:
+## mean in group nonsmoker    mean in group smoker 
+##                  7.1795                  6.7790</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="asignaciones.html#cb64-1" tabindex="-1"></a><span class="fu">cohen.d</span>(weight <span class="sc">~</span> smoke, <span class="at">data =</span> df)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 0.2687581 (small)
+## 95 percent confidence interval:
+##       lower       upper 
+## -0.07488708  0.61240332</code></pre>
+<p>El t-test da t = 1,5517 con 148 grados de libertad y p = 0,1229, con intervalo
+[−0,1096 ; 0,9106] y d de Cohen 0,269, pequeña. La conclusión es la misma que dio
+Mann-Whitney: los p-valores quedan casi pegados, 0,1229 por la vía paramétrica y 0,1310
+por la no paramétrica, y ninguno alcanza el 5%.</p>
+<p>Que las dos pruebas coincidan es una buena señal: significa que la desviación de la
+normalidad no estaba distorsionando el resultado. Cuando coinciden se puede reportar la
+paramétrica, que da un intervalo de confianza sobre la diferencia de medias, más fácil de
+interpretar. Cuando no coinciden, hay que quedarse con la no paramétrica y explicar por
+qué.</p>
+</div>
+<div id="asig-ej-2-10" class="section level2 unnumbered hasAnchor">
+<h2>Ejercicio 2.10. Análisis exploratorio del cuestionario<a href="asignaciones.html#asig-ej-2-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="ejercicio">
+<p><strong>Enunciado.</strong> Realiza el análisis exploratorio del conjunto de datos.</p>
+<p><span class="fuente">Sección 4.4 del libro del profesor</span></p>
+</div>
+<p><em><a href="estadística-paramétrica-y-no-paramétrica.html#ej-2-10">Ver en contexto</a></em></p>
+<p><strong>Solución.</strong> Son 49 participantes medidos dos veces, antes y después de una intervención
+formativa. El cuestionario tiene cuatro preguntas (<code>Q1</code> a <code>Q4</code>) y aquí se trabaja con <code>Q1</code>,
+siguiendo al profesor.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="asignaciones.html#cb66-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;Datos/dataQ.tsv&quot;</span>, <span class="at">delim =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb66-2"><a href="asignaciones.html#cb66-2" tabindex="-1"></a>                    <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-3"><a href="asignaciones.html#cb66-3" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="asignaciones.html#cb66-4" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb66-5"><a href="asignaciones.html#cb66-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Experimento, Genero, <span class="st">`</span><span class="at">Nivel educativo</span><span class="st">`</span>), as.factor),</span>
+<span id="cb66-6"><a href="asignaciones.html#cb66-6" tabindex="-1"></a>         <span class="at">Experimento =</span> <span class="fu">fct_relevel</span>(Experimento, <span class="st">&quot;Pretest&quot;</span>, <span class="st">&quot;Post-test&quot;</span>))</span></code></pre></div>
+<p>La variable de interés, <code>Q1</code>, en cada momento:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="asignaciones.html#cb67-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="asignaciones.html#cb67-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Experimento) <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="asignaciones.html#cb67-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Q1),</span>
+<span id="cb67-4"><a href="asignaciones.html#cb67-4" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(Q1),</span>
+<span id="cb67-5"><a href="asignaciones.html#cb67-5" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(Q1),</span>
+<span id="cb67-6"><a href="asignaciones.html#cb67-6" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(Q1),</span>
+<span id="cb67-7"><a href="asignaciones.html#cb67-7" tabindex="-1"></a>            <span class="at">RIC =</span> <span class="fu">IQR</span>(Q1),</span>
+<span id="cb67-8"><a href="asignaciones.html#cb67-8" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(Q1),</span>
+<span id="cb67-9"><a href="asignaciones.html#cb67-9" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(Q1))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 8
+##   Experimento     n  prom    ds mediana   RIC   min   max
+##   &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Pretest        49  2.57 0.764       2     1     1     4
+## 2 Post-test      49  4.63 0.528       5     1     3     5</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="asignaciones.html#cb69-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb69-2"><a href="asignaciones.html#cb69-2" tabindex="-1"></a>  <span class="fu">count</span>(Experimento, Q1) <span class="sc">%&gt;%</span></span>
+<span id="cb69-3"><a href="asignaciones.html#cb69-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Experimento, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-4"><a href="asignaciones.html#cb69-4" tabindex="-1"></a>  <span class="fu">arrange</span>(Q1)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##      Q1 Pretest `Post-test`
+##   &lt;dbl&gt;   &lt;int&gt;       &lt;int&gt;
+## 1     1       1           0
+## 2     2      26           0
+## 3     3      15           1
+## 4     4       7          16
+## 5     5       0          32</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="asignaciones.html#cb71-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="asignaciones.html#cb71-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Q1), <span class="at">fill =</span> Experimento)) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="asignaciones.html#cb71-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb71-4"><a href="asignaciones.html#cb71-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#47078c&quot;</span>, <span class="st">&quot;#008B8B&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb71-5"><a href="asignaciones.html#cb71-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Respuesta Q1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb71-6"><a href="asignaciones.html#cb71-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/asig-edaqplot-1.png" width="672" /></p>
+<p>En <code>Q1</code> el cambio es grande y evidente. El promedio pasa de 2,57 a 4,63 y la mediana de 2 a
+5. La tabla de frecuencias lo muestra mejor que cualquier promedio: en el pre-test 27 de
+los 49 respondieron 1 o 2 y nadie llegó a 5; en el post-test 48 de 49 respondieron 4 o 5 y
+nadie bajó de 3. Es un desplazamiento de toda la distribución, no un corrimiento del
+promedio jalado por unos pocos.</p>
+<p>Como los datos son pareados, lo que de verdad hay que mirar es la diferencia dentro de cada
+persona:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="asignaciones.html#cb72-1" tabindex="-1"></a>diferencias <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="asignaciones.html#cb72-2" tabindex="-1"></a>  <span class="fu">select</span>(Participantes, Experimento, Q1) <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="asignaciones.html#cb72-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Experimento, <span class="at">values_from =</span> Q1) <span class="sc">%&gt;%</span></span>
+<span id="cb72-4"><a href="asignaciones.html#cb72-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">d =</span> <span class="st">`</span><span class="at">Post-test</span><span class="st">`</span> <span class="sc">-</span> Pretest)</span>
+<span id="cb72-5"><a href="asignaciones.html#cb72-5" tabindex="-1"></a></span>
+<span id="cb72-6"><a href="asignaciones.html#cb72-6" tabindex="-1"></a>diferencias <span class="sc">%&gt;%</span></span>
+<span id="cb72-7"><a href="asignaciones.html#cb72-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(d),</span>
+<span id="cb72-8"><a href="asignaciones.html#cb72-8" tabindex="-1"></a>            <span class="at">prom =</span> <span class="fu">mean</span>(d),</span>
+<span id="cb72-9"><a href="asignaciones.html#cb72-9" tabindex="-1"></a>            <span class="at">ds =</span> <span class="fu">sd</span>(d),</span>
+<span id="cb72-10"><a href="asignaciones.html#cb72-10" tabindex="-1"></a>            <span class="at">mediana =</span> <span class="fu">median</span>(d),</span>
+<span id="cb72-11"><a href="asignaciones.html#cb72-11" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(d),</span>
+<span id="cb72-12"><a href="asignaciones.html#cb72-12" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(d),</span>
+<span id="cb72-13"><a href="asignaciones.html#cb72-13" tabindex="-1"></a>            <span class="at">suben =</span> <span class="fu">sum</span>(d <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb72-14"><a href="asignaciones.html#cb72-14" tabindex="-1"></a>            <span class="at">bajan =</span> <span class="fu">sum</span>(d <span class="sc">&lt;</span> <span class="dv">0</span>),</span>
+<span id="cb72-15"><a href="asignaciones.html#cb72-15" tabindex="-1"></a>            <span class="at">empatan =</span> <span class="fu">sum</span>(d <span class="sc">==</span> <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   min   max suben bajan empatan
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+## 1    49  2.06 0.899       2     0     4    47     0       2</code></pre>
+<p>Este es el dato que define el resultado: de 49 participantes, <strong>47 subieron, 2 se quedaron
+igual y ninguno bajó</strong>. La diferencia promedio es de 2,06 puntos con desviación 0,90. Que
+no haya ni un solo caso en contra es poco común y anticipa un p-valor diminuto.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/josevang0811/Analisis_exploratorio/edit/main/00-asignaciones.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

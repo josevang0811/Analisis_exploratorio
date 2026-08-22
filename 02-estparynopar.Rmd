@@ -37,7 +37,7 @@ dfd <- df %>%
   pull(Valores)
 ```
 
-### Ejercicio 2.1. Análisis exploratorio de los datos de presión
+### Ejercicio 2.1. Análisis exploratorio de los datos de presión {#ej-2-1}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -109,7 +109,7 @@ desviaciones que no tienen importancia práctica. Aquí la asimetría y la curto
 dentro de lo esperado y el histograma se ve simétrico, así que la desviación es leve y el
 t-test, que es bastante robusto con n = 100 por grupo, se puede aplicar sin problema.
 
-### Ejercicio 2.2. Verificación de `var.test` con el teorema de razón de varianzas
+### Ejercicio 2.2. Verificación de `var.test` con el teorema de razón de varianzas {#ej-2-2}
 
 ::: {.ejercicio}
 **Enunciado.** Usando el teorema de razón de varianzas verifica la salida de la función `var.test` con los datos de presión arterial.
@@ -158,7 +158,7 @@ Son exactamente los mismos números que da `var.test`. Como F cae entre 0,6728 y
 1,4862, que son los valores críticos al 5%, no se rechaza H0. Además el intervalo de
 confianza de la razón, [0,6243 ; 1,3790], contiene el 1, que nos lleva a que no hay evidencia de que las varianzas sean distintas.
 
-### Ejercicio 2.3. Teorema de la diferencia de medias
+### Ejercicio 2.3. Teorema de la diferencia de medias {#ej-2-3}
 
 ::: {.ejercicio}
 **Enunciado.** Usando el teorema de la diferencia de medias verifica la salida de la función `t.test` con los datos de presión arterial.
@@ -254,7 +254,7 @@ dfg <- df %>%
   pull(Precio)
 ```
 
-### Ejercicio 2.4. Análisis exploratorio de los precios
+### Ejercicio 2.4. Análisis exploratorio de los precios {#ej-2-4}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -313,13 +313,14 @@ Mismo panorama que antes: KS y Lilliefors no rechazan en ninguno de los dos grup
 Shapiro-Wilk rechaza levemente en el grupo de ganancia (p = 0,0369). Con n = 100 por grupo
 se puede seguir por la vía paramétrica.
 
-### Ejercicio 2.5. Bartlett, Levene y Fligner-Killeen
+### Ejercicio 2.5. Bartlett, Levene y Fligner-Killeen {#ej-2-5}
 
 ::: {.ejercicio}
 **Enunciado.** Aplica las pruebas de Bartlett, Levene y Fligner-Killeen, explica detalladamente cada prueba y cuál distribución usa y después interpreta el resultado.
 
 [Sección 4.1 del libro del profesor]{.fuente}
 :::
+
 **Solución.** Las tres prueban lo mismo, $H_0: \sigma_1^2 = \sigma_2^2$, pero por caminos distintos.
 
 ```{r homogecon}
@@ -394,7 +395,7 @@ datos <- data.frame(
 )
 ```
 
-### Ejercicio 2.6. Análisis exploratorio de los tiempos
+### Ejercicio 2.6. Análisis exploratorio de los tiempos {#ej-2-6}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -455,7 +456,7 @@ normalidad de las diferencias, no de cada medición por separado. Con n = 10 no 
 para descuidar ese supuesto porque el teorema del límite central no ayuda con muestras tan
 pequeñas.
 
-### Ejercicio 2.7. Teorema de la diferencia de medias para datos pareados
+### Ejercicio 2.7. Teorema de la diferencia de medias para datos pareados {#ej-2-7}
 
 ::: {.ejercicio}
 **Enunciado.** Usando el teorema de la diferencia de medias para datos pareados verifica la salida de la función `t.test` con los datos de la intervención educativa.
@@ -522,7 +523,7 @@ df <- births
 
 Vamos a caracterizar el peso del bebé según si la madre fuma o no.
 
-### Ejercicio 2.8. Análisis exploratorio del peso al nacer
+### Ejercicio 2.8. Análisis exploratorio del peso al nacer {#ej-2-8}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.
@@ -617,7 +618,7 @@ df %>%
 El estadístico da W = 2879 con p = 0,131, por encima de 0,05, así que no se rechaza H0. El
 tamaño del efecto r = 0,123 es pequeño. No hay evidencia de que si la madre fuma esto influya en el peso del bebe.
 
-### Ejercicio 2.9. ¿Se puede usar una prueba paramétrica?
+### Ejercicio 2.9. ¿Se puede usar una prueba paramétrica? {#ej-2-9}
 
 ::: {.ejercicio}
 **Enunciado.** ¿Puedes usar una prueba paramétrica? En caso afirmativo, ejecútela.
@@ -676,7 +677,7 @@ Son 49 participantes medidos dos veces, antes y después de una intervención fo
 cuestionario tiene cuatro preguntas (`Q1` a `Q4`) y aquí se trabaja con `Q1`, siguiendo al
 profesor.
 
-### Ejercicio 2.10. Análisis exploratorio del cuestionario
+### Ejercicio 2.10. Análisis exploratorio del cuestionario {#ej-2-10}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el análisis exploratorio del conjunto de datos.

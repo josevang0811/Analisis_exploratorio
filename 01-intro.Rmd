@@ -171,7 +171,7 @@ df %>%
             curtosis = kurtosis(valor))
 ```
 
-### Ejercicio 1.1. Gráficas e interpretación de las variables características
+### Ejercicio 1.1. Gráficas e interpretación de las variables características {#ej-1-1}
 
 ::: {.ejercicio}
 **Enunciado.** Realizar las gráficas de las otras variables, además la interpretación de la tabla y el gráfico quedan como ejercicio.
@@ -284,7 +284,7 @@ Se ve una relación positiva clara: a mayor ingreso medio, mayor valor de la
 vivienda. También se ve la línea horizontal de puntos en 500.001, que es otra vez el tope
 artificial, y unas líneas más tenues en 450.000 y 350.000.
 
-### Ejercicio 1.2. Diagramas de dispersión con las demás variables
+### Ejercicio 1.2. Diagramas de dispersión con las demás variables {#ej-1-2}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza los diagramas de dispersión de la variable `median_house_value` con respecto a las variables independientes que hacen falta. Analiza e interpreta la relación observada entre estas variables, indicando si existe una tendencia lineal, la presencia de valores atípicos y el grado de asociación con la variable objetivo.
@@ -371,7 +371,7 @@ df %>%
 sí. `ISLAND` aparece con la media más alta de todas, 380.440, pero son 5 viviendas, así que
 esa caja no se puede comparar con las otras.
 
-### Ejercicio 1.3. Dispersión entre las variables independientes
+### Ejercicio 1.3. Dispersión entre las variables independientes {#ej-1-3}
 
 ::: {.ejercicio}
 **Enunciado.** Realiza el gráfico de dispersión de las variables independientes numéricas y su interpretación.
@@ -412,7 +412,7 @@ Y por ultimo queda: `longitude` contra `latitude` da −0,925, la segunda correl
 más alta de toda la matriz. Pero no describe ninguna relación entre variables, describe la
 forma de California, que se extiende en diagonal de noroeste a sureste.
 
-### Ejercicio 1.4. Errores del gráfico de `ggpairs`
+### Ejercicio 1.4. Errores del gráfico de `ggpairs` {#ej-1-4}
 
 ::: {.ejercicio}
 **Enunciado.** Menciona los errores que puedes encontrar en el gráfico.

@@ -37,6 +37,10 @@ Y debajo del recuadro empieza la solución, terminando donde arranca la siguient
 Los ejercicios 1.1 a 1.4 están en el capítulo de análisis exploratorio y los 2.1 a 2.10 en
 el de estadística paramétrica y no paramétrica.
 
+Además, los catorce quedan recogidos juntos en el capítulo
+[Asignaciones](#asignaciones), que es el primero del índice. Ahí están en orden y con la
+solución completa, para repasarlos de corrido sin tener que ir saltando entre capítulos.
+
 ## Datos y paquetes {-}
 
 Los archivos que se usan están en la carpeta `Datos` del proyecto. Todos los capítulos
